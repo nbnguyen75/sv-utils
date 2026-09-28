@@ -117,24 +117,24 @@
 		{
 			"dependencies": ["feat-005"],
 			"description": "Review hand-rolled dual-timer logic against VueUse debounceFilter (timestamp-based leading/trailing/maxWait); align semantics vendored/zero-dep; add useThrottleFn.flush(). Proven by parity tests ported from VueUse filter tests.",
-			"evidence": "",
+			"evidence": "src/lib/utilities/useDebounceFn/index.ts (JSDoc + delay<=0/maxWait<=0 immediate + pending()), src/lib/utilities/useThrottleFn/index.ts (JSDoc + flush()), useDebounceFn.test.ts (13), useThrottleFn.test.ts (8) — 27/27 green",
 			"functions": [
 				{
 					"name": "useDebounceFn-parity",
 					"source": "vueuse/shared/utils/filters.ts",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/utilities/useDebounceFn/"
 				},
 				{
 					"name": "useThrottleFn-flush",
 					"source": "vueuse/shared/useThrottleFn",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/utilities/useThrottleFn/"
 				}
 			],
 			"id": "feat-006",
 			"name": "Debounce/throttle lodash-parity review",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005"],

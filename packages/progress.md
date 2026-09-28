@@ -54,3 +54,26 @@
 - [x] `docs/module-readme-template.md`: per-module README convention (§4).
 - [x] Gates: `check` 0/0, `tsc --noEmit` clean, `lint` 0, `test` 6/6,
       `prepack` publint clean, `format` clean, `dist` contains no test files.
+
+### feat-006: Debounce/throttle parity — done
+
+- [x] Analyzed VueUse `debounceFilter`/`throttleFilter` (`shared/utils/filters.ts`):
+      dual-timer like ours (not timestamp-based); VueUse debounce is trailing-only
+      with `maxWait`, immediate invoke on `delay<=0`/`maxWait<=0`, `cancel`/`flush`/
+      `isPending`; throttle is leading+trailing with per-call timer reset.
+- [x] `useDebounceFn`: kept `(fn, delay, {leading, trailing, maxWait})` + explicit
+      `DebouncedFunction` return type; added immediate-invoke path for
+      `delay<=0`/`maxWait<=0`, `pending()` probe, full JSDoc. Verified our
+      leading/trailing/maxWait interplay matches lodash/VueUse burst semantics.
+- [x] `useThrottleFn`: kept signature + explicit `ThrottledFunction` return type;
+      added `flush()` (pending trailing invokes now, no-op when idle); fixed
+      `cancel()` to also drop stale `lastArgs`; full JSDoc.
+- [x] Tests 21/21: `useDebounceFn.test.ts` (13: trailing/latest-args, defaults,
+      window restart, leading±trailing, maxWait forcing + reuse, delay=0/maxWait=0
+      immediate, cancel incl. maxWait burst + reuse, flush incl. no-ops, pending
+      lifecycle) and `useThrottleFn.test.ts` (8: leading+trailing, leading:false,
+      trailing:false, neither-edge VueUse-parity case, interval=0, cancel+reset,
+      flush incl. no-ops). Two initial test expectations corrected to VueUse
+      parity (trailing-fire boundary timing; post-window invoke with edges off).
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 27/27, `prepack`
+      publint clean; `dist` test files excluded from pack via `files` negation.
