@@ -2,8 +2,8 @@ import { useEventListener } from '../../browser/useEventListener/index.svelte.ts
 import { isBrowser } from '../../shared/is.ts';
 
 export type Serializer<T> = {
-	read: (raw: string) => T;
 	write: (value: T) => string;
+	read: (raw: string) => T;
 };
 
 function createDefaultSerializer<T>(): Serializer<T> {

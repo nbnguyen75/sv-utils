@@ -1,5 +1,6 @@
-import { Tween } from 'svelte/motion';
 import { cubicOut } from 'svelte/easing';
+import { Tween } from 'svelte/motion';
+
 import { isBrowser } from '../../shared/is.ts';
 
 type MaybeGetter<T> = T | (() => T);
@@ -9,8 +10,8 @@ function resolve<T>(v: MaybeGetter<T>): T {
 }
 
 export interface UseScrollToTopOptions {
-	duration?: number;
 	easing?: (t: number) => number;
+	duration?: number;
 }
 
 export function useScrollToTop(

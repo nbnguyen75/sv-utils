@@ -1,11 +1,11 @@
-import { useEventListener } from '../useEventListener/index.svelte.ts';
-import { useLocalStorage } from '../../state/useStorage/index.svelte.ts';
 import { isBrowser } from '../../shared/is.ts';
+import { useLocalStorage } from '../../state/useStorage/index.svelte.ts';
+import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 export interface UseDarkOptions {
 	storageKey?: string;
-	selector?: string;
 	attribute?: string;
+	selector?: string;
 }
 
 export function useDark(opts: UseDarkOptions = {}) {

@@ -1,28 +1,23 @@
-import prettier from 'eslint-config-prettier';
+// @ts-check
+
 import path from 'node:path';
-import js from '@eslint/js';
+
+import perfectionist from 'eslint-plugin-perfectionist';
 import svelte from 'eslint-plugin-svelte';
-import { defineConfig, includeIgnoreFile } from 'eslint/config';
-import globals from 'globals';
+import { includeIgnoreFile, defineConfig } from 'eslint/config';
 import ts from 'typescript-eslint';
+
+import { LINT_IGNORE_PATTERNS } from './shared-ignore.config.js';
 
 const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
-	js.configs.recommended,
-	ts.configs.recommended,
-	svelte.configs.recommended,
-	prettier,
-	svelte.configs.prettier,
 	{
-		languageOptions: { globals: { ...globals.browser, ...globals.node } },
-		rules: {
-			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
-			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
-			"no-undef": 'off'
-		}
+		ignores: LINT_IGNORE_PATTERNS
 	},
+	svelte.configs.recommended,
+	svelte.configs.prettier,
 	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
@@ -34,8 +29,78 @@ export default defineConfig(
 		}
 	},
 	{
-		// Override or add rule settings here, such as:
-		// 'svelte/button-has-type': 'error'
+		// Override or add rule settings here
 		rules: {}
+	},
+	{
+		rules: {
+			'perfectionist/sort-imports': [
+				'warn',
+				{
+					customGroups: [
+						{
+							/* Svelte core */
+							elementNamePattern: ['^svelte$', '^svelte/.*$', '^@sveltejs/.*$'],
+							groupName: 'framework',
+							modifiers: ['value']
+						},
+						{
+							/* Browser utilities */
+							elementNamePattern: '^\\$lib/browser/.*$',
+							modifiers: ['value'],
+							groupName: 'browser'
+						},
+						{
+							/* State utilities */
+							elementNamePattern: '^\\$lib/state/.*$',
+							modifiers: ['value'],
+							groupName: 'state'
+						},
+						{
+							/* General utilities */
+							elementNamePattern: '^\\$lib/utilities/.*$',
+							modifiers: ['value'],
+							groupName: 'utilities'
+						},
+						{
+							/* Shared helpers */
+							elementNamePattern: '^\\$lib/shared/.*$',
+							modifiers: ['value'],
+							groupName: 'shared'
+						},
+						{
+							/* CSS */
+							elementNamePattern: '^.+\\.css$',
+							modifiers: ['value'],
+							groupName: 'assets'
+						}
+					],
+					groups: [
+						'type',
+						'builtin',
+						'framework',
+						'external',
+						'browser',
+						'state',
+						'utilities',
+						'shared',
+						'parent',
+						'sibling',
+						'index',
+						'assets',
+						'side-effect-style',
+						'style',
+						'import'
+					]
+				}
+			],
+			'perfectionist/sort-named-imports': ['warn', { type: 'line-length', order: 'desc' }],
+			'perfectionist/sort-named-exports': ['warn', { type: 'line-length', order: 'desc' }],
+			'perfectionist/sort-exports': ['warn', { type: 'line-length', order: 'desc' }],
+			'perfectionist/sort-enums': ['warn', { type: 'line-length', order: 'desc' }],
+			'perfectionist/sort-interfaces': ['warn', { type: 'line-length', order: 'desc' }],
+			'perfectionist/sort-object-types': ['warn', { type: 'line-length', order: 'desc' }]
+		},
+		plugins: { perfectionist }
 	}
 );
