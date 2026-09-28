@@ -1,10 +1,30 @@
+/**
+ * Reactive `localStorage` / `sessionStorage`-backed state.
+ *
+ * Inspired by VueUse `useStorage` / `useLocalStorage` / `useSessionStorage`.
+ * Values serialize as JSON (plain strings pass through), persist
+ * write-through, and sync across tabs via the `storage` event. Storage
+ * failures (unavailable API, quota errors, unparsable values) fall back to
+ * the default instead of throwing. During SSR the default is returned and
+ * nothing is read or written.
+ * Must be called in component initialization (uses `$state` / `$effect`).
+ */
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
 import { isBrowser } from '../../shared/is.ts';
 
+/** String serializer for storage values. */
 export type Serializer<T> = {
+	/** Encode a value for storage. */
 	write: (value: T) => string;
+	/** Decode a stored string; must never throw (fall back to a default). */
 	read: (raw: string) => T;
 };
+
+/** Reactive storage cell returned by `useLocalStorage` / `useSessionStorage`. */
+export interface UseStorageReturn<T> {
+	/** Current value; assigning persists write-through. Getter/setter-backed (destructure-safe). */
+	value: T;
+}
 
 function createDefaultSerializer<T>(): Serializer<T> {
 	return {
@@ -24,18 +44,32 @@ function useStorage<T>(
 	defaultValue: T,
 	getStorage: () => Storage,
 	serializer: Serializer<T> = createDefaultSerializer<T>()
-) {
+): UseStorageReturn<T> {
 	const read = (): T => {
 		if (!isBrowser) return defaultValue;
-		const raw = getStorage().getItem(key);
-		return raw === null ? defaultValue : serializer.read(raw);
+		let raw: string | null;
+		try {
+			raw = getStorage().getItem(key);
+		} catch {
+			return defaultValue;
+		}
+		if (raw === null) return defaultValue;
+		try {
+			return serializer.read(raw);
+		} catch {
+			return defaultValue;
+		}
 	};
 
 	let value = $state<T>(read());
 
 	$effect(() => {
 		if (!isBrowser) return;
-		getStorage().setItem(key, serializer.write(value));
+		try {
+			getStorage().setItem(key, serializer.write(value));
+		} catch {
+			// Storage unavailable or full: keep the in-memory value.
+		}
 	});
 
 	if (isBrowser) {
@@ -60,10 +94,32 @@ function useStorage<T>(
 	};
 }
 
-export function useLocalStorage<T>(key: string, defaultValue: T, serializer?: Serializer<T>) {
+/**
+ * Reactive `localStorage`-backed cell. SSR returns `defaultValue` untouched.
+ *
+ * @param key Storage key.
+ * @param defaultValue Value used when the key is absent, unreadable, or during SSR.
+ * @param serializer Custom codec (default: JSON with string passthrough).
+ */
+export function useLocalStorage<T>(
+	key: string,
+	defaultValue: T,
+	serializer?: Serializer<T>
+): UseStorageReturn<T> {
 	return useStorage(key, defaultValue, () => localStorage, serializer);
 }
 
-export function useSessionStorage<T>(key: string, defaultValue: T, serializer?: Serializer<T>) {
+/**
+ * Reactive `sessionStorage`-backed cell. SSR returns `defaultValue` untouched.
+ *
+ * @param key Storage key.
+ * @param defaultValue Value used when the key is absent, unreadable, or during SSR.
+ * @param serializer Custom codec (default: JSON with string passthrough).
+ */
+export function useSessionStorage<T>(
+	key: string,
+	defaultValue: T,
+	serializer?: Serializer<T>
+): UseStorageReturn<T> {
 	return useStorage(key, defaultValue, () => sessionStorage, serializer);
 }

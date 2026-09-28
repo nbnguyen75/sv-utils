@@ -1,3 +1,12 @@
+/**
+ * Animated scroll-to-top helper (custom utility, no VueUse equivalent).
+ *
+ * Smoothly tweens the scroll position of `window` (default) or an element
+ * to `0` using `svelte/motion` `Tween`. A new `scrollToTop()` call
+ * supersedes any in-flight animation; `cancel()` aborts it. Unmounting
+ * disposes any in-flight animation so no stale writes or effect roots leak.
+ */
+
 import { cubicOut } from 'svelte/easing';
 import { Tween } from 'svelte/motion';
 
@@ -9,43 +18,120 @@ function resolve<T>(v: MaybeGetter<T>): T {
 	return typeof v === 'function' ? (v as () => T)() : v;
 }
 
+/** Options for {@link useScrollToTop}. */
 export interface UseScrollToTopOptions {
+	/**
+	 * Easing applied to the tween progress.
+	 * @default cubicOut
+	 */
 	easing?: (t: number) => number;
+	/**
+	 * Animation duration in milliseconds.
+	 * @default 400
+	 */
 	duration?: number;
 }
 
+/** Controls returned by {@link useScrollToTop}. */
+export interface UseScrollToTopReturn {
+	/**
+	 * Tween scroll position to `0`. Resolves when the animation completes;
+	 * resolves without writing when superseded by a newer call or `cancel()`.
+	 * No-op (resolves immediately) during SSR or without a target.
+	 */
+	scrollToTop(): Promise<void>;
+	/** Abort any in-flight animation. Safe to call when idle. */
+	cancel(): void;
+	/** Whether an animation is currently running. Getter-backed (destructure-safe). */
+	readonly scrolling: boolean;
+}
+
+/**
+ * Animated scroll-to-top controls for `window` or a scrollable element.
+ * Must be called in component initialization (uses `$state` / `$effect`;
+ * unmounting cancels any in-flight animation).
+ *
+ * @param target Scroll container, or a getter for it. Defaults to `window` in browsers.
+ * @param options `duration` and `easing` for the tween.
+ * @returns `scrollToTop`, `cancel`, and getter-backed `scrolling`.
+ */
 export function useScrollToTop(
 	target: MaybeGetter<Window | HTMLElement | null | undefined> = () =>
 		isBrowser ? window : undefined,
 	options: UseScrollToTopOptions = {}
-) {
+): UseScrollToTopReturn {
 	const { duration = 400, easing = cubicOut } = options;
 
+	let scrolling = $state(false);
+	let stopRoot: (() => void) | undefined;
+	let runId = 0;
+
+	/**
+	 * Window detection without `instanceof` (which fails across realms:
+	 * iframes, and test runners that evaluate modules in separate VM
+	 * contexts). A scrollable element never carries a numeric `scrollY`.
+	 */
+	function isWindowLike(el: Window | HTMLElement): el is Window {
+		return typeof (el as Window).scrollY === 'number';
+	}
+
 	function getScrollTop(el: Window | HTMLElement): number {
-		return el instanceof Window ? el.scrollY : el.scrollTop;
+		return isWindowLike(el) ? el.scrollY : el.scrollTop;
 	}
 
 	function setScrollTop(el: Window | HTMLElement, top: number) {
-		if (el instanceof Window) el.scrollTo(0, top);
+		if (isWindowLike(el)) el.scrollTo(0, top);
 		else el.scrollTop = top;
 	}
+
+	function cancel() {
+		runId += 1;
+		if (stopRoot) {
+			stopRoot();
+			stopRoot = undefined;
+		}
+		scrolling = false;
+	}
+
+	$effect(() => {
+		return () => cancel();
+	});
 
 	async function scrollToTop() {
 		if (!isBrowser) return;
 		const el = resolve(target);
 		if (!el) return;
 
+		cancel();
+		const id = ++runId;
+
 		const progress = new Tween(getScrollTop(el), { duration, easing });
+		scrolling = true;
 
 		const stop = $effect.root(() => {
 			$effect(() => {
 				setScrollTop(el, progress.current);
 			});
 		});
+		stopRoot = stop;
 
-		await progress.set(0);
-		stop();
+		try {
+			await progress.set(0);
+		} finally {
+			// Stale runs (superseded or cancelled) must not touch shared state.
+			if (id === runId) {
+				stop();
+				if (stopRoot === stop) stopRoot = undefined;
+				scrolling = false;
+			}
+		}
 	}
 
-	return { scrollToTop };
+	return {
+		cancel,
+		get scrolling() {
+			return scrolling;
+		},
+		scrollToTop
+	};
 }

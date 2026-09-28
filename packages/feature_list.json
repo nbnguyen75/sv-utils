@@ -155,30 +155,30 @@
 		{
 			"dependencies": ["feat-005", "feat-006", "feat-007"],
 			"description": "Backfill README.md + *.test.ts for feat-002/003/004/007 and apply known fixes: useClipboard reset-timer dispose on unmount; useScrollToTop cancel handle + no stale writes mid-flight.",
-			"evidence": "",
+			"evidence": "test/fixtures/run.svelte mount harness; 5 suites (useEventListener 5, useDark 8, useClipboard 5, useScrollToTop 7, useStorage 10) + 8 READMEs (7 modules + shared/) + JSDoc/Return interfaces + fixes — 72/72 green",
 			"functions": [
 				{
 					"name": "retrofit-docs-tests",
 					"source": "internal (migration-plan.md §4-§5)",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/*, src/lib/state/useStorage/, src/lib/utilities/*, src/lib/shared/"
 				},
 				{
 					"name": "useClipboard-cleanup-fix",
 					"source": "internal",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useClipboard/"
 				},
 				{
 					"name": "useScrollToTop-cancel-fix",
 					"source": "internal",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useScrollToTop/"
 				}
 			],
 			"id": "feat-008",
 			"name": "Retrofit: docs/tests/fixes for implemented utils",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
@@ -1602,7 +1602,7 @@
 	"moduleConvention": {
 		"docs": "src/lib/<category>/<name>/README.md — purpose + VueUse link (or `custom`), signature, options table, return table, ≥2 examples incl. SSR note, edge cases/cleanup, parity notes",
 		"layout": "src/lib/<category>/<name>/{index.ts, index.svelte.ts (runes only), <name>.test.ts, README.md}",
-		"reexport": "src/lib/index.ts with `// * Category` group comments; useDebounceFn/useThrottleFn also re-exported from shared/",
+		"reexport": "src/lib/index.ts with `// * Category` group comments; single canonical export per module (no dual export-star: ambiguous names would be dropped)",
 		"tests": "src/lib/<category>/<name>/<name>.test.ts — all exports, all options × defaults, fake timers, jsdom + API mocks, node-env SSR fallback test, cleanup/dispose, controls (cancel/flush/stop/pause/resume), unsupported-API no-ops, VueUse parity cases"
 	},
 	"qualityGates": {

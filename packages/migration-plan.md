@@ -61,9 +61,11 @@ src/lib/<category>/<utilName>/
 Categories: existing `browser/`, `state/`, `utilities/`, `shared/`.
 Expand with `elements/`, `network/`, `sensors/` only when a batch
 requires it — never pre-create empty folders.
-Semantic fixes applied: `useDebounceFn`/`useThrottleFn` stay in
-`utilities/` AND are re-exported from `shared/` (VueUse files them under
-shared); `useScrollToTop` is **custom** (no VueUse equivalent) — its
+Semantic fixes applied: `useDebounceFn`/`useThrottleFn` stay canonically in
+`utilities/` (VueUse files them under shared; a dual `export *` from both
+paths would make the export ambiguous and drop it, so the single
+`utilities/` export stands — the filing deviation is noted in their
+READMEs); `useScrollToTop` is **custom** (no VueUse equivalent) — its
 README must say so.
 
 `src/lib/index.ts` re-exports every module ( keeps `// * Category`

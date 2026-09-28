@@ -1,8 +1,7 @@
 /**
  * Environment flags and type guards.
  *
- * Ported from VueUse `shared/utils/is.ts`
- * (`D:/Personal/Project/vueuse/packages/shared/utils/is.ts`), adapted to
+ * Inspired by VueUse `shared/utils/is`, adapted to
  * strict TypeScript (no `any`): predicates take `unknown`, `assert` takes
  * `unknown[]`, and `hasOwn` avoids `Object.hasOwn` (ES2022) in favor of
  * `Object.prototype.hasOwnProperty` for wider lib targets.

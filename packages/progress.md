@@ -93,3 +93,37 @@
       sampling, own-vs-inherited props). Full suite 37/37 green.
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, `prepack` publint clean.
       Per-module README for `shared/` lands in feat-008 retrofit.
+
+### feat-008: Retrofit docs/tests/fixes — done
+
+- [x] Fixes: `useClipboard` reset-timer disposed on unmount + alive-guard
+      dropping in-flight copies that resolve after unmount (exported
+      `UseClipboardOptions`/`UseClipboardReturn`); `useScrollToTop` gained
+      `cancel()`, getter-backed `scrolling`, supersede-by-generation,
+      unmount disposal, `UseScrollToTopReturn`; `useStorage` read/write
+      try/catch fallbacks + `UseStorageReturn`; `useDark` got
+      `UseDarkMode`/`UseDarkReturn`; `useEventListener` JSDoc + exported
+      `MaybeGetter`; JSDoc on every export of all touched modules.
+- [x] `test/fixtures/run.svelte`: shared mount harness running a setup
+      callback inside `$effect` so `unmount` exercises disposal paths.
+- [x] 5 suites, 35 tests: useEventListener (5: attach, unmount removal,
+      element+once, nullish, document), useDark (8: defaults, OS follow,
+      live media changes, toggle persistence, setMode/auto, restore,
+      custom attribute, unmount silence), useClipboard (5: copy+reset,
+      re-arm, unsupported no-op, timer dispose, in-flight drop),
+      useScrollToTop (7: animate+resolve, cancel, supersede, idle cancel,
+      null target, window default, unmount dispose), useStorage (10:
+      defaults+write-through, JSON read, string passthrough, remount
+      restore, custom serializer, throwing serializer/storage fallbacks,
+      write-failure survival, storage-event sync, session isolation).
+- [x] 8 READMEs per template (7 modules + `shared/`); scrubbed absolute
+      local VueUse paths from all JSDoc (neutral attribution only).
+- [x] Diagnosed two real issues via failing tests: jsdom `window instanceof
+      Window` is false across VM contexts → duck-typed window detection in
+      `useScrollToTop` (also fixes cross-realm iframe windows); a throwing
+      tween poisons Svelte's shared raf scheduler → fixed at the source,
+      window test asserts last `scrollTo(0, 0)`.
+- [x] Corrected migration-plan/feature_list: no dual `export *` re-export
+      (ambiguous names would be silently dropped) — single canonical export.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 72/72
+      (10 files), `prepack` publint clean.

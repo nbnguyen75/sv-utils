@@ -1,13 +1,25 @@
-// useEventListener/index.svelte.ts
+/**
+ * SSR-safe DOM event listener with automatic disposal.
+ *
+ * Inspired by VueUse `useEventListener`.
+ * Attaches inside `$effect` and removes the listener on cleanup, so
+ * unmounting never leaks. Targets accept a `MaybeGetter` so `() => window`
+ * or `() => element` re-resolve if the effect re-runs.
+ * Must be called in component initialization (uses `$effect`).
+ */
 import { isBrowser } from '../../shared/is.ts';
 
-type MaybeGetter<T> = T | (() => T);
+/** A plain value or a getter returning it; getters re-resolve on effect re-run. */
+export type MaybeGetter<T> = T | (() => T);
 
 function resolve<T>(v: MaybeGetter<T>): T {
 	return typeof v === 'function' ? (v as () => T)() : v;
 }
 
 // Overload 1: Window
+/**
+ * Listen for a `Window` event. No-op during SSR or when the target is nullish.
+ */
 export function useEventListener<K extends keyof WindowEventMap>(
 	target: MaybeGetter<Window | null | undefined>,
 	event: K,
@@ -16,6 +28,9 @@ export function useEventListener<K extends keyof WindowEventMap>(
 ): void;
 
 // Overload 2: Document
+/**
+ * Listen for a `Document` event. No-op during SSR or when the target is nullish.
+ */
 export function useEventListener<K extends keyof DocumentEventMap>(
 	target: MaybeGetter<Document | null | undefined>,
 	event: K,
@@ -24,6 +39,9 @@ export function useEventListener<K extends keyof DocumentEventMap>(
 ): void;
 
 // Overload 3: HTMLElement
+/**
+ * Listen for an `HTMLElement` event. No-op during SSR or when the target is nullish.
+ */
 export function useEventListener<K extends keyof HTMLElementEventMap>(
 	target: MaybeGetter<HTMLElement | null | undefined>,
 	event: K,
@@ -32,6 +50,9 @@ export function useEventListener<K extends keyof HTMLElementEventMap>(
 ): void;
 
 // Overload 4: MediaQueryList
+/**
+ * Listen for a `MediaQueryList` event (e.g. `change`). No-op during SSR or when the target is nullish.
+ */
 export function useEventListener<K extends keyof MediaQueryListEventMap>(
 	target: MaybeGetter<MediaQueryList | null | undefined>,
 	event: K,
