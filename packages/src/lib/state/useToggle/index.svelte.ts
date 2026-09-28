@@ -5,8 +5,10 @@
  * Pure `$state` logic — safe to call anywhere, including during SSR
  * (no DOM access, no effects).
  */
-import { resolveGetter } from '../../shared/getter/index.ts';
+
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useToggle}. */
 export interface UseToggleOptions<Truthy = boolean, Falsy = boolean> {
@@ -24,14 +26,14 @@ export interface UseToggleOptions<Truthy = boolean, Falsy = boolean> {
 
 /** Toggleable state returned by {@link useToggle}. */
 export interface UseToggleReturn<T> {
-	/** Current value. Getter/setter-backed (destructure-safe). */
-	value: T;
 	/**
 	 * Flip between the truthy and falsy values, or set an explicit value
 	 * when an argument is passed (even `undefined` counts as explicit).
 	 * @returns The new value.
 	 */
 	toggle(value?: T): T;
+	/** Current value. Getter/setter-backed (destructure-safe). */
+	value: T;
 }
 
 export function useToggle(

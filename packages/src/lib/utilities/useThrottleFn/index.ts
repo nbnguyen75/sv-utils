@@ -11,6 +11,7 @@
  *
  * Pure logic, no DOM access — safe to call during SSR.
  */
+
 export interface UseThrottleOptions {
 	/** Invoke on the leading edge of the interval window. @default true */
 	leading?: boolean;

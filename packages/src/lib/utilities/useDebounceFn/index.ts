@@ -11,6 +11,7 @@
  *
  * Pure logic, no DOM access — safe to call during SSR.
  */
+
 export interface UseDebounceOptions {
 	/** Invoke on the leading edge of the first call in a burst. @default false */
 	leading?: boolean;

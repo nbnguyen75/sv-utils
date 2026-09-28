@@ -7,11 +7,11 @@
  * or `() => element` re-resolve if the effect re-runs.
  * Must be called in component initialization (uses `$effect`).
  */
-import { isBrowser } from '../../shared/is.ts';
 
-/** A plain value or a getter returning it; getters re-resolve on effect re-run. */
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 // Overload 1: Window
 /**

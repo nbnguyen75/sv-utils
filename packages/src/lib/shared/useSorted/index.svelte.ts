@@ -6,10 +6,12 @@
  * except `dirty` mode, which sorts the source in place inside `$effect`
  * and therefore needs component initialization.
  */
+
+import type { MaybeGetter } from '../getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../getter/index.ts';
-import type { MaybeGetter } from '../getter/index.ts';
 
 /** Comparison for {@link useSorted}. */
 export type UseSortedCompareFn<T> = (a: T, b: T) => number;
@@ -20,14 +22,14 @@ export type UseSortedFn<T> = (arr: T[], compareFn: UseSortedCompareFn<T>) => T[]
 /** Options for {@link useSorted}. */
 export interface UseSortedOptions<T> {
 	/**
+	 * Custom comparison. The default subtracts (numbers).
+	 */
+	compareFn?: UseSortedCompareFn<T>;
+	/**
 	 * Custom sort implementation.
 	 * @default (arr, compareFn) => arr.sort(compareFn)
 	 */
 	sortFn?: UseSortedFn<T>;
-	/**
-	 * Custom comparison. The default subtracts (numbers).
-	 */
-	compareFn?: UseSortedCompareFn<T>;
 	/**
 	 * Sort the source array in place instead of returning a sorted copy.
 	 * Requires component initialization.

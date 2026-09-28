@@ -6,8 +6,10 @@
  * dependencies of `list` change. Pure logic — safe to call anywhere,
  * including during SSR (no DOM access, no effects).
  */
-import { resolveGetter } from '../getter/index.ts';
+
 import type { MaybeGetter } from '../getter/index.ts';
+
+import { resolveGetter } from '../getter/index.ts';
 
 /** Filtered state returned by {@link useArrayFilter}. */
 export interface UseArrayFilterReturn<T> {

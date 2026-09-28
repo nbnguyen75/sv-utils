@@ -16,21 +16,21 @@ export interface UseCounterOptions {
 
 /** Counter state returned by {@link useCounter}. */
 export interface UseCounterReturn {
-	/** Current count. Getter-backed (destructure-safe); write via `set`. */
-	readonly count: number;
-	/** Add `delta` (clamped). @default delta 1 */
-	inc(delta?: number): void;
-	/** Subtract `delta` (clamped). @default delta 1 */
-	dec(delta?: number): void;
-	/** Read the current count. */
-	get(): number;
-	/** Set the count (clamped). */
-	set(value: number): void;
 	/**
 	 * Reset to `value`, or to the initial value when omitted. Passing a
 	 * value also redefines what a later bare `reset()` restores.
 	 */
 	reset(value?: number): void;
+	/** Add `delta` (clamped). @default delta 1 */
+	inc(delta?: number): void;
+	/** Subtract `delta` (clamped). @default delta 1 */
+	dec(delta?: number): void;
+	/** Set the count (clamped). */
+	set(value: number): void;
+	/** Current count. Getter-backed (destructure-safe); write via `set`. */
+	readonly count: number;
+	/** Read the current count. */
+	get(): number;
 }
 
 /**

@@ -6,10 +6,12 @@
  * this must be called in component initialization. Bookkeeping reads are
  * `untrack`ed to avoid self-triggering the effect.
  */
+
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Previous-value state returned by {@link usePrevious}. */
 export interface UsePreviousReturn<T> {

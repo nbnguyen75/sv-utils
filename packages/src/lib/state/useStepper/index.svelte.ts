@@ -5,8 +5,10 @@
  * Pure `$state` / `$derived` logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import { resolveGetter } from '../../shared/getter/index.ts';
+
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
 
 /** Step names for array steps are the step values; for records, their keys. */
 export type UseStepName<Steps> = Steps extends readonly (infer S)[]
@@ -17,36 +19,16 @@ export type UseStepName<Steps> = Steps extends readonly (infer S)[]
 
 /** Stepper state returned by {@link useStepper}. */
 export interface UseStepperReturn<Name, Steps, Step> {
-	/** The steps definition. Getter-backed. */
-	readonly steps: Steps;
-	/** Ordered step names. Getter-backed. */
-	readonly stepNames: Name[];
-	/** Index of the current step. Getter/setter-backed. */
-	index: number;
-	/** Current step value. Getter-backed. */
-	readonly current: Step | undefined;
-	/** Next step name, or `undefined` at the last step. Getter-backed. */
-	readonly next: Name | undefined;
 	/** Previous step name, or `undefined` at the first step. Getter-backed. */
 	readonly previous: Name | undefined;
-	/** Whether the current step is the first one. Getter-backed. */
-	readonly isFirst: boolean;
-	/** Whether the current step is the last one. Getter-backed. */
-	readonly isLast: boolean;
 	/** Step at `index`, or `undefined` when out of range. */
 	at(index: number): Step | undefined;
+	/** Current step value. Getter-backed. */
+	readonly current: Step | undefined;
 	/** Step called `step`, or `undefined` when unknown. */
 	get(step: Name): Step | undefined;
-	/** Go to `step` (ignores unknown names). */
-	goTo(step: Name): void;
-	/** Go forward unless already last. */
-	goToNext(): void;
-	/** Go back unless already first. */
-	goToPrevious(): void;
-	/** Go back to `step`, but only when currently after it. */
-	goBackTo(step: Name): void;
-	/** Whether `step` is the next step. */
-	isNext(step: Name): boolean;
+	/** Next step name, or `undefined` at the last step. Getter-backed. */
+	readonly next: Name | undefined;
 	/** Whether `step` is the previous step. */
 	isPrevious(step: Name): boolean;
 	/** Whether `step` is the current step. */
@@ -55,6 +37,26 @@ export interface UseStepperReturn<Name, Steps, Step> {
 	isBefore(step: Name): boolean;
 	/** Whether the current step is after `step`. */
 	isAfter(step: Name): boolean;
+	/** Whether `step` is the next step. */
+	isNext(step: Name): boolean;
+	/** Ordered step names. Getter-backed. */
+	readonly stepNames: Name[];
+	/** Go back to `step`, but only when currently after it. */
+	goBackTo(step: Name): void;
+	/** Whether the current step is the first one. Getter-backed. */
+	readonly isFirst: boolean;
+	/** Whether the current step is the last one. Getter-backed. */
+	readonly isLast: boolean;
+	/** Go to `step` (ignores unknown names). */
+	goTo(step: Name): void;
+	/** The steps definition. Getter-backed. */
+	readonly steps: Steps;
+	/** Go back unless already first. */
+	goToPrevious(): void;
+	/** Go forward unless already last. */
+	goToNext(): void;
+	/** Index of the current step. Getter/setter-backed. */
+	index: number;
 }
 
 export function useStepper<T extends string | number>(

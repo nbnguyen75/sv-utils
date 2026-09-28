@@ -5,24 +5,26 @@
  * The source is sampled inside `$effect` (Vue's `watch` equivalent), so
  * this must be called in component initialization.
  */
+
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 import { timestamp } from '../../shared/is.ts';
 
 /** Options for {@link useLastChanged}. */
 export interface UseLastChangedOptions {
 	/**
-	 * Stamp the mount time instead of starting empty.
-	 * @default false
-	 */
-	immediate?: boolean;
-	/**
 	 * Starting value.
 	 * @default null
 	 */
 	initialValue?: number | null;
+	/**
+	 * Stamp the mount time instead of starting empty.
+	 * @default false
+	 */
+	immediate?: boolean;
 }
 
 /** Change-timestamp state returned by {@link useLastChanged}. */

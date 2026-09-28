@@ -9,6 +9,7 @@
  * nothing is read or written.
  * Must be called in component initialization (uses `$state` / `$effect`).
  */
+
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
 import { isBrowser } from '../../shared/is.ts';
 

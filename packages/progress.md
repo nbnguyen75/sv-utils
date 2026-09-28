@@ -223,3 +223,11 @@ Window` is false across VM contexts → duck-typed window detection in
       Signature/Options/Returns content).
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 193/193
       (32 files), `prepack` publint clean.
+
+### Housekeeping: module docblock placement (partial, parked)
+
+- [x] Moved displaced module `/** */` docblocks back to file top with a
+      blank-line separator across implementation modules (formatter-induced
+      drift from the R1 import rewiring).
+- [ ] Parked before completion (strand sweep + full suite re-run unfinished);
+      committed as-is with `check`/`format` green.

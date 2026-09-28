@@ -8,47 +8,49 @@
  * `syncRef` behavior) is intentionally unsupported — drive external state
  * from the callbacks instead.
  */
+
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useOffsetPagination}. */
 export interface UseOffsetPaginationOptions {
-	/**
-	 * Total number of items. Omit for an unbounded (infinite) listing.
-	 */
-	total?: MaybeGetter<number>;
+	/** Called with the pagination state whenever the page count changes. */
+	onPageCountChange?: (state: UseOffsetPaginationReturn) => void;
+	/** Called with the pagination state whenever the page size changes. */
+	onPageSizeChange?: (state: UseOffsetPaginationReturn) => void;
+	/** Called with the pagination state whenever the page changes. */
+	onPageChange?: (state: UseOffsetPaginationReturn) => void;
 	/**
 	 * Items per page (clamped to `>= 1`).
 	 * @default 10
 	 */
 	pageSize?: MaybeGetter<number>;
 	/**
+	 * Total number of items. Omit for an unbounded (infinite) listing.
+	 */
+	total?: MaybeGetter<number>;
+	/**
 	 * Initial current page (clamped to `[1, pageCount]`).
 	 * @default 1
 	 */
 	page?: MaybeGetter<number>;
-	/** Called with the pagination state whenever the page changes. */
-	onPageChange?: (state: UseOffsetPaginationReturn) => void;
-	/** Called with the pagination state whenever the page size changes. */
-	onPageSizeChange?: (state: UseOffsetPaginationReturn) => void;
-	/** Called with the pagination state whenever the page count changes. */
-	onPageCountChange?: (state: UseOffsetPaginationReturn) => void;
 }
 
 /** Pagination state returned by {@link useOffsetPagination}. */
 export interface UseOffsetPaginationReturn {
-	/** Current page, clamped to `[1, pageCount]`. Getter/setter-backed. */
-	currentPage: number;
-	/** Current page size, clamped to `>= 1`. Getter/setter-backed. */
-	currentPageSize: number;
-	/** Total pages (`Infinity` when unbounded). Getter-backed. */
-	readonly pageCount: number;
 	/** Whether the current page is the first one. Getter-backed. */
 	readonly isFirstPage: boolean;
 	/** Whether the current page is the last one. Getter-backed. */
 	readonly isLastPage: boolean;
+	/** Total pages (`Infinity` when unbounded). Getter-backed. */
+	readonly pageCount: number;
+	/** Current page size, clamped to `>= 1`. Getter/setter-backed. */
+	currentPageSize: number;
+	/** Current page, clamped to `[1, pageCount]`. Getter/setter-backed. */
+	currentPage: number;
 	/** Go back one page (clamped). */
 	prev(): void;
 	/** Go forward one page (clamped). */

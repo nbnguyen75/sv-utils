@@ -5,8 +5,10 @@
  * Memoized in `$derived`. Pure logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import { resolveGetter } from '../getter/index.ts';
+
 import type { MaybeGetter } from '../getter/index.ts';
+
+import { resolveGetter } from '../getter/index.ts';
 import { isObject } from '../is.ts';
 
 /** Equality test for {@link useArrayIncludes}. */
@@ -19,13 +21,13 @@ export type UseArrayIncludesComparatorFn<T, V> = (
 
 /** Options for {@link useArrayIncludes}. */
 export interface UseArrayIncludesOptions<T, V> {
+	/** Comparator function or element key. Defaults to strict equality. */
+	comparator?: UseArrayIncludesComparatorFn<T, V> | keyof T;
 	/**
 	 * Start searching at this index.
 	 * @default 0
 	 */
 	fromIndex?: number;
-	/** Comparator function or element key. Defaults to strict equality. */
-	comparator?: UseArrayIncludesComparatorFn<T, V> | keyof T;
 }
 
 /** Membership state returned by {@link useArrayIncludes}. */

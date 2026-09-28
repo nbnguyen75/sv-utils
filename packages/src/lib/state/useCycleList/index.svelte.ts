@@ -5,13 +5,20 @@
  * List changes re-anchor the state via `$effect`, so this must be called in
  * component initialization.
  */
+
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useCycleList}. */
 export interface UseCycleListOptions<T> {
+	/**
+	 * Custom index lookup.
+	 * @default (value, list) => list.indexOf(value)
+	 */
+	getIndexOf?: (value: T, list: T[]) => number;
 	/**
 	 * Initial value. Defaults to the first list item.
 	 */
@@ -21,17 +28,10 @@ export interface UseCycleListOptions<T> {
 	 * @default 0
 	 */
 	fallbackIndex?: number;
-	/**
-	 * Custom index lookup.
-	 * @default (value, list) => list.indexOf(value)
-	 */
-	getIndexOf?: (value: T, list: T[]) => number;
 }
 
 /** Cycling state returned by {@link useCycleList}. */
 export interface UseCycleListReturn<T> {
-	/** Current item. Getter/setter-backed (destructure-safe). */
-	value: T;
 	/** Index of the current item (falls back per options). Getter-backed. */
 	readonly index: number;
 	/** Move forward `n` places with wraparound. Returns the new item. */
@@ -40,6 +40,8 @@ export interface UseCycleListReturn<T> {
 	prev(n?: number): T;
 	/** Jump to index `i` (wraps out-of-range indices). Returns the new item. */
 	go(i: number): T;
+	/** Current item. Getter/setter-backed (destructure-safe). */
+	value: T;
 }
 
 /**

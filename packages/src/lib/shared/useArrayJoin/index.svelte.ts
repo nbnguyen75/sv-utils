@@ -5,8 +5,10 @@
  * Memoized in `$derived`. Pure logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import { resolveGetter } from '../getter/index.ts';
+
 import type { MaybeGetter } from '../getter/index.ts';
+
+import { resolveGetter } from '../getter/index.ts';
 
 /** Joined state returned by {@link useArrayJoin}. */
 export interface UseArrayJoinReturn {

@@ -18,14 +18,14 @@ export interface UseClipboardOptions {
 
 /** Reactive clipboard state returned by {@link useClipboard}. */
 export interface UseClipboardReturn {
+	/** Copy `value`; safe no-op when unsupported. */
+	copy(value: string): Promise<void>;
+	/** Whether the async Clipboard API is available in this environment. Always `false` during SSR. */
+	readonly isSupported: boolean;
 	/** `true` while inside the post-copy window. Getter-backed (destructure-safe). */
 	readonly copied: boolean;
 	/** Last successfully copied text. Getter-backed (destructure-safe). */
 	readonly text: string;
-	/** Whether the async Clipboard API is available in this environment. Always `false` during SSR. */
-	readonly isSupported: boolean;
-	/** Copy `value`; safe no-op when unsupported. */
-	copy(value: string): Promise<void>;
 }
 
 /**

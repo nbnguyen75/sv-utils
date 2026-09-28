@@ -6,10 +6,12 @@
  * clone raise `isModified`. Both observations run inside `$effect`, so this
  * must be called in component initialization; bookkeeping is `untrack`ed.
  */
+
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useCloned}. */
 export interface UseClonedOptions<T> {
@@ -27,12 +29,12 @@ export interface UseClonedOptions<T> {
 
 /** Cloned state returned by {@link useCloned}. */
 export interface UseClonedReturn<T> {
-	/** Editable clone of the source. Getter/setter-backed (destructure-safe). */
-	value: T;
 	/** Whether the clone was edited since the last sync. Getter-backed. */
 	readonly isModified: boolean;
 	/** Re-clone from the source and clear `isModified`. */
 	sync(): void;
+	/** Editable clone of the source. Getter/setter-backed (destructure-safe). */
+	value: T;
 }
 
 /**

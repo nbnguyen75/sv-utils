@@ -7,13 +7,13 @@
  * disposes any in-flight animation so no stale writes or effect roots leak.
  */
 
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { cubicOut } from 'svelte/easing';
 import { Tween } from 'svelte/motion';
 
-import { isBrowser } from '../../shared/is.ts';
-
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link useScrollToTop}. */
 export interface UseScrollToTopOptions {
@@ -37,10 +37,10 @@ export interface UseScrollToTopReturn {
 	 * No-op (resolves immediately) during SSR or without a target.
 	 */
 	scrollToTop(): Promise<void>;
-	/** Abort any in-flight animation. Safe to call when idle. */
-	cancel(): void;
 	/** Whether an animation is currently running. Getter-backed (destructure-safe). */
 	readonly scrolling: boolean;
+	/** Abort any in-flight animation. Safe to call when idle. */
+	cancel(): void;
 }
 
 /**

@@ -8,6 +8,7 @@
  * custom-mode dictionary — see `useColorMode` (feat-022) for that.
  * Must be called in component initialization (uses `$state` / `$effect`).
  */
+
 import { isBrowser } from '../../shared/is.ts';
 import { useLocalStorage } from '../../state/useStorage/index.svelte.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
@@ -37,12 +38,12 @@ export type UseDarkMode = 'light' | 'dark' | 'auto';
 
 /** Reactive dark-mode state returned by {@link useDark}. */
 export interface UseDarkReturn {
+	/** Persist a mode, or return to OS-driven `auto`. */
+	setMode(mode: UseDarkMode): void;
 	/** Effective dark state (stored mode, or OS preference in `auto`). Getter-backed (destructure-safe). */
 	readonly value: boolean;
 	/** Flip between explicit `light` and `dark` (resolves `auto` first). */
 	toggle(): void;
-	/** Persist a mode, or return to OS-driven `auto`. */
-	setMode(mode: UseDarkMode): void;
 }
 
 /**
