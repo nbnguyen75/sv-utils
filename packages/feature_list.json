@@ -241,90 +241,90 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Pure reactive array transforms. All synchronous/pure — high test coverage without compiler; shared/ category.",
-			"evidence": "",
+			"evidence": "src/lib/shared/{useArrayMap,useArrayFilter,useArrayUnique,useArraySome,useArrayEvery,useArrayIncludes,useArrayJoin,useArrayReduce,useArrayFind,useArrayFindIndex,useArrayFindLast,useArrayDifference,useSorted}/ (impl+test+README each) — 191/191 green",
 			"functions": [
 				{
 					"name": "useArrayMap",
 					"source": "vueuse/shared/useArrayMap",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayMap/"
 				},
 				{
 					"name": "useArrayFilter",
 					"source": "vueuse/shared/useArrayFilter",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayFilter/"
 				},
 				{
 					"name": "useArrayUnique",
 					"source": "vueuse/shared/useArrayUnique",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayUnique/"
 				},
 				{
 					"name": "useArraySome",
 					"source": "vueuse/shared/useArraySome",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArraySome/"
 				},
 				{
 					"name": "useArrayEvery",
 					"source": "vueuse/shared/useArrayEvery",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayEvery/"
 				},
 				{
 					"name": "useArrayIncludes",
 					"source": "vueuse/shared/useArrayIncludes",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayIncludes/"
 				},
 				{
 					"name": "useArrayJoin",
 					"source": "vueuse/shared/useArrayJoin",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayJoin/"
 				},
 				{
 					"name": "useArrayReduce",
 					"source": "vueuse/shared/useArrayReduce",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayReduce/"
 				},
 				{
 					"name": "useArrayFind",
 					"source": "vueuse/shared/useArrayFind",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayFind/"
 				},
 				{
 					"name": "useArrayFindIndex",
 					"source": "vueuse/shared/useArrayFindIndex",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayFindIndex/"
 				},
 				{
 					"name": "useArrayFindLast",
 					"source": "vueuse/shared/useArrayFindLast",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayFindLast/"
 				},
 				{
 					"name": "useArrayDifference",
 					"source": "vueuse/shared/useArrayDifference",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useArrayDifference/"
 				},
 				{
 					"name": "useSorted",
 					"source": "vueuse/core/useSorted",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/useSorted/"
 				}
 			],
 			"id": "feat-010",
 			"name": "Reactive array utils",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

@@ -4,14 +4,17 @@
 
 - Agent harness and linting stack fully configured in `packages/`.
 - Svelte 5 utility library ported from VueUse with Bun, TypeScript, oxlint, oxfmt, eslint (with perfectionist sorting), and svelte-package.
-- Initial utilities ported: `useEventListener`, `useDark`, `useClipboard`, `useScrollToTop`, `useStorage`, `useDebounceFn`, `useThrottleFn`, `is.ts`.
+- Done through feat-010 (191/191 tests, 31 files; all gates green):
+  harness (feat-005), debounce/throttle parity (feat-006), is-guards (feat-007),
+  retrofit docs/tests/fixes (feat-008), state essentials (feat-009),
+  reactive array utils (feat-010).
 
 ## Immediate Next Task
 
-- Start with `feat-005` (test & docs harness: vitest + jsdom, `bun run test`,
-  init wiring) — blocks all implementation batches. Then `feat-006`
-  (debounce/throttle parity) → `feat-007` (is-guards) → `feat-008`
-  (retrofit docs/tests/fixes) → `feat-009` (state essentials).
+- Start with `feat-011` (timing core: useTimeout/useTimeoutFn, useInterval/
+  useIntervalFn, useRafFn, useNow/useTimestamp, useCountdown, useFps) —
+  then `feat-012` (date/time display) → `feat-013` (watchers) per
+  `feature_list.json` dependency order.
 - Per-batch contract: `migration-plan.md` §§3–6 (one batch at a time).
 
 ## How to Resume

@@ -148,3 +148,25 @@ Window` is false across VM contexts → duck-typed window detection in
       `isLastPage` from the type.
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 126/126
       (18 files), `prepack` publint clean.
+
+### feat-010: Reactive array utils — done
+
+- [x] 13 ports in `src/lib/shared/` (impl + test + README each, barrel wired):
+      map (5 tests), filter (4), unique (5), some (3), every (3), includes (7),
+      join (5), reduce (8), find (3), findIndex (3), findLast (3),
+      difference (7), sorted (9).
+- [x] All memoized in `$derived` over `MaybeGetter` lists — context-free and
+      SSR-safe (only `dirty` sorted needs component init). Elements are opaque
+      (no per-item getter resolution: `$state` proxies already track deeply).
+- [x] Faithful edges: reduce overloads incl. function-seed quirk and native
+      throw-on-empty; includes key/comparator/fromIndex (typo fixed vs VueUse's
+      `formIndex` detection, number/symbol keys accepted); symmetric
+      difference; manual reverse-scan findLast (no ES2023); sorted copy/dirty
+      overloads with order-change guard so the in-place effect settles.
+- [x] Fixed via failing tests: `$derived` laziness (callbacks only run on
+      read); reduce index starts at 1 without seed (native); includes key mode
+      compares against the scalar key value; `new Set` banned by
+      `svelte/prefer-svelte-reactivity` → manual SameValueZero dedupe (NaN
+      covered); reduce callback generics need the unknown-hop cast.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 191/191
+      (31 files), `prepack` publint clean.
