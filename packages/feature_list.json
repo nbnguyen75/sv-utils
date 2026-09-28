@@ -139,18 +139,18 @@
 		{
 			"dependencies": ["feat-005"],
 			"description": "Expand is.ts to full VueUse shared/utils/is.ts parity (isClient/isWorker/isDef/notNullish/isObject/noop/clamp/now/timestamp/rand/hasOwn/assert/isIOS) keeping isBrowser alias. Pure fns, full branch coverage.",
-			"evidence": "",
+			"evidence": "src/lib/shared/is.ts (strict-TS, JSDoc, local WorkerGlobalScope decl), src/lib/shared/is.test.ts (10) — 37/37 green",
 			"functions": [
 				{
 					"name": "is-guards",
 					"source": "vueuse/shared/utils/is.ts",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/shared/is.ts"
 				}
 			],
 			"id": "feat-007",
 			"name": "Shared type guards expansion",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-006", "feat-007"],

@@ -77,3 +77,19 @@
       parity (trailing-fire boundary timing; post-window invoke with edges off).
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 27/27, `prepack`
       publint clean; `dist` test files excluded from pack via `files` negation.
+
+### feat-007: Shared type guards expansion — done
+
+- [x] Expanded `src/lib/shared/is.ts` to VueUse `shared/utils/is.ts` parity:
+      `isBrowser` (kept) + `isClient` alias, `isWorker`, `isDef`, `notNullish`,
+      `assert`, `isObject`, `now`, `timestamp`, `clamp`, `noop`, `rand`,
+      `hasOwn`, `isIOS` (frozen at import, SSR-safe short-circuit).
+- [x] Strict-TS adaptations (zero `any`): `unknown` predicates, `unknown[]`
+      assert infos, `hasOwnProperty` instead of ES2022 `Object.hasOwn`,
+      `?? 0` on `maxTouchPoints`, minimal local `WorkerGlobalScope` declaration
+      (lib target lacks worker types — surfaced by `svelte-check`, fixed).
+- [x] `src/lib/shared/is.test.ts` (10 tests: env flags, nullish semantics,
+      assert warn/quiet, isObject matrix, time fns, clamp bounds, rand range
+      sampling, own-vs-inherited props). Full suite 37/37 green.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, `prepack` publint clean.
+      Per-module README for `shared/` lands in feat-008 retrofit.
