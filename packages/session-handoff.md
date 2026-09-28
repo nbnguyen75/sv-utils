@@ -8,9 +8,11 @@
 
 ## Immediate Next Task
 
-- Verify environment health with `.\init.ps1` (or `./init.sh`).
-- Pick the next utilities from `feature_list.json` to port from VueUse (`D:\Personal\Project\vueuse\packages/core`).
-- Recommended next items: `useMediaQuery`, `usePreferredDark`, `useWindowSize`, `useActiveElement`, `useDocumentVisibility`.
+- Start with `feat-005` (test & docs harness: vitest + jsdom, `bun run test`,
+  init wiring) — blocks all implementation batches. Then `feat-006`
+  (debounce/throttle parity) → `feat-007` (is-guards) → `feat-008`
+  (retrofit docs/tests/fixes) → `feat-009` (state essentials).
+- Per-batch contract: `migration-plan.md` §§3–6 (one batch at a time).
 
 ## How to Resume
 

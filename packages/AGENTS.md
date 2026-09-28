@@ -103,6 +103,7 @@ Load the most specific skill for the task:
 ## Required Artifacts
 
 - `feature_list.json` — Source of truth for roadmap and feature completion
+- `migration-plan.md` — Isomorphic scope, popularity tiers, per-module docs/tests contract, batch workflow
 - `progress.md` — Session log with verifiable checkmarks and status
 - `init.sh` / `init.ps1` — Standard baseline verification scripts
 - `session-handoff.md` — Context handoff for next agent session
@@ -117,6 +118,8 @@ A utility is done only when:
 - [ ] Safe for SSR (`typeof window !== 'undefined'` checks in place)
 - [ ] All event listeners, observers, and timers are cleaned up on disposal
 - [ ] Public options and return interfaces are exported from its module and `src/lib/index.ts`
+- [ ] Docs: `src/lib/<category>/<name>/README.md` per `migration-plan.md` §4 + JSDoc on every export
+- [ ] Tests: `src/lib/<category>/<name>/<name>.test.ts` per `migration-plan.md` §5, `bun run test` green, no uncovered public export
 - [ ] `bun run check` passes with 0 errors and 0 warnings
 - [ ] `bun run format` passes with 0 errors
 - [ ] `bun run lint` passes with 0 errors
