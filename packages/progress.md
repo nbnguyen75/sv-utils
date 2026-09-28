@@ -191,3 +191,13 @@ Window` is false across VM contexts → duck-typed window detection in
       last, 3 fns). DnD = recipes only (sortablejs + @dnd-kit/svelte snapshot
       pattern + neodrag; svelte-dnd-action excluded). better-fetch/RPC dropped
       for now — parked, revisit after publish.
+
+### docs/recipes.md — done
+
+- [x] Recipes for every `cut` group (timing, watchers, refs, async, viewport,
+      math, shared), every `deferred` entry (date-fns, Temporal, neodrag,
+      tanstack-virtual, sortablejs, dnd-kit snapshot, qrcode/change-case/jwt,
+      nprogress/cookies/focus-trap/drauu/async-validator), `svelteNative`
+      guidance (title/transitions/animate/mounted), and feat-030 adapter
+      shapes (axios/fuse/idb-keyval). Fixed two snippets that used `await`
+      inside `$derived` (invalid) → `$effect` + alive-guard patterns.
