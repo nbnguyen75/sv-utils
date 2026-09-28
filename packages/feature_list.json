@@ -328,7 +328,7 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Core timers and clock primitives every app needs; fake-timer tests. Pausable controls per architecture rules.",
+			"description": "Core timers and clock primitives; fake-timer tests. Pausable controls per architecture rules. (useTimeout/useInterval/useNow/useTimestamp cut as recipes.)",
 			"evidence": "",
 			"functions": [
 				{
@@ -340,7 +340,7 @@
 				{
 					"name": "useTimeout",
 					"source": "vueuse/shared/useTimeout",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/utilities/useTimeout/"
 				},
 				{
@@ -352,7 +352,7 @@
 				{
 					"name": "useInterval",
 					"source": "vueuse/shared/useInterval",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/utilities/useInterval/"
 				},
 				{
@@ -364,13 +364,13 @@
 				{
 					"name": "useNow",
 					"source": "vueuse/core/useNow",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/utilities/useNow/"
 				},
 				{
 					"name": "useTimestamp",
 					"source": "vueuse/core/useTimestamp",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/utilities/useTimestamp/"
 				},
 				{
@@ -392,31 +392,31 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Human-facing date/time formatting with SSR-deterministic fallbacks (no hydration mismatch: server renders placeholder, client hydrates).",
+			"description": "Date/time display — DEFERRED to date-fns entirely. Recipes only (ticker, Intl.RelativeTimeFormat); no code in this batch.",
 			"evidence": "",
 			"functions": [
 				{
 					"name": "useDateFormat",
 					"source": "vueuse/shared/useDateFormat",
-					"status": "todo",
+					"status": "deferred",
 					"target": "src/lib/utilities/useDateFormat/"
 				},
 				{
 					"name": "useTimeAgo",
 					"source": "vueuse/core/useTimeAgo",
-					"status": "todo",
+					"status": "deferred",
 					"target": "src/lib/utilities/useTimeAgo/"
 				},
 				{
 					"name": "useTimeAgoIntl",
 					"source": "vueuse/core/useTimeAgoIntl",
-					"status": "todo",
+					"status": "deferred",
 					"target": "src/lib/utilities/useTimeAgoIntl/"
 				},
 				{
 					"name": "useTemporalNow",
 					"source": "vueuse/core/useTemporalNow",
-					"status": "todo",
+					"status": "deferred",
 					"target": "src/lib/utilities/useTemporalNow/"
 				}
 			],
@@ -426,13 +426,13 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Svelte $effect-based one-shot/conditional/debounced/throttled/pausable watchers replacing Vue watcher APIs. Depends on feat-006 filter semantics for debounced/throttled variants.",
+			"description": "Reactive watchers kept: until, watchIgnorable, watchTriggerable, watchArray, watchAtMost. (One-liner aliases cut as recipes.)",
 			"evidence": "",
 			"functions": [
 				{
 					"name": "watchOnce",
 					"source": "vueuse/shared/watchOnce",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/watchOnce/"
 				},
 				{
@@ -444,13 +444,13 @@
 				{
 					"name": "watchImmediate",
 					"source": "vueuse/shared/watchImmediate",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/watchImmediate/"
 				},
 				{
 					"name": "watchDeep",
 					"source": "vueuse/shared/watchDeep",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/watchDeep/"
 				},
 				{
@@ -462,7 +462,7 @@
 				{
 					"name": "whenever",
 					"source": "vueuse/shared/whenever",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/whenever/"
 				},
 				{
@@ -474,19 +474,19 @@
 				{
 					"name": "watchDebounced",
 					"source": "vueuse/shared/watchDebounced",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/watchDebounced/"
 				},
 				{
 					"name": "watchThrottled",
 					"source": "vueuse/shared/watchThrottled",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/watchThrottled/"
 				},
 				{
 					"name": "watchPausable",
 					"source": "vueuse/shared/watchPausable",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/watchPausable/"
 				},
 				{
@@ -504,7 +504,7 @@
 				{
 					"name": "watchWithFilter",
 					"source": "vueuse/shared/watchWithFilter",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/watchWithFilter/"
 				}
 			],
@@ -514,25 +514,25 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Value wrappers with defaults/reset/debounce/throttle and app-level shared-state factories. Depends on feat-006 for debounced/throttled variants.",
+			"description": "Ref variants kept: refAutoReset, refManualReset, refWithControl, createEventHook, createGlobalState, createSharedComposable, syncRef, computedWithControl. (Trivial wrappers cut as recipes.)",
 			"evidence": "",
 			"functions": [
 				{
 					"name": "refDefault",
 					"source": "vueuse/shared/refDefault",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/refDefault/"
 				},
 				{
 					"name": "refDebounced",
 					"source": "vueuse/shared/refDebounced",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/refDebounced/"
 				},
 				{
 					"name": "refThrottled",
 					"source": "vueuse/shared/refThrottled",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/refThrottled/"
 				},
 				{
@@ -580,13 +580,13 @@
 				{
 					"name": "syncRefs",
 					"source": "vueuse/shared/syncRefs",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/syncRefs/"
 				},
 				{
 					"name": "computedEager",
 					"source": "vueuse/shared/computedEager",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/computedEager/"
 				},
 				{
@@ -602,7 +602,7 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Async data + memoized/derived state. Promise handling must be SSR-safe (pending state on server, no unhandled rejections).",
+			"description": "Async data + memoized/derived state. (useCached cut as recipe.) Promise handling must be SSR-safe (pending state on server, no unhandled rejections).",
 			"evidence": "",
 			"functions": [
 				{
@@ -638,7 +638,7 @@
 				{
 					"name": "useCached",
 					"source": "vueuse/core/useCached",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/state/useCached/"
 				},
 				{
@@ -672,7 +672,7 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Most-used responsive primitives. matchMedia mocks in tests; SSR returns fallback values (no hydration mismatch).",
+			"description": "Most-used responsive primitives. (useSSRWidth cut as recipe.) matchMedia mocks in tests; SSR returns fallback values (no hydration mismatch).",
 			"evidence": "",
 			"functions": [
 				{
@@ -738,7 +738,7 @@
 				{
 					"name": "useSSRWidth",
 					"source": "vueuse/core/useSSRWidth",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/browser/useSSRWidth/"
 				}
 			],
@@ -812,7 +812,7 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Document/page-level visibility, title, icon, fullscreen. All SSR-guarded with server fallbacks.",
+			"description": "Document/page-level visibility, icon, fullscreen. (useTitle skipped: <svelte:head> covers it.) All SSR-guarded with server fallbacks.",
 			"evidence": "",
 			"functions": [
 				{
@@ -836,7 +836,7 @@
 				{
 					"name": "useTitle",
 					"source": "vueuse/core/useTitle",
-					"status": "todo",
+					"status": "svelte-native",
 					"target": "src/lib/browser/useTitle/"
 				},
 				{
@@ -916,7 +916,7 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Touch/drag interactions and outside/long-press handlers. Touch + mouse event mocks in tests.",
+			"description": "Touch/drag interactions and outside/long-press handlers. (useDraggable deferred to @neodrag/svelte.) Touch + mouse event mocks in tests.",
 			"evidence": "",
 			"functions": [
 				{
@@ -934,7 +934,7 @@
 				{
 					"name": "useDraggable",
 					"source": "vueuse/core/useDraggable",
-					"status": "todo",
+					"status": "deferred",
 					"target": "src/lib/browser/useDraggable/"
 				},
 				{
@@ -1236,7 +1236,7 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Event bus + dialogs + mount/support detection + animation helpers + virtual lists. useTransition/useAnimate must honor prefers-reduced-motion SSR default.",
+			"description": "Event bus + dialogs + support detection + element overflow. (useMounted/useTransition/useAnimate skipped as Svelte-native; useVirtualList deferred to @tanstack/svelte-virtual.)",
 			"evidence": "",
 			"functions": [
 				{
@@ -1254,7 +1254,7 @@
 				{
 					"name": "useMounted",
 					"source": "vueuse/core/useMounted",
-					"status": "todo",
+					"status": "svelte-native",
 					"target": "src/lib/browser/useMounted/"
 				},
 				{
@@ -1266,19 +1266,19 @@
 				{
 					"name": "useTransition",
 					"source": "vueuse/core/useTransition",
-					"status": "todo",
+					"status": "svelte-native",
 					"target": "src/lib/utilities/useTransition/"
 				},
 				{
 					"name": "useAnimate",
 					"source": "vueuse/core/useAnimate",
-					"status": "todo",
+					"status": "svelte-native",
 					"target": "src/lib/browser/useAnimate/"
 				},
 				{
 					"name": "useVirtualList",
 					"source": "vueuse/core/useVirtualList",
-					"status": "todo",
+					"status": "deferred",
 					"target": "src/lib/browser/useVirtualList/"
 				},
 				{
@@ -1400,7 +1400,7 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Reactive math one-liners. Pure/SSR-trivial; shared/ category with full branch coverage.",
+			"description": "Reactive math kept: useClamp, usePrecision, createProjection, createGenericProjection. (One-liner wrappers cut as recipes.) Pure/SSR-trivial; full branch coverage.",
 			"evidence": "",
 			"functions": [
 				{
@@ -1412,25 +1412,25 @@
 				{
 					"name": "useMin",
 					"source": "vueuse/math/useMin",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useMin/"
 				},
 				{
 					"name": "useMax",
 					"source": "vueuse/math/useMax",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useMax/"
 				},
 				{
 					"name": "useAverage",
 					"source": "vueuse/math/useAverage",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useAverage/"
 				},
 				{
 					"name": "useSum",
 					"source": "vueuse/math/useSum",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useSum/"
 				},
 				{
@@ -1442,61 +1442,61 @@
 				{
 					"name": "useRound",
 					"source": "vueuse/math/useRound",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useRound/"
 				},
 				{
 					"name": "useCeil",
 					"source": "vueuse/math/useCeil",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useCeil/"
 				},
 				{
 					"name": "useFloor",
 					"source": "vueuse/math/useFloor",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useFloor/"
 				},
 				{
 					"name": "useTrunc",
 					"source": "vueuse/math/useTrunc",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useTrunc/"
 				},
 				{
 					"name": "useAbs",
 					"source": "vueuse/math/useAbs",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useAbs/"
 				},
 				{
 					"name": "useMath",
 					"source": "vueuse/math/useMath",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useMath/"
 				},
 				{
 					"name": "logicAnd",
 					"source": "vueuse/math/logicAnd",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/logicAnd/"
 				},
 				{
 					"name": "logicOr",
 					"source": "vueuse/math/logicOr",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/logicOr/"
 				},
 				{
 					"name": "logicNot",
 					"source": "vueuse/math/logicNot",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/logicNot/"
 				},
 				{
 					"name": "useProjection",
 					"source": "vueuse/math/useProjection",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useProjection/"
 				},
 				{
@@ -1518,25 +1518,25 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Remaining isomorphic shared helpers: value accessors, function/object reactivity, number/string coercion. Pure and fully testable.",
+			"description": "Shared helpers kept: useToNumber, reactifyObject, reactiveOmit, reactivePick, toReactive, makeDestructurable. (Trivial accessors cut as recipes.) Pure and fully testable.",
 			"evidence": "",
 			"functions": [
 				{
 					"name": "isDefined",
 					"source": "vueuse/shared/isDefined",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/isDefined/"
 				},
 				{
 					"name": "get",
 					"source": "vueuse/shared/get",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/get/"
 				},
 				{
 					"name": "set",
 					"source": "vueuse/shared/set",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/set/"
 				},
 				{
@@ -1548,13 +1548,13 @@
 				{
 					"name": "useToString",
 					"source": "vueuse/shared/useToString",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/useToString/"
 				},
 				{
 					"name": "reactify",
 					"source": "vueuse/shared/reactify",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/reactify/"
 				},
 				{
@@ -1566,7 +1566,7 @@
 				{
 					"name": "reactiveComputed",
 					"source": "vueuse/shared/reactiveComputed",
-					"status": "todo",
+					"status": "cut",
 					"target": "src/lib/shared/reactiveComputed/"
 				},
 				{
@@ -1597,6 +1597,104 @@
 			"id": "feat-028",
 			"name": "Shared value & reactivity helpers",
 			"status": "todo"
+		},
+		{
+			"dependencies": ["feat-005", "feat-008"],
+			"description": "Ports of 11 svbase utilities ( Tier A pure helpers + Tier B Svelte attachments): composeHandlers, mergeProps, id utilities (generateId/createId/getTabIds), stateAttrs, sliderMath, roving, tooltip grace-delay, clickOutside/escapeKey attachments (browser/dismiss/), trackOutsidePress, context helpers. Existing svbase *.test.ts files travel as specs.",
+			"evidence": "",
+			"functions": [
+				{
+					"name": "composeHandlers",
+					"source": "svbase/utils/compose-handlers.ts",
+					"status": "todo",
+					"target": "src/lib/shared/composeHandlers/"
+				},
+				{
+					"name": "mergeProps",
+					"source": "svbase/utils/merge-props.ts",
+					"status": "todo",
+					"target": "src/lib/shared/mergeProps/"
+				},
+				{
+					"name": "generateId/createId/getTabIds",
+					"source": "svbase/utils/id.ts + tabs/context.ts",
+					"status": "todo",
+					"target": "src/lib/shared/id/"
+				},
+				{
+					"name": "getCheckableDataAttributes",
+					"source": "svbase/utils/state-attrs.ts",
+					"status": "todo",
+					"target": "src/lib/shared/stateAttrs/"
+				},
+				{
+					"name": "sliderMath",
+					"source": "svbase/utils/slider-math.ts",
+					"status": "todo",
+					"target": "src/lib/shared/sliderMath/"
+				},
+				{
+					"name": "nextRovingTarget",
+					"source": "svbase/utils/roving.ts",
+					"status": "todo",
+					"target": "src/lib/shared/roving/"
+				},
+				{
+					"name": "tooltipDelay",
+					"source": "svbase/primitives/tooltip/delay.ts",
+					"status": "todo",
+					"target": "src/lib/shared/tooltipDelay/"
+				},
+				{
+					"name": "clickOutside/escapeKey",
+					"source": "svbase/actions/dismiss.ts",
+					"status": "todo",
+					"target": "src/lib/browser/dismiss/"
+				},
+				{
+					"name": "trackOutsidePress",
+					"source": "svbase/utils/outside.ts",
+					"status": "todo",
+					"target": "src/lib/browser/trackOutsidePress/"
+				},
+				{
+					"name": "contextHelpers",
+					"source": "svbase/utils/context.ts",
+					"status": "todo",
+					"target": "src/lib/shared/context/"
+				}
+			],
+			"id": "feat-029",
+			"name": "svbase ports",
+			"status": "todo"
+		},
+		{
+			"dependencies": ["feat-029"],
+			"description": "Integration adapters LAST: useAxios, useFuse, useIDBKeyval as thin ports with peerDependencies (user installs the lib). The other 9 integrations are recipes-only in docs/recipes.md. Packaging/peerDep complexity isolated here.",
+			"evidence": "",
+			"functions": [
+				{
+					"name": "useAxios",
+					"source": "vueuse/integrations/useAxios (peer: axios)",
+					"status": "todo",
+					"target": "src/lib/integrations/useAxios/"
+				},
+				{
+					"name": "useFuse",
+					"source": "vueuse/integrations/useFuse (peer: fuse.js)",
+					"status": "todo",
+					"target": "src/lib/integrations/useFuse/"
+				},
+				{
+					"name": "useIDBKeyval",
+					"source": "vueuse/integrations/useIDBKeyval (peer: idb-keyval)",
+					"status": "todo",
+					"target": "src/lib/integrations/useIDBKeyval/"
+				}
+			],
+			"id": "feat-030",
+			"name": "Integration adapters (last)",
+			"status": "todo"
 		}
 	],
 	"moduleConvention": {
@@ -1610,8 +1708,8 @@
 		"docs": "README.md per module (§4 of migration-plan.md) + JSDoc on every export",
 		"tests": "*.test.ts per module (§5 of migration-plan.md); no uncovered public export"
 	},
-	"scope": "isomorphic-only: SSR-safe, works with or without SvelteKit, no $app/* imports, zero new runtime dependencies. See migration-plan.md §1.",
-	"version": "2.0.0",
+	"scope": "isomorphic-only: SSR-safe, works with or without SvelteKit, no $app/* imports. Core zero-dep; feat-030 adapters may declare peerDeps (never bundled). See migration-plan.md §1.",
+	"version": "2.1.0",
 	"wontPort": [
 		{
 			"functions": [
@@ -1645,23 +1743,6 @@
 		},
 		{
 			"functions": [
-				"useAsyncValidator",
-				"useAxios",
-				"useChangeCase",
-				"useCookies",
-				"useDrauu",
-				"useFocusTrap",
-				"useFuse",
-				"useIDBKeyval",
-				"useJwt",
-				"useNProgress",
-				"useQRCode",
-				"useSortable"
-			],
-			"reason": "Each adds a third-party dependency; optional post-roadmap appendix"
-		},
-		{
-			"functions": [
 				"computedInject",
 				"createInjectionState",
 				"provideLocal",
@@ -1691,5 +1772,152 @@
 			],
 			"reason": "Replaced by $effect cleanup; document pattern, do not port"
 		}
-	]
+	],
+	"cut": [
+		{
+			"functions": ["useTimeout", "useInterval", "useNow", "useTimestamp"],
+			"reason": "Thin wrappers over useTimeoutFn/useIntervalFn or sub-10-line tickers a user writes directly.",
+			"recipes": "docs/recipes.md#timing"
+		},
+		{
+			"functions": [
+				"watchOnce",
+				"watchImmediate",
+				"watchDeep",
+				"watchDebounced",
+				"watchThrottled",
+				"watchPausable",
+				"whenever",
+				"watchWithFilter"
+			],
+			"reason": "One-line $effect/filter compositions; value lives in the filter utils, not the alias.",
+			"recipes": "docs/recipes.md#watchers"
+		},
+		{
+			"functions": ["refDefault", "refDebounced", "refThrottled", "syncRefs", "computedEager"],
+			"reason": "Trivial $state/$derived wrappers (computedEager also deprecated upstream).",
+			"recipes": "docs/recipes.md#refs"
+		},
+		{
+			"functions": ["useCached"],
+			"reason": "Single watch + comparator gate.",
+			"recipes": "docs/recipes.md#async"
+		},
+		{
+			"functions": ["useSSRWidth"],
+			"reason": "One-line SSR fallback constant.",
+			"recipes": "docs/recipes.md#viewport"
+		},
+		{
+			"functions": [
+				"useMin",
+				"useMax",
+				"useAverage",
+				"useSum",
+				"useRound",
+				"useCeil",
+				"useFloor",
+				"useTrunc",
+				"useAbs",
+				"useMath",
+				"logicAnd",
+				"logicOr",
+				"logicNot",
+				"useProjection"
+			],
+			"reason": "One-line Math/logic wrappers; Svelte templates already express && / || / ! natively.",
+			"recipes": "docs/recipes.md#math"
+		},
+		{
+			"functions": ["isDefined", "get", "set", "useToString", "reactify", "reactiveComputed"],
+			"reason": "Sub-10-line accessors; reactify is $derived(fn(...args)) spelled out.",
+			"recipes": "docs/recipes.md#shared"
+		}
+	],
+	"deferred": [
+		{
+			"functions": ["useDateFormat", "useTimeAgo", "useTimeAgoIntl"],
+			"library": "date-fns",
+			"reason": "Token engine, locales, and pluralization beat any hand-rolled tables; keep only a ticker recipe."
+		},
+		{
+			"functions": ["useTemporalNow"],
+			"library": "Temporal API",
+			"reason": "Bleeding-edge API; defer to platform docs until it stabilizes."
+		},
+		{
+			"functions": ["useDraggable"],
+			"library": "@neodrag/svelte",
+			"reason": "383 lines duplicating a 2KB SSR-friendly Svelte action poorly."
+		},
+		{
+			"functions": ["useVirtualList"],
+			"library": "@tanstack/svelte-virtual",
+			"reason": "Dynamic-size windowing, overscan, and a11y belong to a dedicated lib."
+		},
+		{
+			"functions": ["useSortable"],
+			"library": "sortablejs",
+			"reason": "Simple sortable lists via a Svelte action recipe; complex cases go to @dnd-kit/svelte."
+		},
+		{
+			"functions": ["useQRCode", "useChangeCase", "useJwt"],
+			"library": "qrcode / change-case / jwt-decode (used directly)",
+			"reason": "The libs are already functional APIs; the wrapper is a $derived one-liner."
+		},
+		{
+			"functions": ["useNProgress", "useCookies", "useFocusTrap", "useDrauu", "useAsyncValidator"],
+			"library": "nprogress / document.cookie + SvelteKit / focus-trap / svelte whiteboards / async-validator",
+			"reason": "Framework-agnostic libs or platform APIs used directly; Svelte-shape snippets in recipes."
+		}
+	],
+	"svelteNative": [
+		{
+			"functions": ["useTransition"],
+			"guidance": "svelte/motion (tweened/spring) + svelte/easing owns tweening; recipe shows the mapping."
+		},
+		{
+			"functions": ["useAnimate"],
+			"guidance": "svelte/animate + svelte/transition, or raw WAAPI element.animate() in $effect."
+		},
+		{
+			"functions": ["useMounted"],
+			"guidance": "An $effect body IS mount; a composable adds nothing."
+		},
+		{
+			"functions": ["useTitle"],
+			"guidance": "<svelte:head><title> + $effect for dynamic titles."
+		}
+	],
+	"integrationsLast": {
+		"note": "Ported last, after feat-029. Adapters declare the underlying lib as peerDependency (user installs it; never bundled). Everything else is recipes-only.",
+		"adapters": [
+			{
+				"name": "useAxios",
+				"peer": "axios",
+				"reason": "Stateful wrapper (loading/error/abort/retry) with real logic."
+			},
+			{
+				"name": "useFuse",
+				"peer": "fuse.js",
+				"reason": "Rebuild-on-data-change + limit/matchAll logic worth owning."
+			},
+			{
+				"name": "useIDBKeyval",
+				"peer": "idb-keyval",
+				"reason": "Pairs with useStorageAsync (feat-015) as the async backend."
+			}
+		],
+		"recipesOnly": [
+			"useAsyncValidator",
+			"useChangeCase",
+			"useCookies",
+			"useDrauu",
+			"useFocusTrap",
+			"useJwt",
+			"useNProgress",
+			"useQRCode",
+			"useSortable"
+		]
+	}
 }

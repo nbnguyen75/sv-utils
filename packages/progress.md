@@ -170,3 +170,24 @@ Window` is false across VM contexts → duck-typed window detection in
       covered); reduce callback generics need the unknown-hop cast.
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 191/191
       (31 files), `prepack` publint clean.
+
+### Scope review: roadmap 150+ → ~110 ports (v2.1.0)
+
+- [x] Policy locked: core strictly zero-dep; integrations-last may use
+      peerDeps (never bundled); vendor-copy semantics where tiny (mitt-style);
+      cut rule = user-implementable in <10 lines with no edge cases.
+- [x] `feature_list.json` v2.0.0 → v2.1.0 via scripted transform
+      (`feat210.mjs`): 39 `cut`, 6 `deferred`, 4 `svelte-native`; done entries
+      untouched (38 done).
+- [x] Rescoped batches: feat-011 (9→5), feat-012 (recipes-only, date-fns),
+      feat-013 (13→5), feat-014 (13→8), feat-015 (−useCached), feat-016
+      (−useSSRWidth), feat-018 (−useTitle), feat-020 (−useDraggable),
+      feat-025 (8→4), feat-027 (18→4), feat-028 (12→6).
+- [x] New top-level sections: `cut` (7 groups → docs/recipes.md), `deferred`
+      (7 groups → lib links), `svelteNative` (4 → Svelte guidance),
+      `integrationsLast` (3 adapters + 9 recipes-only); old integrations
+      wont-port group superseded.
+- [x] New feat-029 (svbase ports, 10 fns) and feat-030 (integration adapters
+      last, 3 fns). DnD = recipes only (sortablejs + @dnd-kit/svelte snapshot
+      pattern + neodrag; svelte-dnd-action excluded). better-fetch/RPC dropped
+      for now — parked, revisit after publish.

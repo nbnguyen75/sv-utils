@@ -11,11 +11,11 @@
 
 ## Immediate Next Task
 
-- Start with `feat-011` (timing core: useTimeout/useTimeoutFn, useInterval/
-  useIntervalFn, useRafFn, useNow/useTimestamp, useCountdown, useFps) —
-  then `feat-012` (date/time display) → `feat-013` (watchers) per
-  `feature_list.json` dependency order.
-- Per-batch contract: `migration-plan.md` §§3–6 (one batch at a time).
+- Phase 1b: write `docs/recipes.md` (recipes for all `cut` functions,
+  `deferred` lib adapters, `svelteNative` guidance, DnD trio) — then Phase 2
+  refactor (R1 centralize MaybeGetter+resolve, R2 shared mount helper, R3
+  UseXxxOptions normalization, R4 README re-check).
+- After that resume at feat-011 (now 5 functions).
 
 ## How to Resume
 
