@@ -7,6 +7,8 @@
 		"build": "vite build && bun run prepack",
 		"preview": "vite preview",
 		"prepack": "svelte-package && publint",
+		"test": "vitest run",
+		"test:watch": "vitest",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "oxlint && eslint src --ext .svelte --cache",
@@ -43,6 +45,7 @@
 		"eslint-plugin-perfectionist": "^5.12.0",
 		"eslint-plugin-svelte": "^3.19.0",
 		"globals": "^17.6.0",
+		"jsdom": "^30.1.1",
 		"oxfmt": "^0.70.0",
 		"oxlint": "^1.85.0",
 		"oxlint-tsgolint": "^7.0.2002",
@@ -51,7 +54,8 @@
 		"svelte-check": "^4.6.0",
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.60.1",
-		"vite": "^8.0.16"
+		"vite": "^8.0.16",
+		"vitest": "^5.0.2"
 	},
 	"keywords": [
 		"svelte",

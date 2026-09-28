@@ -15,6 +15,9 @@ bun run format
 echo ">> Running linter (oxlint & eslint)..."
 bun run lint
 
+echo ">> Running unit tests (vitest)..."
+bun run test
+
 echo ">> Testing library packaging (prepack)..."
 bun run prepack
 

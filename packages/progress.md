@@ -35,3 +35,22 @@
 - [x] `bun run check`: 0 errors; 1 pre-existing tsconfig warning (no svelte input
       files in include paths — baseline drift, untouched this session).
 - [x] `bun run lint` and `bun run prepack` (svelte-package + publint) pass.
+
+### feat-005: Test & docs harness — done
+
+- [x] Installed `vitest@5.0.2` + `jsdom@30.1.1` (devDeps, `bun.lock` updated).
+- [x] `vitest.config.ts`: svelte plugin (runes forced, mirrors `vite.config.ts`),
+      node default env with per-file `// @vitest-environment jsdom` opt-in,
+      `test/setup.ts`, include `src/**/*.test.ts` + `test/**/*.test.ts`.
+- [x] Fixed bare-`svelte`-import resolution: Vitest externalizes `svelte` to Node
+      (server build, `mount` throws) → `server.deps.inline: ['svelte']` plus
+      `resolve.conditions` with `browser` first (client build everywhere).
+- [x] `test/setup.ts`: controllable `matchMedia` stub (`setMediaMatches`) + per-test reset.
+- [x] Smoke tests 6/6 green: node env (no DOM, runes fixture, fake timers on real
+      `useDebounceFn`) + jsdom env (DOM globals, matchMedia stub, mount/unmount
+      `$effect` cleanup pattern via fixture component).
+- [x] `package.json`: `test` (`vitest run`) + `test:watch`; wired `bun run test`
+      into `init.ps1`/`init.sh` between lint and prepack.
+- [x] `docs/module-readme-template.md`: per-module README convention (§4).
+- [x] Gates: `check` 0/0, `tsc --noEmit` clean, `lint` 0, `test` 6/6,
+      `prepack` publint clean, `format` clean, `dist` contains no test files.

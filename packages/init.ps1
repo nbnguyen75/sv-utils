@@ -15,6 +15,9 @@ bun run format
 Write-Host ">> Running linter (oxlint & eslint)..." -ForegroundColor Yellow
 bun run lint
 
+Write-Host ">> Running unit tests (vitest)..." -ForegroundColor Yellow
+bun run test
+
 Write-Host ">> Testing library packaging (prepack)..." -ForegroundColor Yellow
 bun run prepack
 

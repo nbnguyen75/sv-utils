@@ -95,24 +95,24 @@
 		{
 			"dependencies": ["feat-001"],
 			"description": "Add vitest + jsdom, `bun run test` script, colocated *.test.ts packaging exclusions, per-module README convention, and wire `test` into init.ps1/init.sh. Blocks all implementation batches.",
-			"evidence": "",
+			"evidence": "vitest.config.ts, test/setup.ts, test/harness.test.ts, test/harness.jsdom.test.ts, test/fixtures/, docs/module-readme-template.md, package.json#test, init.ps1/init.sh (6/6 smoke tests green)",
 			"functions": [
 				{
 					"name": "test-harness",
 					"source": "internal",
-					"status": "todo",
+					"status": "done",
 					"target": "vitest.config + package.json#test + init scripts"
 				},
 				{
 					"name": "docs-convention",
 					"source": "internal (migration-plan.md §3-§4)",
-					"status": "todo",
+					"status": "done",
 					"target": "per-module README.md template"
 				}
 			],
 			"id": "feat-005",
 			"name": "Test & docs harness",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005"],
