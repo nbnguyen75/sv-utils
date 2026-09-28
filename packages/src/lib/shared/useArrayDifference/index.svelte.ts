@@ -5,11 +5,8 @@
  * Memoized in `$derived`. Pure logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 
 /** Options for {@link useArrayDifference}. */
 export interface UseArrayDifferenceOptions {
@@ -59,8 +56,8 @@ export function useArrayDifference<T>(
 	}
 
 	const difference = $derived.by(() => {
-		const resolved = resolve(list);
-		const others = resolve(values);
+		const resolved = resolveGetter(list);
+		const others = resolveGetter(values);
 		const missing = (from: readonly T[], against: readonly T[]): T[] =>
 			from.filter((item) => against.findIndex((other) => compareFn(item, other)) === -1);
 		const first = missing(resolved, others);

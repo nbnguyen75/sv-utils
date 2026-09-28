@@ -201,3 +201,25 @@ Window` is false across VM contexts → duck-typed window detection in
       guidance (title/transitions/animate/mounted), and feat-030 adapter
       shapes (axios/fuse/idb-keyval). Fixed two snippets that used `await`
       inside `$derived` (invalid) → `$effect` + alive-guard patterns.
+
+### Phase 2 refactor — done
+
+- [x] R1: centralized `MaybeGetter` + `resolve` (22 copy-pasted copies) into
+      new `src/lib/shared/getter/` (`resolveGetter` + type, own test + README,
+      barrel-wired); single canonical export (dual `export *` would silently
+      drop the name — same hazard as feat-008). All 22 sites rewired via
+      script; `check` clean.
+- [x] R2: new `test/fixtures/mount.ts` (`mountSetup` + `mountUtil<T>`);
+      migrated all 11 jsdom suites (one-line wrappers replace ~20-line
+      helpers); bodies keep direct `tick()` for mid-test flushes.
+- [x] R3: normalized type names (`DebounceOptions`→`UseDebounceOptions`,
+      `ThrottleOptions`→`UseThrottleOptions`,
+      `DebouncedFunction`→`UseDebouncedFunction`,
+      `ThrottledFunction`→`UseThrottledFunction`,
+      `Serializer`→`UseStorageSerializer`, `StepName`→`UseStepName`) across
+      src/test/docs via word-boundary script; progress.md history untouched.
+- [x] R4: README sweep — all modules carry the 7 template sections except
+      `shared/README.md`, accepted as a 15-export index (export table covers
+      Signature/Options/Returns content).
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 193/193
+      (32 files), `prepack` publint clean.

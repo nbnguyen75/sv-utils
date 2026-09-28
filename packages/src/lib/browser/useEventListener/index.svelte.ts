@@ -10,11 +10,8 @@
 import { isBrowser } from '../../shared/is.ts';
 
 /** A plain value or a getter returning it; getters re-resolve on effect re-run. */
-export type MaybeGetter<T> = T | (() => T);
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 // Overload 1: Window
 /**
@@ -70,7 +67,7 @@ export function useEventListener(
 	$effect(() => {
 		if (!isBrowser) return;
 
-		const el = resolve(target);
+		const el = resolveGetter(target);
 		if (!el) return;
 
 		el.addEventListener(event, handler, options);

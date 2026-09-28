@@ -12,11 +12,8 @@ import { Tween } from 'svelte/motion';
 
 import { isBrowser } from '../../shared/is.ts';
 
-type MaybeGetter<T> = T | (() => T);
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useScrollToTop}. */
 export interface UseScrollToTopOptions {
@@ -99,7 +96,7 @@ export function useScrollToTop(
 
 	async function scrollToTop() {
 		if (!isBrowser) return;
-		const el = resolve(target);
+		const el = resolveGetter(target);
 		if (!el) return;
 
 		cancel();

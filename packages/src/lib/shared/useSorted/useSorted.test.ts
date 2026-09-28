@@ -3,11 +3,11 @@
  * Tests for `useSorted`: default/custom/sortFn ordering, overload shapes,
  * non-mutation, reactivity, and in-place `dirty` mode (mounted).
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';
+import { mountSetup } from '../../../../test/fixtures/mount.ts';
 import { useSorted } from './index.ts';
 
 describe('useSorted copy mode', () => {
@@ -64,18 +64,10 @@ describe('useSorted copy mode', () => {
 describe('useSorted dirty mode', () => {
 	it('sorts the source array in place', async () => {
 		const box = createBox([3, 1, 2]);
-		const target = document.createElement('div');
-		document.body.appendChild(target);
 		let seen: number[] | undefined;
-		const app = mount(Run, {
-			props: {
-				setup: () => {
-					seen = useSorted(() => box.value, { dirty: true }).value;
-				}
-			},
-			target
+		const { dispose } = await mountSetup(() => {
+			seen = useSorted(() => box.value, { dirty: true }).value;
 		});
-		await tick();
 		try {
 			expect(box.value).toEqual([1, 2, 3]);
 			expect(seen).toEqual([1, 2, 3]);
@@ -84,9 +76,7 @@ describe('useSorted dirty mode', () => {
 			await tick();
 			expect(box.value).toEqual([0, 1, 2, 3]);
 		} finally {
-			unmount(app);
-			await tick();
-			target.remove();
+			await dispose();
 		}
 	});
 });

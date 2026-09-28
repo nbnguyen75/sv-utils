@@ -5,11 +5,8 @@
  * Memoized in `$derived`. Pure logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 
 /** Joined state returned by {@link useArrayJoin}. */
 export interface UseArrayJoinReturn {
@@ -29,7 +26,7 @@ export function useArrayJoin(
 	separator?: MaybeGetter<string>
 ): UseArrayJoinReturn {
 	const joined = $derived(
-		resolve(list).join(separator === undefined ? undefined : resolve(separator))
+		resolveGetter(list).join(separator === undefined ? undefined : resolveGetter(separator))
 	);
 
 	return {

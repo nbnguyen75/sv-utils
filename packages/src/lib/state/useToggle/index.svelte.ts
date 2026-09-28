@@ -5,11 +5,8 @@
  * Pure `$state` logic — safe to call anywhere, including during SSR
  * (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useToggle}. */
 export interface UseToggleOptions<Truthy = boolean, Falsy = boolean> {
@@ -53,7 +50,7 @@ export function useToggle<Truthy = boolean, Falsy = boolean>(
 		options;
 
 	let state = $state<Truthy | Falsy>(
-		initialValue === undefined ? resolve(falsyValue) : resolve(initialValue)
+		initialValue === undefined ? resolveGetter(falsyValue) : resolveGetter(initialValue)
 	);
 
 	function toggle(value?: Truthy | Falsy): Truthy | Falsy {
@@ -61,8 +58,8 @@ export function useToggle<Truthy = boolean, Falsy = boolean>(
 			state = value as Truthy | Falsy;
 			return state;
 		}
-		const truthy = resolve(truthyValue);
-		state = state === (truthy as unknown as Truthy | Falsy) ? resolve(falsyValue) : truthy;
+		const truthy = resolveGetter(truthyValue);
+		state = state === (truthy as unknown as Truthy | Falsy) ? resolveGetter(falsyValue) : truthy;
 		return state;
 	}
 

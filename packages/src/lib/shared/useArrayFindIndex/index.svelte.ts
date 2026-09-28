@@ -5,11 +5,8 @@
  * Memoized in `$derived`. Pure logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 
 /** Found-index state returned by {@link useArrayFindIndex}. */
 export interface UseArrayFindIndexReturn {
@@ -27,7 +24,7 @@ export function useArrayFindIndex<T>(
 	list: MaybeGetter<readonly T[]>,
 	fn: (element: T, index: number, array: readonly T[]) => unknown
 ): UseArrayFindIndexReturn {
-	const found = $derived(resolve(list).findIndex(fn));
+	const found = $derived(resolveGetter(list).findIndex(fn));
 
 	return {
 		get value() {

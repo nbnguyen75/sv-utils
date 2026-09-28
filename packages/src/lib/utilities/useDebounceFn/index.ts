@@ -11,7 +11,7 @@
  *
  * Pure logic, no DOM access — safe to call during SSR.
  */
-export interface DebounceOptions {
+export interface UseDebounceOptions {
 	/** Invoke on the leading edge of the first call in a burst. @default false */
 	leading?: boolean;
 	/** Invoke on the trailing edge after `delay` ms of quiet. @default true */
@@ -21,7 +21,7 @@ export interface DebounceOptions {
 }
 
 /** Debounced wrapper: callable plus `cancel` / `flush` / `pending` controls. */
-export interface DebouncedFunction<Args extends unknown[]> {
+export interface UseDebouncedFunction<Args extends unknown[]> {
 	(...args: Args): void;
 	/** Drop any pending invocation. Safe to call when idle or twice in a row. */
 	cancel(): void;
@@ -46,8 +46,8 @@ export interface DebouncedFunction<Args extends unknown[]> {
 export function useDebounceFn<Args extends unknown[]>(
 	fn: (...args: Args) => void,
 	delay = 200,
-	options: DebounceOptions = {}
-): DebouncedFunction<Args> {
+	options: UseDebounceOptions = {}
+): UseDebouncedFunction<Args> {
 	const { leading = false, trailing = true, maxWait } = options;
 
 	let timer: ReturnType<typeof setTimeout> | undefined;

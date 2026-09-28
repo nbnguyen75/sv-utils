@@ -7,11 +7,8 @@
  */
 import { untrack } from 'svelte';
 
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useCycleList}. */
 export interface UseCycleListOptions<T> {
@@ -57,12 +54,12 @@ export function useCycleList<T>(
 ): UseCycleListReturn<T> {
 	const { fallbackIndex = 0, getIndexOf } = options;
 
-	const readList = (): T[] => resolve(list);
+	const readList = (): T[] => resolveGetter(list);
 	const findIndex = (value: T, target: T[]): number =>
 		getIndexOf ? getIndexOf(value, target) : target.indexOf(value);
 
 	const initial =
-		options.initialValue === undefined ? readList()[0] : resolve(options.initialValue);
+		options.initialValue === undefined ? readList()[0] : resolveGetter(options.initialValue);
 	let state = $state<T>(initial as T);
 
 	const index = $derived.by(() => {

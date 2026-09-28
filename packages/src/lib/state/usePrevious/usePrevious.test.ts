@@ -3,38 +3,17 @@
  * Tests for `usePrevious`: initial value, change tracking, and
  * non-reactive sources. Runs mounted (the source is sampled in `$effect`).
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { usePrevious } from './index.ts';
-import type { UsePreviousReturn } from './index.ts';
 
-async function mountPrevious<T>(source: () => T, initialValue?: T) {
-	let api: UsePreviousReturn<T | undefined> | undefined;
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = usePrevious(source, initialValue as T);
-			}
-		},
-		target
-	});
-	await tick();
-	if (!api) throw new Error('usePrevious setup did not run');
-	const previous: UsePreviousReturn<T | undefined> = api;
-	return {
-		api: previous,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
+const mountPrevious = <T>(source: () => T, initialValue?: T) =>
+	initialValue === undefined
+		? mountUtil(() => usePrevious(source))
+		: mountUtil(() => usePrevious(source, initialValue));
 
 describe('usePrevious', () => {
 	it('is undefined until the first change without an initial value', async () => {

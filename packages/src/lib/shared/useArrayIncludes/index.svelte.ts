@@ -5,12 +5,9 @@
  * Memoized in `$derived`. Pure logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 import { isObject } from '../is.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
 
 /** Equality test for {@link useArrayIncludes}. */
 export type UseArrayIncludesComparatorFn<T, V> = (
@@ -88,9 +85,9 @@ export function useArrayIncludes<T, V>(
 	}
 
 	const included = $derived(
-		resolve(list)
+		resolveGetter(list)
 			.slice(fromIndex)
-			.some((element, index, array) => comparator(element, resolve(value), index, array))
+			.some((element, index, array) => comparator(element, resolveGetter(value), index, array))
 	);
 
 	return {

@@ -19,6 +19,7 @@ export * from './utilities/useDebounceFn/index.ts';
 export * from './utilities/useThrottleFn/index.ts';
 // * Shared
 export * from './shared/is.ts';
+export * from './shared/getter/index.ts';
 export * from './shared/useArrayMap/index.ts';
 export * from './shared/useArrayFilter/index.ts';
 export * from './shared/useArrayUnique/index.ts';

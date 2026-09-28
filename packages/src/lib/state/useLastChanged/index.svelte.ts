@@ -7,12 +7,9 @@
  */
 import { untrack } from 'svelte';
 
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 import { timestamp } from '../../shared/is.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
 
 /** Options for {@link useLastChanged}. */
 export interface UseLastChangedOptions {
@@ -54,7 +51,7 @@ export function useLastChanged(
 	let fresh = true;
 
 	$effect(() => {
-		resolve(source);
+		resolveGetter(source);
 		untrack(() => {
 			// Skip the effect's first run on mount (unless `immediate`
 			// already stamped above); every later run is a real change.

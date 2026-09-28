@@ -8,11 +8,8 @@
  */
 import { untrack } from 'svelte';
 
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 
 /** Comparison for {@link useSorted}. */
 export type UseSortedCompareFn<T> = (a: T, b: T) => number;
@@ -82,7 +79,7 @@ export function useSorted<T>(
 
 	if (dirty) {
 		$effect(() => {
-			const current = resolve(source);
+			const current = resolveGetter(source);
 			untrack(() => {
 				const result = sortFn([...current], compareFn);
 				// Splice only on real order changes so the effect settles
@@ -95,7 +92,9 @@ export function useSorted<T>(
 		});
 	}
 
-	const sorted = $derived(dirty ? resolve(source) : sortFn([...resolve(source)], compareFn));
+	const sorted = $derived(
+		dirty ? resolveGetter(source) : sortFn([...resolveGetter(source)], compareFn)
+	);
 
 	return {
 		get value() {

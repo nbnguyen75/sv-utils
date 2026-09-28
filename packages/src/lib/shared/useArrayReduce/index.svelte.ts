@@ -5,11 +5,8 @@
  * Memoized in `$derived`. Pure logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 
 /** Reducer over `(previous, current, index)`. */
 export type UseArrayReducer<Previous, Current, Result> = (
@@ -39,7 +36,7 @@ export function useArrayReduce<T>(
 	initialValue?: MaybeGetter<unknown>
 ): UseArrayReduceReturn<unknown> {
 	const reduced = $derived.by((): unknown => {
-		const resolved = resolve(list);
+		const resolved = resolveGetter(list);
 		if (initialValue === undefined) {
 			return resolved.reduce(reducer as unknown as UseArrayReducer<T, T, T>);
 		}

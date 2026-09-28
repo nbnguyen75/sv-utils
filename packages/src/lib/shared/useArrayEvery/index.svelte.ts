@@ -5,11 +5,8 @@
  * Memoized in `$derived`. Pure logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 
 /** Match state returned by {@link useArrayEvery}. */
 export interface UseArrayEveryReturn {
@@ -27,7 +24,7 @@ export function useArrayEvery<T>(
 	list: MaybeGetter<readonly T[]>,
 	fn: (element: T, index: number, array: readonly T[]) => unknown
 ): UseArrayEveryReturn {
-	const every = $derived(resolve(list).every(fn));
+	const every = $derived(resolveGetter(list).every(fn));
 
 	return {
 		get value() {

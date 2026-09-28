@@ -16,11 +16,11 @@ const session = useSessionStorage('draft', { text: '' }, customSerializer);
 
 ## Options
 
-| Parameter      | Type            | Default                      | Description                                             |
-| -------------- | --------------- | ---------------------------- | ------------------------------------------------------- |
-| `key`          | `string`        | (required)                   | Storage key.                                            |
-| `defaultValue` | `T`             | (required)                   | Used when the key is absent, unreadable, or during SSR. |
-| `serializer`   | `Serializer<T>` | JSON with string passthrough | `{ write(value): string; read(raw): T }` codec.         |
+| Parameter      | Type                      | Default                      | Description                                             |
+| -------------- | ------------------------- | ---------------------------- | ------------------------------------------------------- |
+| `key`          | `string`                  | (required)                   | Storage key.                                            |
+| `defaultValue` | `T`                       | (required)                   | Used when the key is absent, unreadable, or during SSR. |
+| `serializer`   | `UseStorageSerializer<T>` | JSON with string passthrough | `{ write(value): string; read(raw): T }` codec.         |
 
 ## Returns
 

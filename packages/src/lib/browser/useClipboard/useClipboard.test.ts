@@ -3,12 +3,12 @@
  * Tests for `useClipboard`: copy flow, reset window, unsupported
  * environments, and disposal of in-flight work on unmount.
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { useClipboard } from './index.ts';
-import type { UseClipboardOptions, UseClipboardReturn } from './index.ts';
+import type { UseClipboardOptions } from './index.ts';
 
 function mockClipboard() {
 	const writeText = vi.fn(async (_value: string) => {});
@@ -19,30 +19,7 @@ function mockClipboard() {
 	return writeText;
 }
 
-async function mountClipboard(opts?: UseClipboardOptions) {
-	let api: UseClipboardReturn | undefined;
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = useClipboard(opts);
-			}
-		},
-		target
-	});
-	await tick();
-	if (!api) throw new Error('useClipboard setup did not run');
-	const clipboard: UseClipboardReturn = api;
-	return {
-		api: clipboard,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
+const mountClipboard = (opts?: UseClipboardOptions) => mountUtil(() => useClipboard(opts));
 
 describe('useClipboard', () => {
 	it('copies text and resets the flag after the window', async () => {

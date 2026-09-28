@@ -11,7 +11,7 @@
  *
  * Pure logic, no DOM access — safe to call during SSR.
  */
-export interface ThrottleOptions {
+export interface UseThrottleOptions {
 	/** Invoke on the leading edge of the interval window. @default true */
 	leading?: boolean;
 	/** Invoke on the trailing edge with the latest args. @default true */
@@ -19,7 +19,7 @@ export interface ThrottleOptions {
 }
 
 /** Throttled wrapper: callable plus `cancel` / `flush` controls. */
-export interface ThrottledFunction<Args extends unknown[]> {
+export interface UseThrottledFunction<Args extends unknown[]> {
 	(...args: Args): void;
 	/** Drop any pending trailing invocation and reset the window. Safe to call when idle or twice in a row. */
 	cancel(): void;
@@ -42,8 +42,8 @@ export interface ThrottledFunction<Args extends unknown[]> {
 export function useThrottleFn<Args extends unknown[]>(
 	fn: (...args: Args) => void,
 	interval = 200,
-	options: ThrottleOptions = {}
-): ThrottledFunction<Args> {
+	options: UseThrottleOptions = {}
+): UseThrottledFunction<Args> {
 	const { leading = true, trailing = true } = options;
 
 	let lastInvokeTime = 0;

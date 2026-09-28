@@ -5,14 +5,11 @@
  * Pure `$state` / `$derived` logic — safe to call anywhere, including
  * during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Step names for array steps are the step values; for records, their keys. */
-export type StepName<Steps> = Steps extends readonly (infer S)[]
+export type UseStepName<Steps> = Steps extends readonly (infer S)[]
 	? S
 	: Steps extends Record<string, unknown>
 		? keyof Steps
@@ -72,7 +69,7 @@ export function useStepper(
 	steps: MaybeGetter<unknown[] | Record<string, unknown>>,
 	initialStep?: unknown
 ): UseStepperReturn<unknown, unknown, unknown> {
-	const readSteps = (): unknown[] | Record<string, unknown> => resolve(steps);
+	const readSteps = (): unknown[] | Record<string, unknown> => resolveGetter(steps);
 
 	const stepNames = $derived.by((): unknown[] => {
 		const current = readSteps();

@@ -10,11 +10,8 @@
  */
 import { untrack } from 'svelte';
 
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useOffsetPagination}. */
 export interface UseOffsetPaginationOptions {
@@ -77,12 +74,12 @@ export function useOffsetPagination(
 		onPageCountChange
 	} = options;
 
-	let pageState = $state(resolve(page));
-	let sizeState = $state(Math.max(1, resolve(pageSize)));
+	let pageState = $state(resolveGetter(page));
+	let sizeState = $state(Math.max(1, resolveGetter(pageSize)));
 
 	const pageCount = $derived.by(() => {
 		if (total === undefined) return Number.POSITIVE_INFINITY;
-		return Math.max(1, Math.ceil(resolve(total) / sizeState));
+		return Math.max(1, Math.ceil(resolveGetter(total) / sizeState));
 	});
 
 	const api: UseOffsetPaginationReturn = {

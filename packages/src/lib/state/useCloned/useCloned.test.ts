@@ -3,38 +3,16 @@
  * Tests for `useCloned`: initial clone, dirty flag, manual sync,
  * source re-sync, custom cloners, and structured-clone defaults.
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { useCloned } from './index.ts';
-import type { UseClonedOptions, UseClonedReturn } from './index.ts';
+import type { UseClonedOptions } from './index.ts';
 
-async function mountCloned<T>(source: () => T, options?: UseClonedOptions<T>) {
-	let api: UseClonedReturn<T> | undefined;
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = useCloned(source, options);
-			}
-		},
-		target
-	});
-	await tick();
-	if (!api) throw new Error('useCloned setup did not run');
-	const cloned: UseClonedReturn<T> = api;
-	return {
-		api: cloned,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
+const mountCloned = <T>(source: () => T, options?: UseClonedOptions<T>) =>
+	mountUtil(() => useCloned(source, options));
 
 describe('useCloned', () => {
 	it('deep-clones on init without marking modified', async () => {

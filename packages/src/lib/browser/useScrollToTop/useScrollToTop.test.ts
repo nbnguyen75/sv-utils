@@ -4,12 +4,10 @@
  * and disposal on unmount. Uses real timers with short durations plus a
  * `requestAnimationFrame` polyfill (jsdom ships none).
  */
-import { mount, tick, unmount } from 'svelte';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { useScrollToTop } from './index.ts';
-import type { UseScrollToTopReturn } from './index.ts';
 
 beforeAll(() => {
 	if (typeof window.requestAnimationFrame !== 'function') {
@@ -22,33 +20,8 @@ beforeAll(() => {
 	}
 });
 
-async function mountScroller(
-	target: () => HTMLElement | null,
-	duration = 30
-): Promise<{ api: UseScrollToTopReturn; dispose: () => Promise<void> }> {
-	let api: UseScrollToTopReturn | undefined;
-	const host = document.createElement('div');
-	document.body.appendChild(host);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = useScrollToTop(target, { duration });
-			}
-		},
-		target: host
-	});
-	await tick();
-	if (!api) throw new Error('useScrollToTop setup did not run');
-	const scroller: UseScrollToTopReturn = api;
-	return {
-		api: scroller,
-		async dispose() {
-			unmount(app);
-			await tick();
-			host.remove();
-		}
-	};
-}
+const mountScroller = (target: () => HTMLElement | null, duration = 30) =>
+	mountUtil(() => useScrollToTop(target, { duration }));
 
 function makeScrollable(top: number): HTMLElement {
 	const el = document.createElement('div');
@@ -138,27 +111,13 @@ describe('useScrollToTop', () => {
 		Object.defineProperty(window, 'scrollY', { configurable: true, value: 300 });
 		const scrollTo = vi.fn();
 		window.scrollTo = scrollTo;
-		const host = document.createElement('div');
-		document.body.appendChild(host);
-		let api: UseScrollToTopReturn | undefined;
-		const app = mount(Run, {
-			props: {
-				setup: () => {
-					api = useScrollToTop(undefined, { duration: 30 });
-				}
-			},
-			target: host
-		});
-		await tick();
+		const { api, dispose } = await mountUtil(() => useScrollToTop(undefined, { duration: 30 }));
 		try {
-			if (!api) throw new Error('useScrollToTop setup did not run');
 			await api.scrollToTop();
 			expect(scrollTo).toHaveBeenCalled();
 			expect(scrollTo).toHaveBeenLastCalledWith(0, 0);
 		} finally {
-			unmount(app);
-			await tick();
-			host.remove();
+			await dispose();
 		}
 	});
 

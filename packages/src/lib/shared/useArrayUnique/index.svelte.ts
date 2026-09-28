@@ -6,11 +6,8 @@
  * dependencies of `list` change. Pure logic — safe to call anywhere,
  * including during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 
 /**
  * Equality predicate for {@link useArrayUnique}: return `true` when `a`
@@ -53,7 +50,7 @@ export function useArrayUnique<T>(
 	compareFn?: UseArrayUniqueCompareFn<T>
 ): UseArrayUniqueReturn<T> {
 	const unique = $derived.by(() => {
-		const resolved = resolve(list);
+		const resolved = resolveGetter(list);
 		return compareFn ? uniqueElementsBy(resolved, compareFn) : uniq(resolved);
 	});
 

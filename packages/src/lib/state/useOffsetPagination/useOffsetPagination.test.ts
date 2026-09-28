@@ -4,40 +4,17 @@
  * and change callbacks. Navigation is pure state; callbacks need component
  * context (mounted) since they are delivered via `$effect`.
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { useOffsetPagination } from './index.svelte.ts';
-import type { UseOffsetPaginationOptions, UseOffsetPaginationReturn } from './index.svelte.ts';
+import type { UseOffsetPaginationOptions } from './index.svelte.ts';
 
-async function mountPagination(
+const mountPagination = (
 	options: UseOffsetPaginationOptions & { total: number | (() => number) }
-) {
-	let api: UseOffsetPaginationReturn | undefined;
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = useOffsetPagination(options);
-			}
-		},
-		target
-	});
-	await tick();
-	if (!api) throw new Error('useOffsetPagination setup did not run');
-	const pagination: UseOffsetPaginationReturn = api;
-	return {
-		api: pagination,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
+) => mountUtil(() => useOffsetPagination(options));
 
 describe('useOffsetPagination navigation', () => {
 	it('paginates with defaults (pageSize 10, page 1)', () => {

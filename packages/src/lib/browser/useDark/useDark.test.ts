@@ -3,13 +3,13 @@
  * Tests for `useDark`: OS preference, persistence, toggle/setMode,
  * DOM sync, custom options, and listener disposal on unmount.
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { setMediaMatches } from '../../../../test/setup.ts';
 import { useDark } from './index.ts';
-import type { UseDarkOptions, UseDarkReturn } from './index.ts';
+import type { UseDarkOptions } from './index.ts';
 
 const MEDIA_QUERY = '(prefers-color-scheme: dark)';
 
@@ -19,30 +19,7 @@ beforeEach(() => {
 	document.documentElement.removeAttribute('data-theme');
 });
 
-async function mountDark(opts?: UseDarkOptions) {
-	let api: UseDarkReturn | undefined;
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = useDark(opts);
-			}
-		},
-		target
-	});
-	await tick();
-	if (!api) throw new Error('useDark setup did not run');
-	const dark: UseDarkReturn = api;
-	return {
-		api: dark,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
+const mountDark = (opts?: UseDarkOptions) => mountUtil(() => useDark(opts));
 
 describe('useDark', () => {
 	it('defaults to light with empty storage and light OS preference', async () => {

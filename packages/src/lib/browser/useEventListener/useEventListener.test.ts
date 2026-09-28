@@ -3,26 +3,10 @@
  * Tests for `useEventListener`: attach, getter targets, options, and
  * disposal on unmount (via the shared `Run` mount fixture).
  */
-import { mount, tick, unmount } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
+import { mountSetup } from '../../../../test/fixtures/mount.ts';
 import { useEventListener } from './index.ts';
-
-async function mountSetup(setup: () => void | (() => void)) {
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, { props: { setup }, target });
-	await tick();
-	return {
-		app,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
 
 describe('useEventListener', () => {
 	it('calls the handler on window events', async () => {

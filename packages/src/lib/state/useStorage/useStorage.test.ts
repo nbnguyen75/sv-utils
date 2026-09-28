@@ -4,10 +4,10 @@
  * defaults, persistence, serializers, cross-tab sync, and storage
  * failure fallbacks.
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { useLocalStorage, useSessionStorage } from './index.ts';
 import type { UseStorageReturn } from './index.ts';
 
@@ -16,30 +16,7 @@ beforeEach(() => {
 	window.sessionStorage.clear();
 });
 
-async function mountCell<T>(create: () => UseStorageReturn<T>) {
-	let api: UseStorageReturn<T> | undefined;
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = create();
-			}
-		},
-		target
-	});
-	await tick();
-	if (!api) throw new Error('useStorage setup did not run');
-	const cell: UseStorageReturn<T> = api;
-	return {
-		api: cell,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
+const mountCell = <T>(create: () => UseStorageReturn<T>) => mountUtil(create);
 
 describe('useStorage', () => {
 	it('returns the default for a missing key and persists write-through', async () => {

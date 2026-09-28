@@ -13,7 +13,7 @@ import { useEventListener } from '../../browser/useEventListener/index.svelte.ts
 import { isBrowser } from '../../shared/is.ts';
 
 /** String serializer for storage values. */
-export type Serializer<T> = {
+export type UseStorageSerializer<T> = {
 	/** Encode a value for storage. */
 	write: (value: T) => string;
 	/** Decode a stored string; must never throw (fall back to a default). */
@@ -26,7 +26,7 @@ export interface UseStorageReturn<T> {
 	value: T;
 }
 
-function createDefaultSerializer<T>(): Serializer<T> {
+function createDefaultSerializer<T>(): UseStorageSerializer<T> {
 	return {
 		read: (raw: string) => {
 			try {
@@ -43,7 +43,7 @@ function useStorage<T>(
 	key: string,
 	defaultValue: T,
 	getStorage: () => Storage,
-	serializer: Serializer<T> = createDefaultSerializer<T>()
+	serializer: UseStorageSerializer<T> = createDefaultSerializer<T>()
 ): UseStorageReturn<T> {
 	const read = (): T => {
 		if (!isBrowser) return defaultValue;
@@ -104,7 +104,7 @@ function useStorage<T>(
 export function useLocalStorage<T>(
 	key: string,
 	defaultValue: T,
-	serializer?: Serializer<T>
+	serializer?: UseStorageSerializer<T>
 ): UseStorageReturn<T> {
 	return useStorage(key, defaultValue, () => localStorage, serializer);
 }
@@ -119,7 +119,7 @@ export function useLocalStorage<T>(
 export function useSessionStorage<T>(
 	key: string,
 	defaultValue: T,
-	serializer?: Serializer<T>
+	serializer?: UseStorageSerializer<T>
 ): UseStorageReturn<T> {
 	return useStorage(key, defaultValue, () => sessionStorage, serializer);
 }

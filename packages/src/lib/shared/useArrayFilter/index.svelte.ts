@@ -6,11 +6,8 @@
  * dependencies of `list` change. Pure logic — safe to call anywhere,
  * including during SSR (no DOM access, no effects).
  */
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../getter/index.ts';
+import type { MaybeGetter } from '../getter/index.ts';
 
 /** Filtered state returned by {@link useArrayFilter}. */
 export interface UseArrayFilterReturn<T> {
@@ -28,7 +25,7 @@ export function useArrayFilter<T>(
 	list: MaybeGetter<readonly T[]>,
 	fn: (element: T, index: number, array: readonly T[]) => unknown
 ): UseArrayFilterReturn<T> {
-	const filtered = $derived(resolve(list).filter(fn));
+	const filtered = $derived(resolveGetter(list).filter(fn));
 
 	return {
 		get value() {

@@ -8,11 +8,8 @@
  */
 import { untrack } from 'svelte';
 
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useCloned}. */
 export interface UseClonedOptions<T> {
@@ -50,7 +47,7 @@ export function useCloned<T>(
 ): UseClonedReturn<T> {
 	const { clone = structuredClone, manual = false } = options;
 
-	let cloned = $state<T>(clone($state.snapshot(resolve(source)) as T));
+	let cloned = $state<T>(clone($state.snapshot(resolveGetter(source)) as T));
 	let isModified = $state(false);
 	let suppressDirty = false;
 	let pristine = true;
@@ -58,14 +55,14 @@ export function useCloned<T>(
 	function sync(): void {
 		suppressDirty = true;
 		isModified = false;
-		cloned = clone($state.snapshot(resolve(source)) as T);
+		cloned = clone($state.snapshot(resolveGetter(source)) as T);
 	}
 
 	if (!manual) {
 		let firstSourceRun = true;
 		$effect(() => {
 			// Deep snapshot so nested source edits re-run this effect.
-			$state.snapshot(resolve(source));
+			$state.snapshot(resolveGetter(source));
 			untrack(() => {
 				// The clone is already synced at setup; every later run
 				// is a genuine source change.

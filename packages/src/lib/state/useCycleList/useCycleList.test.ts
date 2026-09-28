@@ -3,38 +3,16 @@
  * Tests for `useCycleList`: navigation, wraparound, options, setters,
  * and re-anchoring on list changes. Runs mounted (list sync in `$effect`).
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { useCycleList } from './index.ts';
-import type { UseCycleListOptions, UseCycleListReturn } from './index.ts';
+import type { UseCycleListOptions } from './index.ts';
 
-async function mountCycle<T>(list: () => T[], options?: UseCycleListOptions<T>) {
-	let api: UseCycleListReturn<T> | undefined;
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = useCycleList(list, options);
-			}
-		},
-		target
-	});
-	await tick();
-	if (!api) throw new Error('useCycleList setup did not run');
-	const cycle: UseCycleListReturn<T> = api;
-	return {
-		api: cycle,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
+const mountCycle = <T>(list: () => T[], options?: UseCycleListOptions<T>) =>
+	mountUtil(() => useCycleList(list, options));
 
 describe('useCycleList', () => {
 	it('starts at the first item and wraps on next/prev', async () => {

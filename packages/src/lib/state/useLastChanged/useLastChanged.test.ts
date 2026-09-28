@@ -3,38 +3,16 @@
  * Tests for `useLastChanged`: default null, change stamps, immediate mode,
  * and initial values. Runs mounted (the source is sampled in `$effect`).
  */
-import { mount, tick, unmount } from 'svelte';
+import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 
-import Run from '../../../../test/fixtures/run.svelte';
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';
+import { mountUtil } from '../../../../test/fixtures/mount.ts';
 import { useLastChanged } from './index.ts';
-import type { UseLastChangedOptions, UseLastChangedReturn } from './index.ts';
+import type { UseLastChangedOptions } from './index.ts';
 
-async function mountLastChanged(source: () => unknown, options?: UseLastChangedOptions) {
-	let api: UseLastChangedReturn | undefined;
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-	const app = mount(Run, {
-		props: {
-			setup: () => {
-				api = useLastChanged(source, options);
-			}
-		},
-		target
-	});
-	await tick();
-	if (!api) throw new Error('useLastChanged setup did not run');
-	const changed: UseLastChangedReturn = api;
-	return {
-		api: changed,
-		async dispose() {
-			unmount(app);
-			await tick();
-			target.remove();
-		}
-	};
-}
+const mountLastChanged = (source: () => unknown, options?: UseLastChangedOptions) =>
+	mountUtil(() => useLastChanged(source, options));
 
 describe('useLastChanged', () => {
 	it('is null until the first change by default', async () => {

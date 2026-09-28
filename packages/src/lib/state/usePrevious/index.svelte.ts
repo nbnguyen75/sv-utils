@@ -8,11 +8,8 @@
  */
 import { untrack } from 'svelte';
 
-import type { MaybeGetter } from '../../browser/useEventListener/index.svelte.ts';
-
-function resolve<T>(v: MaybeGetter<T>): T {
-	return typeof v === 'function' ? (v as () => T)() : v;
-}
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Previous-value state returned by {@link usePrevious}. */
 export interface UsePreviousReturn<T> {
@@ -27,10 +24,10 @@ export function usePrevious<T>(source: MaybeGetter<T>): UsePreviousReturn<T | un
 export function usePrevious<T>(source: MaybeGetter<T>, initialValue: T): UsePreviousReturn<T>;
 export function usePrevious<T>(source: MaybeGetter<T>, initialValue?: T): UsePreviousReturn<T> {
 	let previous = $state<T | undefined>(initialValue);
-	let last = $state<T>(resolve(source));
+	let last = $state<T>(resolveGetter(source));
 
 	$effect(() => {
-		const snapshot = resolve(source);
+		const snapshot = resolveGetter(source);
 		untrack(() => {
 			// Skip until the source actually moves; this also preserves the
 			// initial value through the effect's first run on mount.
