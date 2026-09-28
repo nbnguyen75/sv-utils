@@ -183,60 +183,60 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Most-imported state primitives. useToggle/useCounter cover the majority of toggle/counter needs; history/cloned/cycle/stepper/previous/lastChanged round out local state.",
-			"evidence": "",
+			"evidence": "src/lib/state/{useToggle,useCounter,usePrevious,useLastChanged,useCloned,useCycleList,useStepper,useOffsetPagination}/ (impl+test+README each), test/fixtures/box.svelte.ts — 126/126 green",
 			"functions": [
 				{
 					"name": "useToggle",
 					"source": "vueuse/shared/useToggle",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/useToggle/"
 				},
 				{
 					"name": "useCounter",
 					"source": "vueuse/shared/useCounter",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/useCounter/"
 				},
 				{
 					"name": "usePrevious",
 					"source": "vueuse/core/usePrevious",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/usePrevious/"
 				},
 				{
 					"name": "useLastChanged",
 					"source": "vueuse/shared/useLastChanged",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/useLastChanged/"
 				},
 				{
 					"name": "useCloned",
 					"source": "vueuse/core/useCloned",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/useCloned/"
 				},
 				{
 					"name": "useCycleList",
 					"source": "vueuse/core/useCycleList",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/useCycleList/"
 				},
 				{
 					"name": "useStepper",
 					"source": "vueuse/core/useStepper",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/useStepper/"
 				},
 				{
 					"name": "useOffsetPagination",
 					"source": "vueuse/core/useOffsetPagination",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/useOffsetPagination/"
 				}
 			],
 			"id": "feat-009",
 			"name": "State essentials",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

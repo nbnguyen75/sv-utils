@@ -119,7 +119,7 @@
 - [x] 8 READMEs per template (7 modules + `shared/`); scrubbed absolute
       local VueUse paths from all JSDoc (neutral attribution only).
 - [x] Diagnosed two real issues via failing tests: jsdom `window instanceof
-      Window` is false across VM contexts → duck-typed window detection in
+Window` is false across VM contexts → duck-typed window detection in
       `useScrollToTop` (also fixes cross-realm iframe windows); a throwing
       tween poisons Svelte's shared raf scheduler → fixed at the source,
       window test asserts last `scrollTo(0, 0)`.
@@ -127,3 +127,24 @@
       (ambiguous names would be silently dropped) — single canonical export.
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 72/72
       (10 files), `prepack` publint clean.
+
+### feat-009: State essentials — done
+
+- [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):
+      useToggle (7 tests), useCounter (7), usePrevious (4), useLastChanged (4),
+      useCloned (7), useCycleList (6), useStepper (8), useOffsetPagination (11).
+- [x] Vue `watch` → `$effect` + `untrack` bookkeeping (previous/lastChanged/
+      cloned/list-sync/pagination callbacks); `structuredClone` default instead
+      of JSON (Dates/Maps survive, documented); getter/setter objects instead
+      of refs; no external two-way ref sync in pagination (callbacks instead);
+      stepper `index` writable, cycle `index` read-only with `go()`.
+- [x] `test/fixtures/box.svelte.ts`: reactive-box fixture so plain test files
+      can drive `$effect`-tracked sources.
+- [x] Fixed via failing tests: shared `Run` fixture now runs setup `untrack`ed
+      (utils sampling reactive state at construction were re-created on every
+      change); stepper `at/get/goTo` infinite self-recursion renamed;
+      `$state` proxies are never identical to raw inputs (test corrected);
+      pagination overloads steer on `total?: never` so unbounded usage drops
+      `isLastPage` from the type.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 126/126
+      (18 files), `prepack` publint clean.

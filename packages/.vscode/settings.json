@@ -28,7 +28,7 @@
 		"**/.svelte-kit": true,
 		"**/node_modules": true,
 		"**/LICENSE": true,
-		"**/README.md": true,
+		"README.md": true,
 		"**/.eslintcache": true
 	},
 	"editor.codeActionsOnSave": {
