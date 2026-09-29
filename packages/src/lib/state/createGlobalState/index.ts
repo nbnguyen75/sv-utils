@@ -1,15 +1,12 @@
 /**
  * Application-wide singleton state from a factory.
- *
- * Inspired by [VueUse `createGlobalState`](https://vueuse.org/shared/createGlobalState/).
- * The factory runs lazily on first call; every later call (anywhere in the
- * app) receives the same instance. Framework-free — safe to call anywhere,
- * including during SSR (note: module singletons are shared across SSR
- * requests, same caveat as upstream).
- *
- * @param stateFactory Builds the state on first use.
- * @returns The memoized factory.
+ * @example
+ * ```ts
+ * const useStore = createGlobalState(() => ({ count: 0 }));
+ * useStore(); // same instance everywhere
+ * ```
  */
+
 export function createGlobalState<Args extends unknown[], R>(
 	stateFactory: (...args: Args) => R
 ): (...args: Args) => R {

@@ -1,11 +1,3 @@
-/**
- * Reactive `Array.some`.
- *
- * Inspired by [VueUse `useArraySome`](https://vueuse.org/shared/useArraySome/).
- * Memoized in `$derived`. Pure logic — safe to call anywhere, including
- * during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -21,6 +13,11 @@ export interface UseArraySomeReturn {
  *
  * @param list Array, or a getter over reactive state.
  * @param fn Predicate invoked per element.
+ * @example
+ * ```ts
+ * const any = useArraySome(users, (user) => user.admin);
+ * any.value; // boolean
+ * ```
  */
 export function useArraySome<T>(
 	list: MaybeGetter<readonly T[]>,

@@ -1,12 +1,3 @@
-/**
- * Reactive sorted array, copy-on-read by default or in-place with `dirty`.
- *
- * Inspired by [VueUse `useSorted`](https://vueuse.org/core/useSorted/).
- * Pure `$derived` logic — safe to call anywhere, including during SSR —
- * except `dirty` mode, which sorts the source in place inside `$effect`
- * and therefore needs component initialization.
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { untrack } from 'svelte';
@@ -47,6 +38,15 @@ export interface UseSortedReturn<T> {
 const defaultNumericCompare = (a: number, b: number): number => a - b;
 const defaultSort = <T>(source: T[], compareFn: UseSortedCompareFn<T>): T[] =>
 	source.sort(compareFn);
+
+/**
+ * Reactive sorted array — copy-on-read by default, in-place with `dirty`.
+ * @example
+ * ```ts
+ * const ranked = useSorted([3, 1, 2]);
+ * ranked.value; // [1, 2, 3] (source untouched)
+ * ```
+ */
 
 export function useSorted<T>(
 	source: MaybeGetter<T[]>,

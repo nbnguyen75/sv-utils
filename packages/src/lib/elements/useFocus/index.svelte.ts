@@ -1,12 +1,3 @@
-/**
- * Track or set an element's focus state.
- *
- * Inspired by [VueUse `useFocus`](https://vueuse.org/core/useFocus/).
- * Listens to focus/blur on the target; assigning `focused` focuses or
- * blurs it. Re-applies `initialValue` whenever the target swaps. Must be
- * called in component initialization. Server value is `initialValue`.
- * Disposal on unmount is automatic.
- */
 import { untrack } from 'svelte';
 
 import { isBrowser } from '../../shared/is.ts';
@@ -47,6 +38,11 @@ export interface UseFocusReturn {
  *
  * @param target Element or getter (e.g. `bind:this` state).
  * @param options Initial value, focus-visible mode, and scroll behavior.
+ * @example
+ * ```ts
+ * const { focused } = useFocus(() => input, { initialValue: true });
+ * focused.value = false; // blurs the element
+ * ```
  */
 export function useFocus(target: MaybeElement, options: UseFocusOptions = {}): UseFocusReturn {
 	const { initialValue = false, focusVisible = false, preventScroll = false } = options;

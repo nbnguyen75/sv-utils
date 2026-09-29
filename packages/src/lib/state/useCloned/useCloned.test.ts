@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useCloned`: initial clone, dirty flag, manual sync,
- * source re-sync, custom cloners, and structured-clone defaults.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

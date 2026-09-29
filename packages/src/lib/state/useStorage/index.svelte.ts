@@ -1,15 +1,3 @@
-/**
- * Reactive `localStorage` / `sessionStorage`-backed state.
- *
- * Inspired by VueUse `useStorage` / `useLocalStorage` / `useSessionStorage`.
- * Values serialize as JSON (plain strings pass through), persist
- * write-through, and sync across tabs via the `storage` event. Storage
- * failures (unavailable API, quota errors, unparsable values) fall back to
- * the default instead of throwing. During SSR the default is returned and
- * nothing is read or written.
- * Must be called in component initialization (uses `$state` / `$effect`).
- */
-
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
 import { isBrowser } from '../../shared/is.ts';
 
@@ -101,6 +89,11 @@ function useStorage<T>(
  * @param key Storage key.
  * @param defaultValue Value used when the key is absent, unreadable, or during SSR.
  * @param serializer Custom codec (default: JSON with string passthrough).
+ * @example
+ * ```ts
+ * const theme = useLocalStorage('theme', 'light');
+ * theme.value = 'dark'; // persists write-through
+ * ```
  */
 export function useLocalStorage<T>(
 	key: string,
@@ -116,6 +109,11 @@ export function useLocalStorage<T>(
  * @param key Storage key.
  * @param defaultValue Value used when the key is absent, unreadable, or during SSR.
  * @param serializer Custom codec (default: JSON with string passthrough).
+ * @example
+ * ```ts
+ * const draft = useSessionStorage('draft', '');
+ * draft.value = 'hello'; // tab-scoped
+ * ```
  */
 export function useSessionStorage<T>(
 	key: string,

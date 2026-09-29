@@ -1,7 +1,3 @@
-/**
- * Tests for the shared environment flags and type guards (`is.ts`).
- * Runs in node: asserts SSR-safe defaults (no DOM globals at import).
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import {

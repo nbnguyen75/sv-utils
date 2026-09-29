@@ -1,10 +1,3 @@
-/**
- * State that resets to its default some time after each write.
- *
- * Inspired by [VueUse `refAutoReset`](https://vueuse.org/shared/refAutoReset/).
- * The reset timer disposes on unmount, so this must be called in component
- * initialization. Safe during SSR (no timer runs on the server).
- */
 import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
@@ -19,6 +12,11 @@ export interface RefAutoResetReturn<T> {
  *
  * @param defaultValue Fallback value; getters re-resolve on every reset.
  * @param afterMs Quiet period in milliseconds; getters resolve per write.
+ * @example
+ * ```ts
+ * const status = refAutoReset('idle', 2000);
+ * status.value = 'saved!'; // back to 'idle' after 2s quiet
+ * ```
  */
 export function refAutoReset<T>(
 	defaultValue: MaybeGetter<T>,

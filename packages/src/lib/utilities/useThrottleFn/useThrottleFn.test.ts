@@ -1,8 +1,3 @@
-/**
- * Parity + edge-case tests for `useThrottleFn`.
- * Semantics mirror VueUse `throttleFilter` (leading + trailing by
- * default), plus a `flush()` control.
- */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useThrottleFn } from './index.ts';

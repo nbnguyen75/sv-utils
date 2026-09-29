@@ -1,17 +1,3 @@
-/**
- * Debounce helper with lodash-style `leading` / `trailing` / `maxWait`
- * semantics, vendored with zero dependencies.
- *
- * Mirrors VueUse `debounceFilter` (`vueuse/shared/utils/filters.ts`):
- * trailing-edge invocation, `maxWait` upper bound, `cancel` / `flush`,
- * and immediate invocation when `delay <= 0` (or `maxWait <= 0`).
- * Extends it with `leading` / `trailing` edge options and a `pending()`
- * probe. Unlike VueUse, the wrapped function stays synchronous (no
- * promise wrapper, no `this` forwarding, no `rejectOnCancel`).
- *
- * Pure logic, no DOM access — safe to call during SSR.
- */
-
 export interface UseDebounceOptions {
 	/** Invoke on the leading edge of the first call in a burst. @default false */
 	leading?: boolean;
@@ -43,6 +29,12 @@ export interface UseDebouncedFunction<Args extends unknown[]> {
  * @param delay Quiet period in milliseconds. Values `<= 0` invoke synchronously.
  * @param options `leading` / `trailing` edge flags and `maxWait` cap.
  * @returns The debounced function with `cancel`, `flush`, and `pending` controls.
+ * @example
+ * ```ts
+ * const save = useDebounceFn((text: string) => persist(text), 300);
+ * save('hello'); // fires after 300ms quiet
+ * save.cancel(); // drop pending
+ * ```
  */
 export function useDebounceFn<Args extends unknown[]>(
 	fn: (...args: Args) => void,

@@ -1,13 +1,3 @@
-/**
- * SSR-safe DOM event listener with automatic disposal.
- *
- * Inspired by VueUse `useEventListener`.
- * Attaches inside `$effect` and removes the listener on cleanup, so
- * unmounting never leaks. Targets accept a `MaybeGetter` so `() => window`
- * or `() => element` re-resolve if the effect re-runs.
- * Must be called in component initialization (uses `$effect`).
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -16,6 +6,12 @@ import { isBrowser } from '../../shared/is.ts';
 // Overload 1: Window
 /**
  * Listen for a `Window` event. No-op during SSR or when the target is nullish.
+ * @example
+ * ```ts
+ * useEventListener(() => window, 'click', (event) => {
+ * 	console.log(event.clientX);
+ * });
+ * ```
  */
 export function useEventListener<K extends keyof WindowEventMap>(
 	target: MaybeGetter<Window | null | undefined>,

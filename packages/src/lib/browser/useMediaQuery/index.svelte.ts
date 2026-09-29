@@ -1,12 +1,3 @@
-/**
- * Reactive CSS media-query matching.
- *
- * Inspired by [VueUse `useMediaQuery`](https://vueuse.org/core/useMediaQuery/).
- * Subscribes to a `MediaQueryList` inside `$effect` (re-subscribing when a
- * reactive query changes), so this must be called in component
- * initialization. Server output is the `ssrMatches` fallback; the client
- * hydrates from the live query. Disposal on unmount is automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
@@ -40,6 +31,11 @@ function queryMatches(query: string): boolean {
  *
  * @param query CSS media query, or a getter for one (changing it re-subscribes).
  * @param options `ssrMatches` server fallback.
+ * @example
+ * ```ts
+ * const wide = useMediaQuery('(min-width: 1024px)');
+ * wide.value; // boolean
+ * ```
  */
 export function useMediaQuery(
 	query: MaybeGetter<string>,

@@ -87,6 +87,12 @@ group comments).
 
 JSDoc on exports must mirror the tables (reviewers read code, users read README).
 
+No file-top banner comments: implementation files start with code
+(imports). Every exported function — including each overload — carries
+JSDoc with purpose, `@param`, `@returns`/`@default`, and a runnable
+2–5 line `@example` fenced block, so IDE hovers teach usage without
+opening the README.
+
 ## 5. Test requirements (per public util)
 
 `<utilName>.test.ts` (vitest; `bun run test`) must cover **all cases as

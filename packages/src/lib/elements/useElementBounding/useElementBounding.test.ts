@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useElementBounding`: manual updates, rect mapping, window
- * listeners, observer triggers, target swaps, immediacy, and reset.
- */
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 

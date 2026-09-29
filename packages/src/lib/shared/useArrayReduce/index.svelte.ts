@@ -1,11 +1,3 @@
-/**
- * Reactive `Array.reduce`, with or without an initial value.
- *
- * Inspired by [VueUse `useArrayReduce`](https://vueuse.org/shared/useArrayReduce/).
- * Memoized in `$derived`. Pure logic — safe to call anywhere, including
- * during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -22,6 +14,15 @@ export interface UseArrayReduceReturn<T> {
 	/** Reduction result. Getter-backed (destructure-safe). */
 	readonly value: T;
 }
+
+/**
+ * Reactive `Array.reduce`, with or without an initial value.
+ * @example
+ * ```ts
+ * const total = useArrayReduce([1, 2, 3], (sum, n) => sum + n, 0);
+ * total.value; // 6
+ * ```
+ */
 
 export function useArrayReduce<T>(
 	list: MaybeGetter<readonly T[]>,

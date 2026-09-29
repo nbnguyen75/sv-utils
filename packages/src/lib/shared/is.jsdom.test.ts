@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * DOM-side tests for `isElement` (the rest of `is.ts` is covered in
- * node in `is.test.ts`).
- */
 import { describe, expect, it } from 'vitest';
 
 import { isElement } from './is.ts';

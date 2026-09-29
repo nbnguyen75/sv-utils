@@ -1,7 +1,3 @@
-/**
- * Tests for `useArrayEvery`: universal match, empty lists, reactivity.
- * Pure `$derived` logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';

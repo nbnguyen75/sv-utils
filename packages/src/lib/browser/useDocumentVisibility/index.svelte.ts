@@ -1,11 +1,3 @@
-/**
- * Reactive `document.visibilityState`.
- *
- * Inspired by [VueUse `useDocumentVisibility`](https://vueuse.org/core/useDocumentVisibility/).
- * Refreshes on `visibilitychange`. Must be called in component
- * initialization. Server value is `'visible'`. Disposal on unmount is
- * automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
@@ -17,6 +9,11 @@ export interface UseDocumentVisibilityReturn {
 
 /**
  * Track whether the document is visible.
+ * @example
+ * ```ts
+ * const visibility = useDocumentVisibility();
+ * visibility.value; // 'visible' | 'hidden'
+ * ```
  */
 export function useDocumentVisibility(): UseDocumentVisibilityReturn {
 	let visibility = $state<DocumentVisibilityState>(

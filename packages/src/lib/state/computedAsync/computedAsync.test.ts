@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `computedAsync`: evaluation, dep tracking, races, cancel
- * hooks, and errors. Runs mounted (evaluation in `$effect`).
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';

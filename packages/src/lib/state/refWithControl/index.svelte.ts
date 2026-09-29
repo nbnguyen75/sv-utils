@@ -1,15 +1,3 @@
-/**
- * Fine-grained control over a state cell: vetoable writes, change
- * callbacks, and untracked reads.
- *
- * Inspired by [VueUse `refWithControl`](https://vueuse.org/shared/refWithControl/).
- * Pure `$state` logic — safe to call anywhere, including during SSR
- * (no DOM access, no effects).
- *
- * Svelte divergence: silent writes are impossible — every write notifies.
- * `silentSet`/`lay` are therefore unsupported; use `onBeforeChange` vetoes
- * and `untrack`ed reads to shape notification flow instead.
- */
 import { untrack } from 'svelte';
 
 /** Options for {@link refWithControl}. */
@@ -43,6 +31,13 @@ export interface RefWithControlReturn<T> {
  *
  * @param initial Starting value.
  * @param options `onBeforeChange` veto and `onChanged` notification.
+ * @example
+ * ```ts
+ * const age = refWithControl(0, {
+ * 	onBeforeChange: (value) => (value < 0 ? false : undefined)
+ * });
+ * age.value = -5; // dismissed, stays 0
+ * ```
  */
 export function refWithControl<T>(
 	initial: T,

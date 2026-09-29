@@ -1,11 +1,3 @@
-/**
- * Argument-keyed function result cache.
- *
- * Inspired by [VueUse `useMemoize`](https://vueuse.org/core/useMemoize/).
- * Framework-free — safe to call anywhere, including during SSR
- * (no DOM access, no effects).
- */
-
 /** Cache container for {@link useMemoize}. */
 export interface UseMemoizeCache<Key, Value> {
 	/** Read a cached value. */
@@ -49,6 +41,11 @@ export interface UseMemoizeOptions<Result, Args extends unknown[]> {
  *
  * @param resolver Function whose results are cached.
  * @param options `getKey` derivation and `cache` container overrides.
+ * @example
+ * ```ts
+ * const getUser = useMemoize((id: number) => fetchUser(id));
+ * getUser(7); // computes once, then cached
+ * ```
  */
 export function useMemoize<Result, Args extends unknown[]>(
 	resolver: (...args: Args) => Result,

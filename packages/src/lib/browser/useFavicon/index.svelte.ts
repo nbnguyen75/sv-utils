@@ -1,14 +1,3 @@
-/**
- * Reactive favicon, applied to the document on change.
- *
- * Inspired by [VueUse `useFavicon`](https://vueuse.org/core/useFavicon/).
- * Applies the icon on mount and whenever a reactive source changes;
- * assigning `value` applies immediately. Reuses an existing matching
- * `<link>` or creates one (`rel`, `href`, and an image `type` derived
- * from the extension). Must be called in component initialization.
- * Server output is the initial value with no DOM access. Disposal is
- * automatic (no timers or observers to clean).
- */
 import { untrack } from 'svelte';
 
 import { isBrowser } from '../../shared/is.ts';
@@ -34,6 +23,15 @@ export interface UseFaviconReturn {
 	/** Current icon path (`null`/`undefined` clears nothing). Getter/setter-backed. */
 	value: string | null | undefined;
 }
+
+/**
+ * Reactive favicon, applied to the document on change.
+ * @example
+ * ```ts
+ * const icon = useFavicon('app.png');
+ * icon.value = 'alert.png'; // swaps href immediately
+ * ```
+ */
 
 export function useFavicon(newIcon: MaybeGetter<string | null | undefined>): UseFaviconReturn;
 export function useFavicon(

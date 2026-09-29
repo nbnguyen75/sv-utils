@@ -1,7 +1,3 @@
-/**
- * Tests for `refManualReset`: writes, resets, getter defaults.
- * Pure `$state` logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { refManualReset } from './index.ts';

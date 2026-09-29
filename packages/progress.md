@@ -286,6 +286,40 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 416/416
       (86 files), `prepack` publint clean.
 
+### feat-019: Scroll & mouse — done
+
+- [x] 8 ports in `src/lib/browser/` (impl + test + README each, barrel
+      wired): useWindowScroll (1 test), useScroll (6), useScrollLock (7),
+      useInfiniteScroll (3), useMouse (6), useMouseInElement (5),
+      useMousePressed (4), useElementHover (5).
+- [x] Full arrival math (offsets, RTL, flex-reverse, 1px tolerance),
+      writable x/y with behavior, scroll-end dedupe (timer + native),
+      WeakMap overflow restore with iOS touch prevention, one-flight
+      infinite loads, extractor/touch/scroll mouse model, duck-typed
+      containers throughout.
+- [x] Fixed via failing tests: effect read-write aliasing re-triggers
+      (locals-only computation rule); `$state` reads in teardown cleanups
+      observe pre-teardown values (plain-variable disposal mirrors for
+      scrollLock restore + fullscreen autoExit).
+- [x] `useInfiniteScroll` never loaded for `window`/`document` targets
+      (visibility gate required an element). Now they resolve to
+      `document.documentElement` and count as visible by definition;
+      element containers keep the `useElementVisibility` gate. Added a
+      regression test.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 454/454
+      (94 files), `prepack` publint clean.
+
+### Docs overhaul: banners removed, per-function examples, agent rules
+
+- [x] Removed file-top `/** */` banner comments from all 183 lib files
+      (scripted); documentation lives on exports + READMEs.
+- [x] `@example` on every exported function overload (97 blocks added
+      scripted from curated snippets; overloads share the primary example).
+- [x] Agent docs updated: AGENTS.md DoD (examples + no banners),
+      `utilities-architecture.md` §1 (no read-write aliasing, no `$state`
+      reads in teardown) + new §5 (documentation rules incl. duck-typed
+      DOM checks), `migration-plan.md` §4 (examples + no banners).
+
 ### feat-014: Ref variants & shared state — done
 
 - [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):

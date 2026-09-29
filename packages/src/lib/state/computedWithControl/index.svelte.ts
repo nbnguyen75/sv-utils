@@ -1,13 +1,3 @@
-/**
- * Derived value with explicit dependencies and a manual refresh trigger.
- *
- * Inspired by [VueUse `computedWithControl`](https://vueuse.org/shared/computedWithControl/).
- * The derivation runs only when a tracked `source` changes (or `trigger()`
- * is called) — reads of unrelated state inside `fn` never invalidate it.
- * The source is sampled inside `$effect`, so this must be called in
- * component initialization. Disposal on unmount is automatic.
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { untrack } from 'svelte';
@@ -27,6 +17,15 @@ export interface WritableComputedWithControlReturn<T> extends ComputedWithContro
 	/** Write through the provided setter. Getter/setter-backed. */
 	value: T;
 }
+
+/**
+ * Derived value with explicit dependencies and a manual refresh trigger.
+ * @example
+ * ```ts
+ * const total = computedWithControl(() => items, () => sum(items));
+ * total.trigger(); // force refresh
+ * ```
+ */
 
 export function computedWithControl<T>(
 	source: MaybeGetter<unknown>,

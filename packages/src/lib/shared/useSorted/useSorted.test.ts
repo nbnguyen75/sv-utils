@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useSorted`: default/custom/sortFn ordering, overload shapes,
- * non-mutation, reactivity, and in-place `dirty` mode (mounted).
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

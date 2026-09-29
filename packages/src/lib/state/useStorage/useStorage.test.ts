@@ -1,9 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useStorage` / `useLocalStorage` / `useSessionStorage`:
- * defaults, persistence, serializers, cross-tab sync, and storage
- * failure fallbacks.
- */
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

@@ -1,11 +1,3 @@
-/**
- * Auto-tracked history with debounced commits.
- *
- * Inspired by [VueUse `useDebouncedRefHistory`](https://vueuse.org/core/useDebouncedRefHistory/).
- * Shorthand for {@link useRefHistory} with a `debounce` window: rapid
- * changes coalesce into one commit after the burst goes quiet. Must be
- * called in component initialization.
- */
 import { useRefHistory } from '../useRefHistory/index.svelte.ts';
 import type { UseRefHistoryOptions, UseRefHistoryReturn } from '../useRefHistory/index.svelte.ts';
 import type { HistoryCell } from '../useManualRefHistory/index.svelte.ts';
@@ -27,6 +19,11 @@ export interface UseDebouncedRefHistoryOptions<Raw, Serialized = Raw> extends Om
  *
  * @param source Writable cell to track.
  * @param options History options plus the `debounce` window.
+ * @example
+ * ```ts
+ * const history = useDebouncedRefHistory(editor, { debounce: 500 });
+ * history.undo(); // back before the burst
+ * ```
  */
 export function useDebouncedRefHistory<Raw, Serialized = Raw>(
 	source: HistoryCell<Raw>,

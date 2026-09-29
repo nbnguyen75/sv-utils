@@ -1,12 +1,3 @@
-/**
- * Manually triggerable watcher with silence controls.
- *
- * Inspired by [VueUse `watchTriggerable`](https://vueuse.org/shared/watchTriggerable/).
- * Composes {@link watchIgnorable}: `trigger()` runs the callback immediately
- * with the current value (old value unknown) without scheduling a duplicate
- * notification. Must be called in component initialization. Disposal on
- * unmount is automatic.
- */
 import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 import { watchIgnorable } from '../watchIgnorable/index.svelte.ts';
@@ -41,6 +32,11 @@ export interface WatchTriggerableReturn<R = void> extends WatchIgnorableReturn {
  * @param cb Invoked per observed change (or `trigger()`) with
  *   `(value, oldValue, onCleanup)`; its return flows out of `trigger()`.
  * @param options `immediate` mount behavior.
+ * @example
+ * ```ts
+ * const { trigger } = watchTriggerable(() => settings, apply);
+ * trigger(); // run now with current settings
+ * ```
  */
 export function watchTriggerable<T, R = void>(
 	source: MaybeGetter<T>,

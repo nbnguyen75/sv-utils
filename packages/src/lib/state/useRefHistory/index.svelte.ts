@@ -1,12 +1,3 @@
-/**
- * Auto-tracked change history (undo/redo) for a state cell.
- *
- * Inspired by [VueUse `useRefHistory`](https://vueuse.org/core/useRefHistory/).
- * Source changes commit automatically through {@link watchIgnorable}
- * (silent programmatic writes stay skippable); optional `debounce` /
- * `throttle` windows coalesce rapid commits. Must be called in component
- * initialization. Disposal on unmount is automatic.
- */
 import { untrack } from 'svelte';
 
 import { useDebounceFn } from '../../utilities/useDebounceFn/index.ts';
@@ -77,6 +68,12 @@ export interface UseRefHistoryReturn<Raw, Serialized> extends UseManualRefHistor
  * @param source Writable cell to track.
  * @param options Capacity, codecs, `deep` tracking, `debounce`/`throttle`
  *   commit windows, and `shouldCommit` vetoes.
+ * @example
+ * ```ts
+ * const history = useRefHistory(form, { clone: true, deep: true });
+ * history.undo(); // restore previous
+ * history.pause(); // suspend auto-commit
+ * ```
  */
 export function useRefHistory<Raw, Serialized = Raw>(
 	source: HistoryCell<Raw>,

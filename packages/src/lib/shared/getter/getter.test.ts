@@ -1,6 +1,3 @@
-/**
- * Tests for the shared `MaybeGetter` pattern. Pure logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { resolveGetter } from './index.ts';

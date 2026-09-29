@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useEventListener`: attach, getter targets, options, and
- * disposal on unmount (via the shared `Run` mount fixture).
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { mountSetup } from '../../../../test/fixtures/mount.ts';

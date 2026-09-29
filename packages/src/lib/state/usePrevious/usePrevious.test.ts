@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `usePrevious`: initial value, change tracking, and
- * non-reactive sources. Runs mounted (the source is sampled in `$effect`).
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

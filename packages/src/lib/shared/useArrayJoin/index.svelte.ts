@@ -1,11 +1,3 @@
-/**
- * Reactive `Array.join`.
- *
- * Inspired by [VueUse `useArrayJoin`](https://vueuse.org/shared/useArrayJoin/).
- * Memoized in `$derived`. Pure logic — safe to call anywhere, including
- * during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -22,6 +14,11 @@ export interface UseArrayJoinReturn {
  * @param list Array, or a getter over reactive state.
  * @param separator Pair separator; getters resolve per evaluation.
  *   Omitted means `','`, matching native `join`.
+ * @example
+ * ```ts
+ * const label = useArrayJoin(['a', 'b'], ' - ');
+ * label.value; // 'a - b'
+ * ```
  */
 export function useArrayJoin(
 	list: MaybeGetter<readonly unknown[]>,

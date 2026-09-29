@@ -1,12 +1,3 @@
-/**
- * Animated scroll-to-top helper (custom utility, no VueUse equivalent).
- *
- * Smoothly tweens the scroll position of `window` (default) or an element
- * to `0` using `svelte/motion` `Tween`. A new `scrollToTop()` call
- * supersedes any in-flight animation; `cancel()` aborts it. Unmounting
- * disposes any in-flight animation so no stale writes or effect roots leak.
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { cubicOut } from 'svelte/easing';
@@ -51,6 +42,11 @@ export interface UseScrollToTopReturn {
  * @param target Scroll container, or a getter for it. Defaults to `window` in browsers.
  * @param options `duration` and `easing` for the tween.
  * @returns `scrollToTop`, `cancel`, and getter-backed `scrolling`.
+ * @example
+ * ```ts
+ * const { scrollToTop, scrolling } = useScrollToTop();
+ * await scrollToTop();
+ * ```
  */
 export function useScrollToTop(
 	target: MaybeGetter<Window | HTMLElement | null | undefined> = () =>

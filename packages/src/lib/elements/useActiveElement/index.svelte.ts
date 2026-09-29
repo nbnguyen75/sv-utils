@@ -1,12 +1,3 @@
-/**
- * Reactive `document.activeElement` with shadow-DOM and removal tracking.
- *
- * Inspired by [VueUse `useActiveElement`](https://vueuse.org/core/useActiveElement/).
- * Listens to capturing blur/focus on window and, with `triggerOnRemoval`,
- * re-resolves when the focused node leaves the DOM. Must be called in
- * component initialization. Server value is `undefined`. Disposal on
- * unmount is automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
 
@@ -35,6 +26,11 @@ export interface UseActiveElementReturn<T extends HTMLElement = HTMLElement> {
  * Track the focused element.
  *
  * @param options `deep` shadow piercing and `triggerOnRemoval` tracking.
+ * @example
+ * ```ts
+ * const focused = useActiveElement();
+ * focused.value?.tagName; // e.g. 'INPUT'
+ * ```
  */
 export function useActiveElement<T extends HTMLElement = HTMLElement>(
 	options: UseActiveElementOptions = {}

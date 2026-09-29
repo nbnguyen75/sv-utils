@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `usePreferredColorScheme`: dark/light/no-preference resolution.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

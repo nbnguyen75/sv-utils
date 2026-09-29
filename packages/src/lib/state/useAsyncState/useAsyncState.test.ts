@@ -1,7 +1,3 @@
-/**
- * Tests for `useAsyncState`: lifecycle flags, args, races, errors,
- * options, and awaitability. Promise-only — node environment.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { useAsyncState } from './index.ts';

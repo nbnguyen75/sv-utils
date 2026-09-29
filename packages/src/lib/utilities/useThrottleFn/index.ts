@@ -1,17 +1,3 @@
-/**
- * Throttle helper with lodash-style `leading` / `trailing` semantics,
- * vendored with zero dependencies.
- *
- * Mirrors VueUse `throttleFilter` (`vueuse/shared/utils/filters.ts`):
- * at most one invocation per `interval`, leading edge by default with a
- * trailing invocation carrying the latest args. Unlike VueUse, the wrapped
- * function stays synchronous (no promise wrapper, no `this` forwarding,
- * no `rejectOnCancel`). Adds `flush()`, which VueUse only exposes on its
- * debounced wrapper.
- *
- * Pure logic, no DOM access — safe to call during SSR.
- */
-
 export interface UseThrottleOptions {
 	/** Invoke on the leading edge of the interval window. @default true */
 	leading?: boolean;
@@ -39,6 +25,11 @@ export interface UseThrottledFunction<Args extends unknown[]> {
  * @param interval Minimum milliseconds between invocations. Values `<= 0` invoke every call.
  * @param options `leading` / `trailing` edge flags.
  * @returns The throttled function with `cancel` and `flush` controls.
+ * @example
+ * ```ts
+ * const onScroll = useThrottleFn(() => update(), 200);
+ * onScroll(); // at most once per 200ms
+ * ```
  */
 export function useThrottleFn<Args extends unknown[]>(
 	fn: (...args: Args) => void,

@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `watchIgnorable`: normal fires, silent updates, pending
- * drops, immediate mode, stop, and cleanup. Runs mounted.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

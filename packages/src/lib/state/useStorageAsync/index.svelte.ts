@@ -1,14 +1,3 @@
-/**
- * Reactive async-storage cell with readiness tracking.
- *
- * Inspired by [VueUse `useStorageAsync`](https://vueuse.org/core/useStorageAsync/).
- * Works with any promise-based key/value backend (`getItem`/`setItem`/
- * `removeItem`); defaults to `localStorage` in browsers. Reads once on
- * mount, persists write-through, re-reads on cross-tab `storage` events,
- * and reports failures to `onError` instead of throwing. The cell is also
- * awaitable for first-read readiness. Must be called in component
- * initialization (uses `$state` / `$effect`).
- */
 import { untrack } from 'svelte';
 
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
@@ -93,6 +82,11 @@ function defaultSerializer<T>(): UseStorageAsyncSerializer<T> {
  *   read failures), or a getter resolving to one.
  * @param storage Backend; defaults to `localStorage` in browsers.
  * @param options Codec, write-defaults, cross-tab sync, and hooks.
+ * @example
+ * ```ts
+ * const settings = useStorageAsync('settings', defaults, idbBackend);
+ * await settings; // first read settled
+ * ```
  */
 export function useStorageAsync<T>(
 	key: string,

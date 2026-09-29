@@ -1,11 +1,3 @@
-/**
- * Reactive `Array.every`.
- *
- * Inspired by [VueUse `useArrayEvery`](https://vueuse.org/shared/useArrayEvery/).
- * Memoized in `$derived`. Pure logic — safe to call anywhere, including
- * during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -21,6 +13,11 @@ export interface UseArrayEveryReturn {
  *
  * @param list Array, or a getter over reactive state.
  * @param fn Predicate invoked per element.
+ * @example
+ * ```ts
+ * const all = useArrayEvery(items, (item) => item.done);
+ * all.value; // boolean
+ * ```
  */
 export function useArrayEvery<T>(
 	list: MaybeGetter<readonly T[]>,

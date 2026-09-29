@@ -1,11 +1,3 @@
-/**
- * Records the timestamp of the last change of a reactive source.
- *
- * Inspired by [VueUse `useLastChanged`](https://vueuse.org/shared/useLastChanged/).
- * The source is sampled inside `$effect` (Vue's `watch` equivalent), so
- * this must be called in component initialization.
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { untrack } from 'svelte';
@@ -42,6 +34,11 @@ export interface UseLastChangedReturn {
  *
  * @param source Reactive source: a value or a getter over reactive state.
  * @param options `immediate` stamp-on-mount and `initialValue` override.
+ * @example
+ * ```ts
+ * const changed = useLastChanged(() => draft);
+ * changed.value; // epoch ms of last edit (null until first)
+ * ```
  */
 export function useLastChanged(
 	source: MaybeGetter<unknown>,

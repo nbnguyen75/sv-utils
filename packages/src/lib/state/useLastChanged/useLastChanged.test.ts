@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useLastChanged`: default null, change stamps, immediate mode,
- * and initial values. Runs mounted (the source is sampled in `$effect`).
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

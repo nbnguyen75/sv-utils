@@ -1,12 +1,3 @@
-/**
- * Reactive async state machine with race guards and lifecycle callbacks.
- *
- * Inspired by [VueUse `useAsyncState`](https://vueuse.org/core/useAsyncState/).
- * Only the latest execution can settle state (stale responses are dropped
- * but still reported to the callbacks, mirroring upstream). Promise-only —
- * no effects — so this is safe to call anywhere, including during SSR
- * (an `immediate` execution still fires on the server; nothing DOM-bound).
- */
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
 
@@ -90,6 +81,13 @@ function delayBy(ms: number): Promise<void> {
  * @param promise A promise, or a factory receiving `execute` arguments.
  * @param initialState Value held until the first execution settles.
  * @param options Lifecycle flags and callbacks.
+ * @example
+ * ```ts
+ * const user = useAsyncState((id: number) => fetchUser(id), null, {
+ * 	immediate: false
+ * });
+ * await user.executeImmediate(7);
+ * ```
  */
 export function useAsyncState<D, Args extends unknown[] = []>(
 	promise: Promise<D> | ((...args: Args) => Promise<D>),

@@ -1,11 +1,3 @@
-/**
- * Tiny typed pub/sub event hook.
- *
- * Inspired by [VueUse `createEventHook`](https://vueuse.org/shared/createEventHook/).
- * Framework-free: no scope auto-cleanup (call the returned `off()` or
- * `clear()` instead). Safe to call anywhere, including during SSR.
- */
-
 /** Subscriber for an {@link EventHook}. */
 export type EventHookCallback<T> = [T] extends [void] ? () => unknown : (data: T) => unknown;
 
@@ -23,6 +15,12 @@ export interface EventHook<T> {
 
 /**
  * Create an event hook: `on`/`off`/`trigger`/`clear` over a subscriber set.
+ * @example
+ * ```ts
+ * const hook = createEventHook<string>();
+ * hook.on((data) => console.log(data));
+ * await hook.trigger('go');
+ * ```
  */
 export function createEventHook<T = void>(): EventHook<T> {
 	const fns = new Set<EventHookCallback<T>>();

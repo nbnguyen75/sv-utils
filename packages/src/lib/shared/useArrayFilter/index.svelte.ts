@@ -1,12 +1,3 @@
-/**
- * Reactive `Array.filter`.
- *
- * Inspired by [VueUse `useArrayFilter`](https://vueuse.org/shared/useArrayFilter/).
- * The result is memoized in `$derived` and recomputes when reactive
- * dependencies of `list` change. Pure logic — safe to call anywhere,
- * including during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -22,6 +13,11 @@ export interface UseArrayFilterReturn<T> {
  *
  * @param list Array, or a getter over reactive state.
  * @param fn Predicate invoked per element.
+ * @example
+ * ```ts
+ * const evens = useArrayFilter([1, 2, 3, 4], (n) => n % 2 === 0);
+ * evens.value; // [2, 4]
+ * ```
  */
 export function useArrayFilter<T>(
 	list: MaybeGetter<readonly T[]>,

@@ -1,11 +1,3 @@
-/**
- * Watch an array with per-change additions and removals.
- *
- * Inspired by [VueUse `watchArray`](https://vueuse.org/shared/watchArray/).
- * The source is sampled inside `$effect`, so this must be called in
- * component initialization. Stopping is flag-based (effects cannot
- * unsubscribe early); disposal on unmount is automatic.
- */
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -38,6 +30,13 @@ export interface WatchArrayOptions {
  * @param cb Invoked per change with `(value, oldValue, added, removed, onCleanup)`.
  * @param options `immediate` mount behavior.
  * @returns `stop`: ignore further changes and run pending cleanup.
+ * @example
+ * ```ts
+ * const stop = watchArray(() => ids, (value, old, added, removed) => {
+ * 	sync(added, removed);
+ * });
+ * stop(); // ignore further changes
+ * ```
  */
 export function watchArray<T>(
 	source: MaybeGetter<T[]>,

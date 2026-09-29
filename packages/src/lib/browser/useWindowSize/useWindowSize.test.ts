@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useWindowSize`: initial values, resize updates, dimension
- * sources, and orientation refreshes.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

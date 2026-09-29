@@ -1,13 +1,3 @@
-/**
- * Viewport visibility of an element, with observer controls.
- *
- * Inspired by [VueUse `useElementVisibility`](https://vueuse.org/core/useElementVisibility/).
- * Composes {@link useIntersectionObserver}: the latest entry wins.
- * Unlike upstream (which returns either a bare ref or a controls object
- * depending on flags), this always returns one uniform object. Must be
- * called in component initialization. Server output is `initialValue`.
- * Disposal on unmount is automatic.
- */
 import { useIntersectionObserver } from '../useIntersectionObserver/index.svelte.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
 
@@ -59,6 +49,11 @@ export interface UseElementVisibilityReturn {
  *
  * @param element Target element or getter.
  * @param options Initial value, thresholds, root, and once mode.
+ * @example
+ * ```ts
+ * const visible = useElementVisibility(() => hero, { once: true });
+ * visible.value; // true once seen
+ * ```
  */
 export function useElementVisibility(
 	element: MaybeElement,

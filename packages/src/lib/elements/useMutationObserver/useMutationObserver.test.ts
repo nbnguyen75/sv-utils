@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useMutationObserver`: observation, options, takeRecords,
- * stop, and disposal. Uses the native jsdom MutationObserver.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useIntervalFn`: repetition, pause/resume, guards, reactive
- * interval restart, immediate callback, and unmount disposal.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `usePreferredContrast`: more/less/custom precedence.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

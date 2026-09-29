@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useFocus`: event tracking, programmatic focus/blur,
- * initial values, target swaps, and focus-visible mode.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

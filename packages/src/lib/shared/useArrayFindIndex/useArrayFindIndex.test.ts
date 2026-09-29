@@ -1,7 +1,3 @@
-/**
- * Tests for `useArrayFindIndex`: first index, misses.
- * Pure `$derived` logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { useArrayFindIndex } from './index.ts';

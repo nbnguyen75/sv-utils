@@ -1,12 +1,3 @@
-/**
- * Reactive element bounding box, refreshed on layout changes.
- *
- * Inspired by [VueUse `useElementBounding`](https://vueuse.org/core/useElementBounding/).
- * Re-measures on resize observations, style/class mutations, window
- * scroll/resize, target swaps, and on demand via `update()`. Must be
- * called in component initialization. Server values are zeros. Disposal
- * on unmount is automatic (optionally resetting to zeros).
- */
 import { untrack } from 'svelte';
 
 import { isBrowser } from '../../shared/is.ts';
@@ -65,6 +56,12 @@ export interface UseElementBoundingReturn {
  *
  * @param target Element or getter (e.g. `bind:this` state).
  * @param options Reset, listeners, immediacy, and timing flags.
+ * @example
+ * ```ts
+ * const box = useElementBounding(() => card);
+ * box.top; // viewport-relative top
+ * box.update(); // re-measure now
+ * ```
  */
 export function useElementBounding(
 	target: MaybeElement,

@@ -1,11 +1,3 @@
-/**
- * Cycle through a list of items with wraparound navigation.
- *
- * Inspired by [VueUse `useCycleList`](https://vueuse.org/core/useCycleList/).
- * List changes re-anchor the state via `$effect`, so this must be called in
- * component initialization.
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { untrack } from 'svelte';
@@ -49,6 +41,11 @@ export interface UseCycleListReturn<T> {
  *
  * @param list Items: a plain array or a getter over reactive state.
  * @param options `initialValue`, `fallbackIndex`, and `getIndexOf` overrides.
+ * @example
+ * ```ts
+ * const theme = useCycleList(['light', 'dark', 'system']);
+ * theme.next(); // 'dark' (wraps around)
+ * ```
  */
 export function useCycleList<T>(
 	list: MaybeGetter<T[]>,

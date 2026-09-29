@@ -1,15 +1,3 @@
-/**
- * Two-way synchronization between state cells, with direction control
- * and value transforms.
- *
- * Inspired by [VueUse `syncRef`](https://vueuse.org/shared/syncRef/).
- * Cells are any getter/setter pair (including every `{ value }` object
- * this library returns). Each direction runs in its own `$effect`, so this
- * must be called in component initialization. Loop-breaking uses a sync
- * window instead of VueUse's mutual pause: a write suppresses the opposite
- * direction until the flush settles, then converges via equality checks.
- * Disposal on unmount is automatic.
- */
 import { untrack } from 'svelte';
 
 /** Readable/writable cell shape accepted by {@link syncRef}. */
@@ -48,6 +36,11 @@ export interface SyncRefOptions<L, R> {
  * @param right Right cell.
  * @param options `direction`, `immediate` alignment, and `transform`s.
  * @returns `stop`: detach both directions permanently.
+ * @example
+ * ```ts
+ * const stop = syncRef(sourceCell, mirrorCell, { direction: 'ltr' });
+ * stop(); // detach permanently
+ * ```
  */
 export function syncRef<L, R>(
 	left: SyncCell<L>,

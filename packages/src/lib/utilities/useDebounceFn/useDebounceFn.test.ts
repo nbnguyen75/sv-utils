@@ -1,8 +1,3 @@
-/**
- * Parity + edge-case tests for `useDebounceFn`.
- * Semantics mirror VueUse `debounceFilter`, extended with lodash-style
- * `leading` / `trailing` edges and a `pending()` probe.
- */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useDebounceFn } from './index.ts';

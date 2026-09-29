@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `watchArray`: diffs, duplicate safety, immediate mode,
- * stop, and cleanup ordering. Runs mounted (sampling in `$effect`).
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

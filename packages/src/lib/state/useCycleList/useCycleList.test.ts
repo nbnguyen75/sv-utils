@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useCycleList`: navigation, wraparound, options, setters,
- * and re-anchoring on list changes. Runs mounted (list sync in `$effect`).
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

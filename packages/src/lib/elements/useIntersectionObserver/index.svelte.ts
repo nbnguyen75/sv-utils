@@ -1,12 +1,3 @@
-/**
- * `IntersectionObserver` wrapper with pause/resume/stop controls.
- *
- * Inspired by [VueUse `useIntersectionObserver`](https://vueuse.org/core/useIntersectionObserver/).
- * Rebuilds when targets, root, or margin change. Must be called in
- * component initialization. Reports `isSupported: false` (and never
- * observes) without `IntersectionObserver` or during SSR. Disposal on
- * unmount is automatic.
- */
 import { untrack } from 'svelte';
 
 import { isBrowser } from '../../shared/is.ts';
@@ -57,6 +48,12 @@ export interface UseIntersectionObserverReturn {
  * @param target Element(s) or getters; nullish entries are skipped.
  * @param callback Observer callback.
  * @param options Root, margin, threshold, and auto-start.
+ * @example
+ * ```ts
+ * const { pause, resume } = useIntersectionObserver(() => sentinel, ([entry]) => {
+ * 	if (entry?.isIntersecting) loadMore();
+ * });
+ * ```
  */
 export function useIntersectionObserver(
 	target: MaybeElement | MaybeElement[],

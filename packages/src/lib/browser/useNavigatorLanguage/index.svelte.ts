@@ -1,11 +1,3 @@
-/**
- * Reactive navigator language with support detection.
- *
- * Inspired by [VueUse `useNavigatorLanguage`](https://vueuse.org/core/useNavigatorLanguage/).
- * Must be called in component initialization. Server output is
- * `{ isSupported: false, language: undefined }`. Disposal on unmount is
- * automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
@@ -19,6 +11,11 @@ export interface UseNavigatorLanguageReturn {
 
 /**
  * Track the browser's active language.
+ * @example
+ * ```ts
+ * const { isSupported, language } = useNavigatorLanguage();
+ * language; // e.g. 'en-US'
+ * ```
  */
 export function useNavigatorLanguage(): UseNavigatorLanguageReturn {
 	const navigatorRef = isBrowser ? window.navigator : undefined;

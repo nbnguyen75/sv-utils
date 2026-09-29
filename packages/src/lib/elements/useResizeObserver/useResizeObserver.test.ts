@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useResizeObserver`: observation, arrays, nullish targets,
- * callbacks, stop, target swaps, disposal, and unsupported environments.
- */
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

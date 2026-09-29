@@ -1,7 +1,3 @@
-/**
- * Tests for `useMemoize`: hits, refresh, deletion, custom keys/caches.
- * Framework-free — node environment.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { useMemoize } from './index.ts';

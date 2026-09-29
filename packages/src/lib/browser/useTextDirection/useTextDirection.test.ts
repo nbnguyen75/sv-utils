@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useTextDirection`: defaults, attribute reads, setter writes,
- * observation, and missing elements.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

@@ -118,7 +118,7 @@ A utility is done only when:
 - [ ] Safe for SSR (`typeof window !== 'undefined'` checks in place)
 - [ ] All event listeners, observers, and timers are cleaned up on disposal
 - [ ] Public options and return interfaces are exported from its module and `src/lib/index.ts`
-- [ ] Docs: `src/lib/<category>/<name>/README.md` per `migration-plan.md` §4 + JSDoc on every export
+- [ ] Docs: `src/lib/<category>/<name>/README.md` per `migration-plan.md` §4 + JSDoc with `@example` on every exported function (each overload too); no file-top banner comments — documentation lives on exports, not file headers
 - [ ] Tests: `src/lib/<category>/<name>/<name>.test.ts` per `migration-plan.md` §5, `bun run test` green, no uncovered public export
 - [ ] `bun run check` passes with 0 errors and 0 warnings
 - [ ] `bun run format` passes with 0 errors

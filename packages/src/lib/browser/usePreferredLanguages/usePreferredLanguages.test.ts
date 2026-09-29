@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `usePreferredLanguages`: defaults, live updates, disposal.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

@@ -1,9 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useScrollToTop`: animated scroll, cancel, supersede,
- * and disposal on unmount. Uses real timers with short durations plus a
- * `requestAnimationFrame` polyfill (jsdom ships none).
- */
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { mountUtil } from '../../../../test/fixtures/mount.ts';

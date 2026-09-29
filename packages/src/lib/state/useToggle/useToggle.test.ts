@@ -1,7 +1,3 @@
-/**
- * Tests for `useToggle`: default/custom values, explicit set, and
- * getter-based truthy/falsy values. Pure `$state` logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { useToggle } from './index.ts';

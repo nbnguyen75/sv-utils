@@ -1,16 +1,3 @@
-/**
- * Environment flags and type guards.
- *
- * Inspired by VueUse `shared/utils/is`, adapted to
- * strict TypeScript (no `any`): predicates take `unknown`, `assert` takes
- * `unknown[]`, and `hasOwn` avoids `Object.hasOwn` (ES2022) in favor of
- * `Object.prototype.hasOwnProperty` for wider lib targets.
- *
- * All flags are computed once at module import and frozen — `isIOS`, for
- * example, cannot react to a UA change afterwards. Every access is
- * `typeof`-guarded, so importing this module is safe during SSR.
- */
-
 /** True when both `window` and `document` exist (real browser DOM). */
 export const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 
@@ -28,24 +15,46 @@ export const isWorker =
 /**
  * True when `value` is not `undefined` (note: `null` counts as defined,
  * matching VueUse).
+ * @example
+ * ```ts
+ * isDef(value); // false only for undefined
+ * ```
  */
 export function isDef<T>(value: T | undefined): value is T {
 	return typeof value !== 'undefined';
 }
 
-/** True when `value` is neither `null` nor `undefined`. */
+/**
+ * True when `value` is neither `null` nor `undefined`.
+ * @example
+ * ```ts
+ * if (notNullish(maybe)) console.log(maybe); // narrowed, non-null
+ * ```
+ */
 export function notNullish<T>(value: T | null | undefined): value is T {
 	return value != null;
 }
 
-/** `console.warn` with `infos` unless `condition` holds. */
+/**
+ * `console.warn` with `infos` unless `condition` holds.
+ * @example
+ * ```ts
+ * assert(count > 0, 'count must be positive', { count });
+ * ```
+ */
 export function assert(condition: boolean, ...infos: unknown[]): void {
 	if (!condition) console.warn(...infos);
 }
 
 const objectToString = Object.prototype.toString;
 
-/** True for plain objects (`[object Object]`); false for arrays, dates, functions, etc. */
+/**
+ * True for plain objects (`[object Object]`); false for arrays, dates, functions, etc.
+ * @example
+ * ```ts
+ * isObject(payload); // true only for plain objects
+ * ```
+ */
 export function isObject(value: unknown): value is Record<string, unknown> {
 	return objectToString.call(value) === '[object Object]';
 }
@@ -55,6 +64,10 @@ export function isObject(value: unknown): value is Record<string, unknown> {
  * instead of `instanceof Element`, which fails across realms (iframes and
  * test runners evaluating modules in separate VM contexts). No globals
  * touched — safe during SSR.
+ * @example
+ * ```ts
+ * isElement(node); // duck-typed Element check, SSR-safe
+ * ```
  */
 export function isElement(value: unknown): value is Element {
 	return (
@@ -75,7 +88,13 @@ export const timestamp = (): number => +Date.now();
 export const clamp = (n: number, min: number, max: number): number =>
 	Math.min(max, Math.max(min, n));
 
-/** No-operation placeholder. */
+/**
+ * No-operation placeholder.
+ * @example
+ * ```ts
+ * onComplete ?? noop(); // no-op placeholder
+ * ```
+ */
 export function noop(): void {}
 
 /** Random integer in the inclusive `[min, max]` range. */
@@ -85,7 +104,13 @@ export const rand = (min: number, max: number): number => {
 	return Math.floor(Math.random() * (high - low + 1)) + low;
 };
 
-/** True when `key` is an own (non-inherited) property of `value`. */
+/**
+ * True when `key` is an own (non-inherited) property of `value`.
+ * @example
+ * ```ts
+ * hasOwn(options, 'timeout'); // own-property check
+ * ```
+ */
 export function hasOwn<T extends object>(value: T, key: PropertyKey): key is keyof T {
 	return Object.prototype.hasOwnProperty.call(value, key);
 }

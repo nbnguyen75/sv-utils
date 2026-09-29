@@ -1,11 +1,3 @@
-/**
- * Reactive `Array.includes` with comparator / key / from-index support.
- *
- * Inspired by [VueUse `useArrayIncludes`](https://vueuse.org/shared/useArrayIncludes/).
- * Memoized in `$derived`. Pure logic — safe to call anywhere, including
- * during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -35,6 +27,15 @@ export interface UseArrayIncludesReturn {
 	/** Whether `value` was found. Getter-backed (destructure-safe). */
 	readonly value: boolean;
 }
+
+/**
+ * Reactive membership check with comparator, key, or from-index.
+ * @example
+ * ```ts
+ * const known = useArrayIncludes(ids, 2);
+ * known.value; // ids contains 2
+ * ```
+ */
 
 export function useArrayIncludes<T, V>(
 	list: MaybeGetter<readonly T[]>,

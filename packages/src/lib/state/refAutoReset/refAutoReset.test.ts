@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `refAutoReset`: timed reset, re-arming, getter defaults,
- * and timer disposal on unmount.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { mountUtil } from '../../../../test/fixtures/mount.ts';

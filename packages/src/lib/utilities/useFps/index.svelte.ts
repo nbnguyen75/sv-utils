@@ -1,12 +1,3 @@
-/**
- * Reactive frames-per-second meter over `requestAnimationFrame`.
- *
- * Inspired by [VueUse `useFps`](https://vueuse.org/core/useFps/).
- * Returns `0` where `performance` is unavailable (including SSR) without
- * starting any loop. Otherwise samples via `useRafFn`, so this must be
- * called in component initialization.
- */
-
 import { useRafFn } from '../useRafFn/index.svelte.ts';
 
 /** Options for {@link useFps}. */
@@ -28,6 +19,11 @@ export interface UseFpsReturn {
  * Measure rendering FPS.
  *
  * @param options `every`: frames per sample window.
+ * @example
+ * ```ts
+ * const fps = useFps();
+ * fps.value; // measured frames per second
+ * ```
  */
 export function useFps(options: UseFpsOptions = {}): UseFpsReturn {
 	const { every = 10 } = options;

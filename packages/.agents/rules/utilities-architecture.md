@@ -8,6 +8,8 @@
   - Use `$derived` and `$derived.by` for all computed/derived calculations.
   - Use `$effect` for side effects, subscriptions, event listeners, observers, and DOM lifecycle.
   - Always clean up subscriptions/listeners when the effect unmounts (return a cleanup function from `$effect`).
+  - **Never read and write the same signal inside one effect** (read-then-write aliasing re-triggers the effect — it converges only after a wasted second run and can clobber intermediate writes; use locals for computation, write state once at the end).
+  - **Teardown cleanups must not read `$state`** (reads observe pre-teardown values during unmount — writes still apply). Mirror disposal-critical intent (locked flags, restore targets, pending handles) in plain variables captured at action time.
 - **Reactive Getters & Object Ergonomics**:
   - When a composable returns multiple reactive values, return getter properties:
     ```ts
@@ -46,3 +48,10 @@
   - `shared/` — Common type helpers, type guards, math/array/object utils.
 - **Strict Relative Imports**:
   - Inside `src/lib/`, always use relative imports (`./...` or `../...`). Do NOT use `$lib` path aliases in library code to ensure clean package distribution via `svelte-package`.
+
+## 5. Documentation
+
+- **No file-top banner comments**: source files start with code (imports). Never add `/** ... */` module headers — documentation lives on exports and in READMEs, not file headers.
+- **JSDoc + `@example` on every exported function** (including each overload): purpose, `@param`, `@returns`/`@default`, plus a runnable 2–5 line `@example` fenced block. Keep examples minimal but real (import + call + one assertion-shaped line where helpful).
+- **README per module** (`src/lib/<category>/<name>/README.md`): purpose, signature, options table (every default stated), return table, ≥2 runnable examples including SSR behavior, edge cases/cleanup, and VueUse parity notes.
+- **Duck-type DOM checks**: never use `instanceof` against DOM globals (`Window`, `Element`, …) — it fails across realms (iframes, isolated test contexts). Prefer structural checks (`typeof x.scrollY === 'number'`, `nodeType === 1`, method presence). Centralize shared guards in `src/lib/shared/is.ts`.

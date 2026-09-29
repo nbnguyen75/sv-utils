@@ -1,11 +1,3 @@
-/**
- * Reactive window dimensions with scrollbar/viewport source options.
- *
- * Inspired by [VueUse `useWindowSize`](https://vueuse.org/core/useWindowSize/).
- * Measures on mount (SSR renders `initialWidth`/`initialHeight`) and
- * refreshes on `resize` plus orientation changes. Must be called in
- * component initialization. Disposal on unmount is automatic.
- */
 import { untrack } from 'svelte';
 
 import { isBrowser } from '../../shared/is.ts';
@@ -58,6 +50,11 @@ export interface UseWindowSizeReturn {
  * Track window dimensions.
  *
  * @param options Initials, orientation listening, scrollbar, and source.
+ * @example
+ * ```ts
+ * const { width, height } = useWindowSize();
+ * width < 768; // responsive branch
+ * ```
  */
 export function useWindowSize(options: UseWindowSizeOptions = {}): UseWindowSizeReturn {
 	const {

@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useRefHistory`: automatic commits, undo/redo, pause/resume,
- * batching, disposal, vetoes, deep tracking, and capacity.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

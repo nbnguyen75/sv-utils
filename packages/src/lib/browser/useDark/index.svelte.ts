@@ -1,14 +1,3 @@
-/**
- * Reactive dark-mode state synced to the DOM and persisted to storage.
- *
- * Inspired by VueUse `useDark`. Tracks the
- * OS `prefers-color-scheme` media query, persists the `light | dark | auto`
- * mode via `useLocalStorage`, and toggles `class="dark"` (or a custom
- * attribute) on the selector target. Simplified: no VueUse `useColorMode`
- * custom-mode dictionary — see `useColorMode` (feat-022) for that.
- * Must be called in component initialization (uses `$state` / `$effect`).
- */
-
 import { isBrowser } from '../../shared/is.ts';
 import { useLocalStorage } from '../../state/useStorage/index.svelte.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
@@ -52,6 +41,11 @@ export interface UseDarkReturn {
  *
  * @param opts `storageKey`, `attribute`, and `selector` overrides.
  * @returns Getter-backed `value` plus `toggle` and `setMode`.
+ * @example
+ * ```ts
+ * const dark = useDark();
+ * dark.toggle(); // light <-> dark (resolves auto first)
+ * ```
  */
 export function useDark(opts: UseDarkOptions = {}): UseDarkReturn {
 	const storageKey = opts.storageKey ?? 'sv-color-scheme';

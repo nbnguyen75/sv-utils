@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useDocumentVisibility`: event tracking.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

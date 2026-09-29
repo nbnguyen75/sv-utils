@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useStorageAsync`: initial reads, write-through, removal,
- * cross-tab sync, failures, serializers, and awaitability.
- */
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

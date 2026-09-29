@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useClipboard`: copy flow, reset window, unsupported
- * environments, and disposal of in-flight work on unmount.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

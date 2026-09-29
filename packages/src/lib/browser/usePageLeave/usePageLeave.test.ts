@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `usePageLeave`: exit/entry detection.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

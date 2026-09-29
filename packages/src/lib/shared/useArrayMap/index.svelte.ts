@@ -1,12 +1,3 @@
-/**
- * Reactive `Array.map`.
- *
- * Inspired by [VueUse `useArrayMap`](https://vueuse.org/shared/useArrayMap/).
- * The result is memoized in `$derived` and recomputes when reactive
- * dependencies of `list` change. Pure logic — safe to call anywhere,
- * including during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -22,6 +13,11 @@ export interface UseArrayMapReturn<T> {
  *
  * @param list Array, or a getter over reactive state.
  * @param fn Mapping invoked per element.
+ * @example
+ * ```ts
+ * const doubled = useArrayMap([1, 2, 3], (n) => n * 2);
+ * doubled.value; // [2, 4, 6]
+ * ```
  */
 export function useArrayMap<T, U>(
 	list: MaybeGetter<readonly T[]>,

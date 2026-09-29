@@ -1,13 +1,3 @@
-/**
- * `requestAnimationFrame` loop with pause/resume, FPS cap, and once mode.
- *
- * Inspired by [VueUse `useRafFn`](https://vueuse.org/core/useRafFn/).
- * Starts on mount when `immediate` (only where `requestAnimationFrame`
- * exists) and always disposes on unmount, so this must be called in
- * component initialization. Safe during SSR (the loop never starts on
- * the server).
- */
-
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -60,6 +50,12 @@ function hasRaf(): boolean {
  *
  * @param fn Frame callback receiving `{ delta, timestamp }`.
  * @param options `immediate` auto-start, `fpsLimit` cap, and `once` mode.
+ * @example
+ * ```ts
+ * useRafFn(({ delta }) => {
+ * 	x += delta * 0.06;
+ * });
+ * ```
  */
 export function useRafFn(
 	fn: (args: UseRafFnCallbackArguments) => void,

@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `usePreferredDark`: OS dark-theme preference tracking.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

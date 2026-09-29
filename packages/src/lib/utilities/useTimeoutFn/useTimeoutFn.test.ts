@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useTimeoutFn`: auto-start, restart, stop, args, immediate
- * callback, reactive interval reads, and unmount disposal.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { mountUtil } from '../../../../test/fixtures/mount.ts';

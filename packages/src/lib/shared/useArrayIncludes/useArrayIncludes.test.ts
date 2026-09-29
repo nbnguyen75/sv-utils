@@ -1,7 +1,3 @@
-/**
- * Tests for `useArrayIncludes`: equality, comparators, keys, options.
- * Pure `$derived` logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';

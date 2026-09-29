@@ -1,12 +1,3 @@
-/**
- * `setTimeout` wrapper with start/stop controls and pending state.
- *
- * Inspired by [VueUse `useTimeoutFn`](https://vueuse.org/shared/useTimeoutFn/).
- * Auto-starts on mount when `immediate` (browser only) and always disposes
- * on unmount, so this must be called in component initialization. Pure
- * timer logic otherwise — safe during SSR (no timer runs on the server).
- */
-
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -43,6 +34,11 @@ export interface UseTimeoutFnReturn<Args extends unknown[]> {
  * @param cb Callback invoked once per arming (without arguments).
  * @param interval Delay in milliseconds; getters resolve at each `start`.
  * @param options `immediate` auto-start and `immediateCallback` flags.
+ * @example
+ * ```ts
+ * const { start, stop } = useTimeoutFn(() => save(), 500, { immediate: false });
+ * start(); // fires once after 500ms
+ * ```
  */
 export function useTimeoutFn<Args extends unknown[]>(
 	cb: (...args: Args) => void,

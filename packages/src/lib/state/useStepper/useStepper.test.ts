@@ -1,7 +1,3 @@
-/**
- * Tests for `useStepper`: array and record steps, navigation, guards,
- * and predicates. Pure `$state`/`$derived` logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { useStepper } from './index.ts';

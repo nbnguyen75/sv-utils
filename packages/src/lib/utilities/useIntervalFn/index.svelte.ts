@@ -1,13 +1,3 @@
-/**
- * `setInterval` wrapper with pause/resume controls and a reactive interval.
- *
- * Inspired by [VueUse `useIntervalFn`](https://vueuse.org/shared/useIntervalFn/).
- * Auto-starts on mount when `immediate`, restarts when a reactive interval
- * changes while active, and always disposes on unmount — so this must be
- * called in component initialization. Safe during SSR (no timer runs on
- * the server).
- */
-
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -45,6 +35,12 @@ export interface UseIntervalFnReturn {
  * @param interval Period in milliseconds; getters are tracked — changing
  *   the value while active restarts the timer at the new cadence.
  * @param options `immediate` auto-start and `immediateCallback` flags.
+ * @example
+ * ```ts
+ * const clock = useIntervalFn(() => tick(), 1000);
+ * clock.pause();
+ * clock.resume();
+ * ```
  */
 export function useIntervalFn(
 	cb: () => void,

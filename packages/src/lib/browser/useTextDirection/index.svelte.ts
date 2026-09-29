@@ -1,13 +1,3 @@
-/**
- * Reactive text direction (`dir`) of an element, writable back to the DOM.
- *
- * Inspired by [VueUse `useTextDirection`](https://vueuse.org/core/useTextDirection/).
- * Reads the selector target on mount (SSR renders `initialValue`) and,
- * with `observe`, follows attribute changes via `MutationObserver`.
- * Assigning `value` writes the attribute (removing it when emptied).
- * Must be called in component initialization. Disposal on unmount is
- * automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 
 /** Text direction values. */
@@ -42,6 +32,11 @@ export interface UseTextDirectionReturn {
  * Track (and control) an element's text direction.
  *
  * @param options `selector`, `observe`, and `initialValue` overrides.
+ * @example
+ * ```ts
+ * const dir = useTextDirection({ observe: true });
+ * dir.value = 'rtl'; // writes document.dir
+ * ```
  */
 export function useTextDirection(options: UseTextDirectionOptions = {}): UseTextDirectionReturn {
 	const { selector = 'html', observe = false, initialValue = 'ltr' } = options;

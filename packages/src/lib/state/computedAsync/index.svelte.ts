@@ -1,14 +1,3 @@
-/**
- * Async derivation with overlap guards and cancellation hooks.
- *
- * Inspired by [VueUse `computedAsync`](https://vueuse.org/core/computedAsync/).
- * The evaluation callback runs tracked inside `$effect` (Vue's `watchEffect`
- * equivalent): whatever reactive state it reads becomes a dependency.
- * Overlapping runs resolve by generation — only the latest may commit —
- * and superseded runs fire their `onCancel` hooks. Must be called in
- * component initialization. Safe during SSR (evaluation runs on mount).
- */
-
 /** Register a callback for superseded evaluations. */
 export type AsyncComputedOnCancel = (cancel: () => void) => void;
 
@@ -29,6 +18,15 @@ export interface AsyncComputedReturn<T> {
 function defaultOnError(error: unknown) {
 	if (typeof globalThis.reportError === 'function') globalThis.reportError(error);
 }
+
+/**
+ * Async derivation with overlap guards and cancellation hooks.
+ * @example
+ * ```ts
+ * const profile = computedAsync(() => fetchProfile(userId()), null);
+ * profile.value; // latest settled (or initial)
+ * ```
+ */
 
 export function computedAsync<T>(
 	evaluationCallback: (onCancel: AsyncComputedOnCancel) => T | Promise<T>,

@@ -1,7 +1,3 @@
-/**
- * Tests for `createGlobalState`: lazy singleton, argument passthrough,
- * and instance stability. Framework-free — node environment.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { createGlobalState } from './index.ts';

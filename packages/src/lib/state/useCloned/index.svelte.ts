@@ -1,12 +1,3 @@
-/**
- * Editable deep clone of a reactive source with a dirty flag.
- *
- * Inspired by [VueUse `useCloned`](https://vueuse.org/core/useCloned/).
- * Source changes re-sync the clone (unless `manual`), and edits to the
- * clone raise `isModified`. Both observations run inside `$effect`, so this
- * must be called in component initialization; bookkeeping is `untrack`ed.
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { untrack } from 'svelte';
@@ -42,6 +33,13 @@ export interface UseClonedReturn<T> {
  *
  * @param source Reactive source: a value or a getter over reactive state.
  * @param options `clone` implementation and `manual` sync mode.
+ * @example
+ * ```ts
+ * const form = useCloned(() => original);
+ * form.value.name = 'edited';
+ * form.isModified; // true
+ * form.sync(); // discard edits
+ * ```
  */
 export function useCloned<T>(
 	source: MaybeGetter<T>,

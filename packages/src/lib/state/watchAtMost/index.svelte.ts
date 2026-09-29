@@ -1,11 +1,3 @@
-/**
- * Watch a source at most `count` times, with pause/resume/stop controls.
- *
- * Inspired by [VueUse `watchAtMost`](https://vueuse.org/shared/watchAtMost/).
- * The source is sampled inside `$effect`, so this must be called in
- * component initialization. Fires only on genuine source changes (pauses
- * swallow changes without catch-up); disposal on unmount is automatic.
- */
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -40,6 +32,11 @@ export interface WatchAtMostReturn {
  * @param source Reactive source: a value or a getter over reactive state.
  * @param cb Invoked per change with `(value, oldValue, onCleanup)`.
  * @param options `count` limit and `immediate` mount behavior.
+ * @example
+ * ```ts
+ * watchAtMost(() => draft, (value) => save(value), { count: 5 });
+ * // saves the first 5 edits, then stops
+ * ```
  */
 export function watchAtMost<T>(
 	source: MaybeGetter<T>,

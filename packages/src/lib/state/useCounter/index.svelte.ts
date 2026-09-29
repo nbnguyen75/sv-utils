@@ -1,11 +1,3 @@
-/**
- * Counter with clamped increment / decrement / set / reset helpers.
- *
- * Inspired by [VueUse `useCounter`](https://vueuse.org/shared/useCounter/).
- * Pure `$state` logic — safe to call anywhere, including during SSR
- * (no DOM access, no effects).
- */
-
 /** Options for {@link useCounter}. */
 export interface UseCounterOptions {
 	/** Lower bound applied to `inc` / `dec` / `set`. @default -Infinity */
@@ -38,6 +30,12 @@ export interface UseCounterReturn {
  *
  * @param initialValue Starting value (not clamped, mirroring VueUse).
  * @param options `min` / `max` clamp bounds.
+ * @example
+ * ```ts
+ * const counter = useCounter(0, { min: 0 });
+ * counter.inc();
+ * counter.count; // 1
+ * ```
  */
 export function useCounter(
 	initialValue?: number | (() => number),

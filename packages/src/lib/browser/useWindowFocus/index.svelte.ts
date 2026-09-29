@@ -1,11 +1,3 @@
-/**
- * Reactive window focus state.
- *
- * Inspired by [VueUse `useWindowFocus`](https://vueuse.org/core/useWindowFocus/).
- * Starts from `document.hasFocus()` and follows `blur`/`focus`. Must be
- * called in component initialization. Server value is `false`. Disposal on
- * unmount is automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
@@ -17,6 +9,11 @@ export interface UseWindowFocusReturn {
 
 /**
  * Track window focus.
+ * @example
+ * ```ts
+ * const focused = useWindowFocus();
+ * focused.value; // window focus state
+ * ```
  */
 export function useWindowFocus(): UseWindowFocusReturn {
 	let focused = $state(isBrowser ? document.hasFocus() : false);

@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useFavicon`: initial application, reactive updates, setter
- * writes, custom rel/base, and link reuse.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

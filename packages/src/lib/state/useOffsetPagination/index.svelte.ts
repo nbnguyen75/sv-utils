@@ -1,14 +1,3 @@
-/**
- * Offset-based pagination state with clamped page navigation.
- *
- * Inspired by [VueUse `useOffsetPagination`](https://vueuse.org/core/useOffsetPagination/).
- * `total` / `pageSize` / `page` accept plain values or getters over reactive
- * state; change callbacks are delivered via `$effect`, so this must be
- * called in component initialization. External two-way ref sync (VueUse's
- * `syncRef` behavior) is intentionally unsupported — drive external state
- * from the callbacks instead.
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { untrack } from 'svelte';
@@ -60,9 +49,29 @@ export interface UseOffsetPaginationReturn {
 /** Pagination state without `isLastPage` (unbounded listing). */
 export type UseOffsetPaginationInfinityReturn = Omit<UseOffsetPaginationReturn, 'isLastPage'>;
 
+/**
+ * Offset-based pagination state with clamped page navigation.
+ * @example
+ * ```ts
+ * const pages = useOffsetPagination({ total: 95 });
+ * pages.next();
+ * pages.currentPage; // 2
+ * ```
+ */
+
 export function useOffsetPagination(
 	options: Omit<UseOffsetPaginationOptions, 'total'> & { total?: never }
 ): UseOffsetPaginationInfinityReturn;
+/**
+ * Offset-based pagination state with clamped page navigation.
+ * @example
+ * ```ts
+ * const pages = useOffsetPagination({ total: 95 });
+ * pages.next();
+ * pages.currentPage; // 2
+ * ```
+ */
+
 export function useOffsetPagination(options: UseOffsetPaginationOptions): UseOffsetPaginationReturn;
 export function useOffsetPagination(
 	options: UseOffsetPaginationOptions

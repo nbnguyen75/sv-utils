@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `watchTriggerable`: manual triggers, return values,
- * no double-fires, normal notifications, and silence controls.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

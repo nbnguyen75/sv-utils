@@ -1,12 +1,3 @@
-/**
- * Holds the previous value of a reactive source.
- *
- * Inspired by [VueUse `usePrevious`](https://vueuse.org/core/usePrevious/).
- * The source is sampled inside `$effect` (Vue's `watch` equivalent), so
- * this must be called in component initialization. Bookkeeping reads are
- * `untrack`ed to avoid self-triggering the effect.
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { untrack } from 'svelte';
@@ -22,7 +13,25 @@ export interface UsePreviousReturn<T> {
 	readonly value: T | undefined;
 }
 
+/**
+ * Holds the value of a reactive source before its most recent change.
+ * @example
+ * ```ts
+ * const previous = usePrevious(() => name, '');
+ * previous.value; // value before the latest change
+ * ```
+ */
+
 export function usePrevious<T>(source: MaybeGetter<T>): UsePreviousReturn<T | undefined>;
+/**
+ * Holds the value of a reactive source before its most recent change.
+ * @example
+ * ```ts
+ * const previous = usePrevious(() => name, '');
+ * previous.value; // value before the latest change
+ * ```
+ */
+
 export function usePrevious<T>(source: MaybeGetter<T>, initialValue: T): UsePreviousReturn<T>;
 export function usePrevious<T>(source: MaybeGetter<T>, initialValue?: T): UsePreviousReturn<T> {
 	let previous = $state<T | undefined>(initialValue);

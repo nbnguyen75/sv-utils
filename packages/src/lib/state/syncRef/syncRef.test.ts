@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `syncRef`: bidirectional sync, directions, transforms,
- * immediate alignment, and stop. Runs mounted.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

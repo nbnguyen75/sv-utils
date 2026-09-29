@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useBreakpoints`: shortcuts, comparisons, current/active,
- * strategies, presets, and sync predicates.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

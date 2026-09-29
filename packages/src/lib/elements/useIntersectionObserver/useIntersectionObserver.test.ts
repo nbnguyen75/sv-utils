@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useIntersectionObserver`: callbacks, pause/resume/stop,
- * immediate mode, options plumbing, and disposal.
- */
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

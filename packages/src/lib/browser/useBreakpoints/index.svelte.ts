@@ -1,12 +1,3 @@
-/**
- * Reactive viewport breakpoints with shortcut queries and comparisons.
- *
- * Inspired by [VueUse `useBreakpoints`](https://vueuse.org/core/useBreakpoints/).
- * Per-key shortcuts are created eagerly at setup (known keys); dynamic
- * comparisons build media queries on demand. Must be called in component
- * initialization. Server output is all-`false` (no `ssrWidth` evaluation —
- * see the README). Disposal on unmount is automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
@@ -77,6 +68,12 @@ function asPx(value: number | string): string {
  *
  * @param breakpoints Name-to-width table (numbers are pixels).
  * @param options `strategy` for per-key shortcuts.
+ * @example
+ * ```ts
+ * import { breakpointsTailwind } from 'sv-utils';
+ * const breakpoints = useBreakpoints(breakpointsTailwind);
+ * breakpoints.lg.value; // viewport >= 1024px
+ * ```
  */
 export function useBreakpoints<K extends string>(
 	breakpoints: Breakpoints<K>,

@@ -1,7 +1,3 @@
-/**
- * Tests for `refWithControl`: vetoes, change callbacks, untracked reads,
- * and same-value skips. Pure `$state` logic — node environment.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { refWithControl } from './index.ts';

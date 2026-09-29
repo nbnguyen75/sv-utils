@@ -1,11 +1,3 @@
-/**
- * Reactive navigator languages.
- *
- * Inspired by [VueUse `usePreferredLanguages`](https://vueuse.org/core/usePreferredLanguages/).
- * Starts from `navigator.languages` (or `['en']` on the server) and
- * refreshes on `languagechange`. Must be called in component
- * initialization. Disposal on unmount is automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
@@ -22,6 +14,11 @@ function readLanguages(): readonly string[] {
 
 /**
  * Track the browser's preferred languages.
+ * @example
+ * ```ts
+ * const languages = usePreferredLanguages();
+ * languages.value[0]; // e.g. 'en-US'
+ * ```
  */
 export function usePreferredLanguages(): UsePreferredLanguagesReturn {
 	let languages = $state<readonly string[]>(readLanguages());

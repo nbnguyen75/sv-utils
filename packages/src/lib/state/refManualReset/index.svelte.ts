@@ -1,10 +1,3 @@
-/**
- * State with a manual reset back to its default.
- *
- * Inspired by [VueUse `refManualReset`](https://vueuse.org/shared/refManualReset/).
- * Pure `$state` logic — safe to call anywhere, including during SSR
- * (no DOM access, no effects).
- */
 import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
@@ -20,6 +13,12 @@ export interface RefManualResetReturn<T> {
  * Create state with an explicit `reset()`.
  *
  * @param defaultValue Fallback value; getters resolve at creation and per reset.
+ * @example
+ * ```ts
+ * const query = refManualReset('');
+ * query.value = 'hello';
+ * query.reset(); // ''
+ * ```
  */
 export function refManualReset<T>(defaultValue: MaybeGetter<T>): RefManualResetReturn<T> {
 	let value = $state<T>(resolveGetter(defaultValue));

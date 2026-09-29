@@ -1,13 +1,3 @@
-/**
- * Promised one-time watches: resolve when a source meets a condition.
- *
- * Inspired by [VueUse `until`](https://vueuse.org/shared/until/).
- * `until()` itself creates nothing; each matcher (`toBe`, `toMatch`, …)
- * installs a one-shot `$effect` **at call time**, so build the full chain
- * synchronously in component initialization and `await` the resulting
- * promise afterwards. Disposal on unmount is automatic; a timeout still
- * settles afterwards (bounded, VueUse parity).
- */
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -177,7 +167,25 @@ function createArrayUntil<T>(source: MaybeGetter<T>, isNot: boolean): UntilArray
 	};
 }
 
+/**
+ * Promised one-time watches: resolve when a source meets a condition.
+ * @example
+ * ```ts
+ * await until(() => status).toBe('ready');
+ * startHeavyWork();
+ * ```
+ */
+
 export function until<T extends unknown[]>(source: MaybeGetter<T>): UntilArrayInstance<T>;
+/**
+ * Promised one-time watches: resolve when a source meets a condition.
+ * @example
+ * ```ts
+ * await until(() => status).toBe('ready');
+ * startHeavyWork();
+ * ```
+ */
+
 export function until<T>(source: MaybeGetter<T>): UntilValueInstance<T>;
 export function until<T>(source: MaybeGetter<T>): UntilValueInstance<T> | UntilArrayInstance<T> {
 	return Array.isArray(resolveGetter(source))

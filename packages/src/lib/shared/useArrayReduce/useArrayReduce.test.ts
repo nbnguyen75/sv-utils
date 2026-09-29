@@ -1,7 +1,3 @@
-/**
- * Tests for `useArrayReduce`: sums, typed reductions, getter initials,
- * index args, empty-list throw, reactivity. Pure `$derived` logic — node.
- */
 import { describe, expect, it } from 'vitest';
 
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';

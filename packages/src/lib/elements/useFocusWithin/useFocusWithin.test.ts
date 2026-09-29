@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useFocusWithin`: containment tracking.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

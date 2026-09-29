@@ -1,8 +1,3 @@
-/**
- * Named breakpoint presets (widths in pixels) for {@link useBreakpoints}.
- * Values mirror the upstream design systems; check their docs for updates.
- */
-
 /** Breakpoints from Tailwind CSS. */
 export const breakpointsTailwind = {
 	sm: 640,

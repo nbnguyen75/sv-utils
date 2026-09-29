@@ -1,13 +1,3 @@
-/**
- * `MutationObserver` wrapper with multi-target support, disposal,
- * and pending-record access.
- *
- * Inspired by [VueUse `useMutationObserver`](https://vueuse.org/core/useMutationObserver/).
- * Re-observes when targets resolve differently. Must be called in component
- * initialization. Reports `isSupported: false` (and never observes)
- * without `MutationObserver` or during SSR. Disposal on unmount is
- * automatic.
- */
 import { untrack } from 'svelte';
 
 import { isBrowser } from '../../shared/is.ts';
@@ -34,6 +24,13 @@ export interface UseMutationObserverReturn {
  * @param target Element(s) or getters; nullish entries are skipped.
  * @param callback Observer callback.
  * @param options `MutationObserverInit` (e.g. `{ attributes: true }`).
+ * @example
+ * ```ts
+ * const { takeRecords } = useMutationObserver(() => article, callback, {
+ * 	childList: true
+ * });
+ * takeRecords(); // drain pending without disconnecting
+ * ```
  */
 export function useMutationObserver(
 	target: MaybeElement | MaybeElement[],

@@ -1,7 +1,3 @@
-/**
- * Tests for `createEventHook`: subscribe, notify, unsubscribe, clear.
- * Framework-free — node environment.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { createEventHook } from './index.ts';

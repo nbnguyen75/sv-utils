@@ -1,11 +1,3 @@
-/**
- * Manual change history (undo/redo) for a state cell.
- *
- * Inspired by [VueUse `useManualRefHistory`](https://vueuse.org/core/useManualRefHistory/).
- * Snapshots are plain `{ snapshot, timestamp }` records; undo/redo move
- * them between stacks and write back through `setSource`. No effects —
- * safe to call anywhere, including during SSR (no DOM access).
- */
 import { timestamp } from '../../shared/is.ts';
 
 /** Writable cell shape accepted by the history utils. */
@@ -94,6 +86,13 @@ function defaultParse<Raw, Serialized>(
  *
  * @param source Writable cell to track.
  * @param options `capacity`, `clone`/`dump`/`parse` codecs, `setSource`.
+ * @example
+ * ```ts
+ * const history = useManualRefHistory(form, { clone: true });
+ * form.value.name = 'edited';
+ * history.commit();
+ * history.undo(); // name restored
+ * ```
  */
 export function useManualRefHistory<Raw, Serialized = Raw>(
 	source: HistoryCell<Raw>,

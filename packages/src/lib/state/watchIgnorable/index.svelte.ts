@@ -1,19 +1,3 @@
-/**
- * Watch a source with the ability to apply silent updates.
- *
- * Inspired by [VueUse `watchIgnorable`](https://vueuse.org/shared/watchIgnorable/).
- * `ignoreUpdates` runs a mutation without notifying this watcher;
- * `ignorePrevAsyncUpdates` drops whatever change is currently pending.
- * The source is sampled inside `$effect`, so this must be called in
- * component initialization. Disposal on unmount is automatic.
- *
- * Svelte has no synchronous observation primitive, so ignorance is a
- * boolean guard (not VueUse's exact counters): an `ignoreUpdates` call
- * that mutates nothing leaves a stale guard swallowing the next change,
- * and external changes coalesced into an ignored flush are skipped
- * together. Undo/redo/revert flows — the documented use case — behave
- * exactly.
- */
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -47,6 +31,11 @@ export interface WatchIgnorableReturn {
  * @param source Reactive source: a value or a getter over reactive state.
  * @param cb Invoked per observed change with `(value, oldValue, onCleanup)`.
  * @param options `immediate` mount behavior.
+ * @example
+ * ```ts
+ * const { ignoreUpdates } = watchIgnorable(() => doc, persist);
+ * ignoreUpdates(() => undo()); // silent revert
+ * ```
  */
 export function watchIgnorable<T>(
 	source: MaybeGetter<T>,

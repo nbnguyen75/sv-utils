@@ -1,12 +1,3 @@
-/**
- * Clipboard copy helper with a reactive "recently copied" flag.
- *
- * Inspired by VueUse `useClipboard`.
- * Simplified: no legacy `execCommand` fallback, no `read()`/cut support —
- * modern async Clipboard API only, with a safe no-op when unsupported
- * (SSR, insecure contexts, tests).
- */
-
 /** Options for {@link useClipboard}. */
 export interface UseClipboardOptions {
 	/**
@@ -37,6 +28,12 @@ export interface UseClipboardReturn {
  *
  * @param opts `copiedDuring` window in milliseconds.
  * @returns Getter-backed `copied` / `text`, `isSupported`, and `copy`.
+ * @example
+ * ```ts
+ * const clipboard = useClipboard();
+ * await clipboard.copy('copy me');
+ * clipboard.copied; // true for 1500ms
+ * ```
  */
 export function useClipboard(opts?: UseClipboardOptions): UseClipboardReturn {
 	const copiedDuring = opts?.copiedDuring ?? 1500;

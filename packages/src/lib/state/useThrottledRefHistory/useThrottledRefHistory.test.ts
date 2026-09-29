@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useThrottledRefHistory`: per-window commits with latest values.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `createSharedComposable`: fresh instances on the server
- * (node), one shared instance on the client (jsdom).
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { createSharedComposable } from './index.ts';

@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useRafFn`: frame args, pause/resume, once mode, FPS cap,
- * and unmount disposal. Frames are stepped manually for determinism.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { mountUtil } from '../../../../test/fixtures/mount.ts';

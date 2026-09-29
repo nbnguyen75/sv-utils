@@ -1,7 +1,3 @@
-/**
- * Tests for `useAsyncQueue`: sequencing, interruption, hooks, abort,
- * and empty input. Framework-free — node environment.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { useAsyncQueue } from './index.ts';

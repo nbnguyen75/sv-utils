@@ -1,7 +1,3 @@
-/**
- * Tests for `useArrayFindLast`: last match, misses, scan order.
- * Pure `$derived` logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { useArrayFindLast } from './index.ts';

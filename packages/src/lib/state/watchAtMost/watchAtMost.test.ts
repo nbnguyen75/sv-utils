@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `watchAtMost`: count cap, immediate mode, pause/resume,
- * stop, old values, and reactive counts. Runs mounted.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useNavigatorLanguage`: support flag, value, live updates.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

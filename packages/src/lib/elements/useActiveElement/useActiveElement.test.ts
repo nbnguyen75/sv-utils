@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useActiveElement`: focus tracking, blur semantics,
- * removal tracking, and disposal.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

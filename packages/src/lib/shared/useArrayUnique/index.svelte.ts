@@ -1,12 +1,3 @@
-/**
- * Reactive unique array.
- *
- * Inspired by [VueUse `useArrayUnique`](https://vueuse.org/shared/useArrayUnique/).
- * The result is memoized in `$derived` and recomputes when reactive
- * dependencies of `list` change. Pure logic — safe to call anywhere,
- * including during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -46,6 +37,11 @@ function uniqueElementsBy<T>(array: readonly T[], fn: UseArrayUniqueCompareFn<T>
  *
  * @param list Array, or a getter over reactive state.
  * @param compareFn Custom duplicate test; defaults to `Set` semantics.
+ * @example
+ * ```ts
+ * const unique = useArrayUnique([1, 2, 1]);
+ * unique.value; // [1, 2]
+ * ```
  */
 export function useArrayUnique<T>(
 	list: MaybeGetter<readonly T[]>,

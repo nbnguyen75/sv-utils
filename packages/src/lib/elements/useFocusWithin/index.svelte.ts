@@ -1,12 +1,3 @@
-/**
- * Track whether focus sits inside a target element.
- *
- * Inspired by [VueUse `useFocusWithin`](https://vueuse.org/core/useFocusWithin/).
- * `focusin` marks focused; `focusout` re-checks `:focus-within` (covers
- * focus moving between descendants). Must be called in component
- * initialization. Server value is `false`. Disposal on unmount is
- * automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
@@ -22,6 +13,11 @@ export interface UseFocusWithinReturn {
  * Track focus containment.
  *
  * @param target Element or getter (e.g. `bind:this` state).
+ * @example
+ * ```ts
+ * const { focused } = useFocusWithin(() => dialog);
+ * focused; // focus inside dialog or descendants
+ * ```
  */
 export function useFocusWithin(target: MaybeElement): UseFocusWithinReturn {
 	let focused = $state(false);

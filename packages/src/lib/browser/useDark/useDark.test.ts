@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useDark`: OS preference, persistence, toggle/setMode,
- * DOM sync, custom options, and listener disposal on unmount.
- */
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 

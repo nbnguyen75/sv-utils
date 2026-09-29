@@ -1,4 +1,3 @@
-// Reexport your entry components here
 // * Browser
 export * from './browser/useEventListener/index.ts';
 export * from './browser/useDark/index.ts';
@@ -20,6 +19,14 @@ export * from './browser/useWindowFocus/index.ts';
 export * from './browser/usePageLeave/index.ts';
 export * from './browser/useFavicon/index.ts';
 export * from './browser/useFullscreen/index.ts';
+export * from './browser/useWindowScroll/index.ts';
+export * from './browser/useScroll/index.ts';
+export * from './browser/useScrollLock/index.ts';
+export * from './browser/useInfiniteScroll/index.ts';
+export * from './browser/useMouse/index.ts';
+export * from './browser/useMouseInElement/index.ts';
+export * from './browser/useMousePressed/index.ts';
+export * from './browser/useElementHover/index.ts';
 // * Elements
 export * from './elements/useResizeObserver/index.ts';
 export * from './elements/useMutationObserver/index.ts';

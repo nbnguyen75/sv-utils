@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useFullscreen`: unsupported no-ops plus a mocked Fullscreen
- * API covering enter/exit/toggle, event sync, and auto-exit.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

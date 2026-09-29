@@ -1,9 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useFps`: sampling math, the every-window option, the
- * performance-missing fallback, and unmount disposal. `performance.now`
- * is mocked with a controllable clock; frames step manually.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { mountUtil } from '../../../../test/fixtures/mount.ts';

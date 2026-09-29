@@ -1,7 +1,3 @@
-/**
- * Tests for `useManualRefHistory`: stacks, undo/redo, capacity, codecs,
- * clear/reset, and custom writers. Pure state — node environment.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { createBox } from '../../../../test/fixtures/box.svelte.ts';

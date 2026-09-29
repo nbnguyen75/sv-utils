@@ -1,9 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useOffsetPagination`: page math, clamping, unbounded mode,
- * and change callbacks. Navigation is pure state; callbacks need component
- * context (mounted) since they are delivered via `$effect`.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `computedWithControl`: explicit-dep memoization, manual
- * trigger, writable form, and unrelated-state immunity. Runs mounted.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

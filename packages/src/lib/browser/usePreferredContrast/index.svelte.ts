@@ -1,10 +1,3 @@
-/**
- * Reactive OS contrast preference.
- *
- * Inspired by [VueUse `usePreferredContrast`](https://vueuse.org/core/usePreferredContrast/).
- * Combines the `more`/`less`/`custom` contrast queries. Must be called in
- * component initialization. Server output is `'no-preference'`.
- */
 import { useMediaQuery } from '../useMediaQuery/index.svelte.ts';
 
 /** OS contrast preference. */
@@ -18,6 +11,11 @@ export interface UsePreferredContrastReturn {
 
 /**
  * Track the OS contrast preference.
+ * @example
+ * ```ts
+ * const contrast = usePreferredContrast();
+ * contrast.value; // 'more' | 'less' | 'custom' | 'no-preference'
+ * ```
  */
 export function usePreferredContrast(): UsePreferredContrastReturn {
 	const isMore = useMediaQuery('(prefers-contrast: more)');

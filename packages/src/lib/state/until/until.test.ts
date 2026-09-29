@@ -1,9 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `until`: immediate and deferred matching across every
- * matcher, inversion, timeouts, and getter targets. Matchers are built
- * synchronously in setup; the promises are awaited in the tests.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

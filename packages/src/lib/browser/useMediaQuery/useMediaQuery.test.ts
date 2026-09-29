@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useMediaQuery`: matching, live changes, reactive queries,
- * SSR fallback, invalid queries, and disposal.
- */
 import { tick } from 'svelte';
 import { describe, expect, it } from 'vitest';
 

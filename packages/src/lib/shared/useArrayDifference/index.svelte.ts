@@ -1,11 +1,3 @@
-/**
- * Reactive difference of two arrays, with key / comparator / symmetric support.
- *
- * Inspired by [VueUse `useArrayDifference`](https://vueuse.org/shared/useArrayDifference/).
- * Memoized in `$derived`. Pure logic — safe to call anywhere, including
- * during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -24,6 +16,15 @@ export interface UseArrayDifferenceReturn<T> {
 	/** Items of `list` absent from `values` (plus the reverse when symmetric). Getter-backed (destructure-safe). */
 	readonly value: T[];
 }
+
+/**
+ * Reactive difference of two arrays, with key, comparator, or symmetric mode.
+ * @example
+ * ```ts
+ * const missing = useArrayDifference([1, 2, 3], [2]);
+ * missing.value; // [1, 3]
+ * ```
+ */
 
 export function useArrayDifference<T>(
 	list: MaybeGetter<readonly T[]>,

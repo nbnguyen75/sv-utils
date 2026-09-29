@@ -1,11 +1,3 @@
-/**
- * Reactive OS color-scheme preference.
- *
- * Inspired by [VueUse `usePreferredColorScheme`](https://vueuse.org/core/usePreferredColorScheme/).
- * Combines the light/dark media queries into `'dark' | 'light' |
- * 'no-preference'`. Must be called in component initialization. Server
- * output is `'no-preference'`.
- */
 import { useMediaQuery } from '../useMediaQuery/index.svelte.ts';
 
 /** OS color-scheme preference. */
@@ -19,6 +11,11 @@ export interface UsePreferredColorSchemeReturn {
 
 /**
  * Track the OS color-scheme preference.
+ * @example
+ * ```ts
+ * const scheme = usePreferredColorScheme();
+ * scheme.value; // 'dark' | 'light' | 'no-preference'
+ * ```
  */
 export function usePreferredColorScheme(): UsePreferredColorSchemeReturn {
 	const isLight = useMediaQuery('(prefers-color-scheme: light)');

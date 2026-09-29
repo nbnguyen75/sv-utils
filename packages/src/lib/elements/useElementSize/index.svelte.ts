@@ -1,13 +1,3 @@
-/**
- * Reactive element dimensions via `ResizeObserver`, with mount measuring.
- *
- * Inspired by [VueUse `useElementSize`](https://vueuse.org/core/useElementSize/).
- * Tracks `content-box` (default), `border-box`, or device-pixel boxes;
- * SVG elements fall back to `getBoundingClientRect`. Measures once on
- * mount and resets when the target swaps. Must be called in component
- * initialization. Server values are `initialSize`. Disposal on unmount is
- * automatic.
- */
 import { untrack } from 'svelte';
 
 import { isBrowser } from '../../shared/is.ts';
@@ -67,6 +57,11 @@ function sumBoxBlock(
  * @param target Element or getter (e.g. `bind:this` state).
  * @param initialSize Server and pre-mount dimensions.
  * @param options `box` model to measure.
+ * @example
+ * ```ts
+ * const { width, height } = useElementSize(() => panel);
+ * width; // content-box width
+ * ```
  */
 export function useElementSize(
 	target: MaybeElement,

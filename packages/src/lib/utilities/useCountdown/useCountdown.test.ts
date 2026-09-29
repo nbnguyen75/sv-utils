@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useCountdown`: ticking, completion, pause/resume, reset,
- * custom schedulers, and unmount disposal.
- */
 import { describe, expect, it, vi } from 'vitest';
 
 import { mountUtil } from '../../../../test/fixtures/mount.ts';

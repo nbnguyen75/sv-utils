@@ -1,11 +1,3 @@
-/**
- * Helpers for building multi-step wizard interfaces.
- *
- * Inspired by [VueUse `useStepper`](https://vueuse.org/core/useStepper/).
- * Pure `$state` / `$derived` logic — safe to call anywhere, including
- * during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -58,6 +50,16 @@ export interface UseStepperReturn<Name, Steps, Step> {
 	/** Index of the current step. Getter/setter-backed. */
 	index: number;
 }
+
+/**
+ * Helpers for building multi-step wizard interfaces.
+ * @example
+ * ```ts
+ * const stepper = useStepper(['intro', 'form', 'done'], 'form');
+ * stepper.goToNext(); // 'done'
+ * stepper.isLast; // true
+ * ```
+ */
 
 export function useStepper<T extends string | number>(
 	steps: MaybeGetter<T[]>,

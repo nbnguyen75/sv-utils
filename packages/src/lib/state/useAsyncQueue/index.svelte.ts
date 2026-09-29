@@ -1,13 +1,3 @@
-/**
- * Sequential async task queue with per-task state, interruption,
- * and abort support.
- *
- * Inspired by [VueUse `useAsyncQueue`](https://vueuse.org/core/useAsyncQueue/).
- * Tasks run chained on creation (each receives the previous result).
- * Framework-free — safe to call anywhere, including during SSR
- * (no DOM access, no effects).
- */
-
 export type UseAsyncQueueTask<T> = (previousResult: never) => T | Promise<T>;
 
 /** Per-task outcome. */
@@ -52,6 +42,11 @@ function whenAborted(signal: AbortSignal): Promise<never> {
  *
  * @param tasks Task functions receiving the previous task's result.
  * @param options `interrupt`, `onError`/`onFinished` hooks, `signal`.
+ * @example
+ * ```ts
+ * const queue = useAsyncQueue([() => login(), (session) => load(session)]);
+ * queue.result[0]?.state; // 'fulfilled'
+ * ```
  */
 export function useAsyncQueue<T extends unknown[]>(
 	tasks: { [K in keyof T]: UseAsyncQueueTask<T[K]> },

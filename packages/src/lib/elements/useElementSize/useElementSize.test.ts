@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useElementSize`: observer updates, box modes, fallbacks,
- * mount retention in layout-less environments, target swaps, and stop.
- */
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 

@@ -1,14 +1,3 @@
-/**
- * Reactive Fullscreen API with vendor-prefix fallbacks.
- *
- * Inspired by [VueUse `useFullscreen`](https://vueuse.org/core/useFullscreen/).
- * Detects `request/exit/enabled/element` method names across vendor
- * prefixes (no `any` casts — capability probing via the `in` operator),
- * syncs state from fullscreen change events, and optionally exits on
- * unmount. Must be called in component initialization. Unsupported
- * environments (including SSR) report `isSupported: false` and all
- * controls safely no-op. Disposal on unmount is automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
@@ -106,6 +95,11 @@ async function invokeMethod(
  *
  * @param target Element or getter; omitted means `document.documentElement`.
  * @param options `autoExit` on unmount.
+ * @example
+ * ```ts
+ * const screen = useFullscreen(() => player);
+ * await screen.toggle();
+ * ```
  */
 export function useFullscreen(
 	target?: MaybeElement,

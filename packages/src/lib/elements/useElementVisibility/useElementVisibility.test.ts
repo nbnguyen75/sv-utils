@@ -1,8 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useElementVisibility`: initial values, live changes,
- * once mode, and controls.
- */
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 

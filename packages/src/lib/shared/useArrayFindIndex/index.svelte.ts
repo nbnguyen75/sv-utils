@@ -1,11 +1,3 @@
-/**
- * Reactive `Array.findIndex`.
- *
- * Inspired by [VueUse `useArrayFindIndex`](https://vueuse.org/shared/useArrayFindIndex/).
- * Memoized in `$derived`. Pure logic — safe to call anywhere, including
- * during SSR (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../getter/index.ts';
 
 import { resolveGetter } from '../getter/index.ts';
@@ -21,6 +13,11 @@ export interface UseArrayFindIndexReturn {
  *
  * @param list Array, or a getter over reactive state.
  * @param fn Predicate invoked per element.
+ * @example
+ * ```ts
+ * const index = useArrayFindIndex([1, 3, 4], (n) => n % 2 === 0);
+ * index.value; // 2
+ * ```
  */
 export function useArrayFindIndex<T>(
 	list: MaybeGetter<readonly T[]>,

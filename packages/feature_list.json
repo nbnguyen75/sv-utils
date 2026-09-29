@@ -859,60 +859,60 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Scroll position/lock/infinite lists plus pointer position primitives. Passive listeners; SSR fallbacks.",
-			"evidence": "",
+			"evidence": "src/lib/browser/{useWindowScroll,useScroll,useScrollLock,useInfiniteScroll,useMouse,useMouseInElement,useMousePressed,useElementHover}/ (impl+test+README each) — 454/454 green (94 files); format/lint/check(0/0)/prepack clean",
 			"functions": [
 				{
 					"name": "useWindowScroll",
 					"source": "vueuse/core/useWindowScroll",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useWindowScroll/"
 				},
 				{
 					"name": "useScroll",
 					"source": "vueuse/core/useScroll",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useScroll/"
 				},
 				{
 					"name": "useScrollLock",
 					"source": "vueuse/core/useScrollLock",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useScrollLock/"
 				},
 				{
 					"name": "useInfiniteScroll",
 					"source": "vueuse/core/useInfiniteScroll",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useInfiniteScroll/"
 				},
 				{
 					"name": "useMouse",
 					"source": "vueuse/core/useMouse",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useMouse/"
 				},
 				{
 					"name": "useMouseInElement",
 					"source": "vueuse/core/useMouseInElement",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useMouseInElement/"
 				},
 				{
 					"name": "useMousePressed",
 					"source": "vueuse/core/useMousePressed",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useMousePressed/"
 				},
 				{
 					"name": "useElementHover",
 					"source": "vueuse/core/useElementHover",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useElementHover/"
 				}
 			],
 			"id": "feat-019",
 			"name": "Scroll & mouse",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

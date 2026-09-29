@@ -1,13 +1,3 @@
-/**
- * Reactive page-leave detection (pointer leaving the viewport).
- *
- * Inspired by [VueUse `usePageLeave`](https://vueuse.org/core/usePageLeave/).
- * Listens to `mouseout` on window plus `mouseleave`/`mouseenter` on the
- * document; the page counts as left when the pointer moves to nothing
- * (legacy `toElement` covered without `any` casts). Must be called in
- * component initialization. Server value is `false`. Disposal on unmount
- * is automatic.
- */
 import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
@@ -24,6 +14,11 @@ interface MouseEventWithLegacyTarget extends MouseEvent {
 
 /**
  * Track whether the pointer left the page.
+ * @example
+ * ```ts
+ * const left = usePageLeave();
+ * left.value; // pointer left the page
+ * ```
  */
 export function usePageLeave(): UsePageLeaveReturn {
 	let left = $state(false);

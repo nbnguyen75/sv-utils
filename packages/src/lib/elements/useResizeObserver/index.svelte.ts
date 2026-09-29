@@ -1,12 +1,3 @@
-/**
- * `ResizeObserver` wrapper with multi-target support and disposal.
- *
- * Inspired by [VueUse `useResizeObserver`](https://vueuse.org/core/useResizeObserver/).
- * Re-observes when targets resolve differently (e.g. `bind:this` wiring
- * up late). Must be called in component initialization. Reports
- * `isSupported: false` (and never observes) without `ResizeObserver`
- * or during SSR. Disposal on unmount is automatic.
- */
 import { untrack } from 'svelte';
 
 import { isBrowser } from '../../shared/is.ts';
@@ -36,6 +27,13 @@ function resolveTargets(target: MaybeElement | MaybeElement[]): (Element | null 
  * @param target Element(s) or getters; nullish entries are skipped.
  * @param callback Observer callback.
  * @param options `ResizeObserver` init options (e.g. `box`).
+ * @example
+ * ```ts
+ * const { stop } = useResizeObserver(() => panel, ([entry]) => {
+ * 	console.log(entry?.contentRect.width);
+ * });
+ * stop(); // disconnect permanently
+ * ```
  */
 export function useResizeObserver(
 	target: MaybeElement | MaybeElement[],

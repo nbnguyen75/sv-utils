@@ -1,11 +1,3 @@
-/**
- * Boolean (or two-value) state with a toggler.
- *
- * Inspired by [VueUse `useToggle`](https://vueuse.org/shared/useToggle/).
- * Pure `$state` logic — safe to call anywhere, including during SSR
- * (no DOM access, no effects).
- */
-
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -35,6 +27,16 @@ export interface UseToggleReturn<T> {
 	/** Current value. Getter/setter-backed (destructure-safe). */
 	value: T;
 }
+
+/**
+ * Boolean (or two-value) state with a toggler.
+ * @example
+ * ```ts
+ * const toggle = useToggle();
+ * toggle.toggle(); // true
+ * toggle.value = false;
+ * ```
+ */
 
 export function useToggle(
 	initialValue?: boolean | (() => boolean),

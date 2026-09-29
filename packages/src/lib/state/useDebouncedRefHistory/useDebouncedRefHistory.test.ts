@@ -1,7 +1,4 @@
 // @vitest-environment jsdom
-/**
- * Tests for `useDebouncedRefHistory`: burst coalescing and undo.
- */
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 

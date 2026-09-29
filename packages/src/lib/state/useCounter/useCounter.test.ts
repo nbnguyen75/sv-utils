@@ -1,7 +1,3 @@
-/**
- * Tests for `useCounter`: counting, clamping, get/set/reset.
- * Pure `$state` logic — node environment.
- */
 import { describe, expect, it } from 'vitest';
 
 import { useCounter } from './index.ts';

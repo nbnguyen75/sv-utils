@@ -1,14 +1,3 @@
-/**
- * Reactive countdown timer in seconds, with tick/complete callbacks.
- *
- * Inspired by [VueUse `useCountdown`](https://vueuse.org/core/useCountdown/).
- * Ticks via an injectable scheduler (default: a 1s `useIntervalFn` that
- * starts on demand). Clamps at zero, pauses itself on completion, and
- * stays quiet on construction. The default scheduler creates effects, so
- * with default options this must be called in component initialization;
- * safe during SSR (nothing ticks on the server).
- */
-
 import { useIntervalFn } from '../useIntervalFn/index.svelte.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
@@ -56,6 +45,12 @@ export interface UseCountdownReturn {
  *
  * @param initialCountdown Starting value; getters re-resolve on `reset()`.
  * @param options `scheduler` factory plus `onTick` / `onComplete` callbacks.
+ * @example
+ * ```ts
+ * const timer = useCountdown(10, { onComplete: () => finish() });
+ * timer.start();
+ * timer.remaining; // seconds left
+ * ```
  */
 export function useCountdown(
 	initialCountdown: MaybeGetter<number>,

@@ -1,11 +1,3 @@
-/**
- * Auto-tracked history with throttled commits.
- *
- * Inspired by [VueUse `useThrottledRefHistory`](https://vueuse.org/core/useThrottledRefHistory/).
- * Shorthand for {@link useRefHistory} with a `throttle` window: at most
- * one commit per window, trailing with the latest value. Must be called in
- * component initialization.
- */
 import { useRefHistory } from '../useRefHistory/index.svelte.ts';
 import type { UseRefHistoryOptions, UseRefHistoryReturn } from '../useRefHistory/index.svelte.ts';
 import type { HistoryCell } from '../useManualRefHistory/index.svelte.ts';
@@ -27,6 +19,10 @@ export interface UseThrottledRefHistoryOptions<Raw, Serialized = Raw> extends Om
  *
  * @param source Writable cell to track.
  * @param options History options plus the `throttle` window.
+ * @example
+ * ```ts
+ * const history = useThrottledRefHistory(position, { throttle: 250 });
+ * ```
  */
 export function useThrottledRefHistory<Raw, Serialized = Raw>(
 	source: HistoryCell<Raw>,
