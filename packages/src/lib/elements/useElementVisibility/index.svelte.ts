@@ -1,45 +1,46 @@
-import { useIntersectionObserver } from '../useIntersectionObserver/index.svelte.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
+
+import { useIntersectionObserver } from '../useIntersectionObserver/index.svelte.ts';
 
 /** Options for {@link useElementVisibility}. */
 export interface UseElementVisibilityOptions {
-	/**
-	 * Value until the first observation.
-	 * @default false
-	 */
-	initialValue?: boolean;
-	/**
-	 * Stop tracking after the first visible report.
-	 * @default false
-	 */
-	once?: boolean;
 	/**
 	 * Intersection threshold(s).
 	 * @default 0
 	 */
 	threshold?: number | number[];
 	/**
+	 * Scroll container used as the intersection root.
+	 */
+	scrollTarget?: MaybeElement;
+	/**
+	 * Value until the first observation.
+	 * @default false
+	 */
+	initialValue?: boolean;
+	/**
 	 * Root margin string.
 	 */
 	rootMargin?: string;
 	/**
-	 * Scroll container used as the intersection root.
+	 * Stop tracking after the first visible report.
+	 * @default false
 	 */
-	scrollTarget?: MaybeElement;
+	once?: boolean;
 }
 
 /** State returned by {@link useElementVisibility}. */
 export interface UseElementVisibilityReturn {
-	/** Whether the element is currently visible. Getter-backed. */
-	readonly value: boolean;
 	/** Whether `IntersectionObserver` exists here. */
 	readonly isSupported: boolean;
 	/** Whether observation is active. Getter-backed. */
 	readonly isActive: boolean;
-	/** Suspend observation. */
-	pause(): void;
+	/** Whether the element is currently visible. Getter-backed. */
+	readonly value: boolean;
 	/** Resume observation. */
 	resume(): void;
+	/** Suspend observation. */
+	pause(): void;
 	/** Stop permanently. */
 	stop(): void;
 }

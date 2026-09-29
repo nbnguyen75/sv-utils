@@ -1,6 +1,7 @@
+import type { UseScrollOptions, UseScrollReturn } from '../useScroll/index.svelte.ts';
+
 import { isBrowser } from '../../shared/is.ts';
 import { useScroll } from '../useScroll/index.svelte.ts';
-import type { UseScrollOptions, UseScrollReturn } from '../useScroll/index.svelte.ts';
 
 /** Options for {@link useWindowScroll} (same as `useScroll`). */
 export type UseWindowScrollOptions = UseScrollOptions;

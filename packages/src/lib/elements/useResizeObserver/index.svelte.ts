@@ -1,9 +1,10 @@
+import type { MaybeElement } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
+import { resolveGetter } from '../../shared/getter/index.ts';
 import { isBrowser } from '../../shared/is.ts';
 import { isElement } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeElement } from '../../shared/getter/index.ts';
 
 /** Options for {@link useResizeObserver} (observer init + targets). */
 export type UseResizeObserverOptions = ResizeObserverOptions;

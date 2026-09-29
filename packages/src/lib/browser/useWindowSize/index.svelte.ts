@@ -10,16 +10,6 @@ export type UseWindowSizeType = 'inner' | 'outer' | 'visual';
 /** Options for {@link useWindowSize}. */
 export interface UseWindowSizeOptions {
 	/**
-	 * Server and pre-mount width.
-	 * @default Infinity
-	 */
-	initialWidth?: number;
-	/**
-	 * Server and pre-mount height.
-	 * @default Infinity
-	 */
-	initialHeight?: number;
-	/**
 	 * Refresh on orientation changes (via media query).
 	 * @default true
 	 */
@@ -36,14 +26,24 @@ export interface UseWindowSizeOptions {
 	 * @default 'inner'
 	 */
 	type?: UseWindowSizeType;
+	/**
+	 * Server and pre-mount height.
+	 * @default Infinity
+	 */
+	initialHeight?: number;
+	/**
+	 * Server and pre-mount width.
+	 * @default Infinity
+	 */
+	initialWidth?: number;
 }
 
 /** Size state returned by {@link useWindowSize}. */
 export interface UseWindowSizeReturn {
-	/** Viewport/window width. Getter-backed (destructure-safe). */
-	readonly width: number;
 	/** Viewport/window height. Getter-backed (destructure-safe). */
 	readonly height: number;
+	/** Viewport/window width. Getter-backed (destructure-safe). */
+	readonly width: number;
 }
 
 /**

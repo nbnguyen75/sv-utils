@@ -1,7 +1,8 @@
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
-import { watchIgnorable } from '../watchIgnorable/index.svelte.ts';
 import type { WatchIgnorableReturn } from '../watchIgnorable/index.svelte.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { watchIgnorable } from '../watchIgnorable/index.svelte.ts';
 
 /** Callback for {@link watchTriggerable}. */
 export type WatchTriggerableCallback<T, R = void> = (

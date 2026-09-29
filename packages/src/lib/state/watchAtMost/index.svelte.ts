@@ -1,7 +1,8 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link watchAtMost}. */
 export interface WatchAtMostOptions {
@@ -16,14 +17,14 @@ export interface WatchAtMostOptions {
 
 /** Controls returned by {@link watchAtMost}. */
 export interface WatchAtMostReturn {
-	/** Stop watching permanently. */
-	stop(): void;
-	/** Suspend notifications (changes while paused are dropped). */
-	pause(): void;
-	/** Resume notifications (no catch-up fire for missed changes). */
-	resume(): void;
 	/** Invocations so far. Getter-backed (destructure-safe). */
 	readonly calls: number;
+	/** Resume notifications (no catch-up fire for missed changes). */
+	resume(): void;
+	/** Suspend notifications (changes while paused are dropped). */
+	pause(): void;
+	/** Stop watching permanently. */
+	stop(): void;
 }
 
 /**

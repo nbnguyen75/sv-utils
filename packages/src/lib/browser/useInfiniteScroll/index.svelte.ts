@@ -1,11 +1,12 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+import type { UseScrollOptions, UseScrollReturn, ScrollTarget } from '../useScroll/index.svelte.ts';
+
 import { tick } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 import { useElementVisibility } from '../../elements/useElementVisibility/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useScroll } from '../useScroll/index.svelte.ts';
-import type { ScrollTarget, UseScrollOptions, UseScrollReturn } from '../useScroll/index.svelte.ts';
 
 /** Load direction. */
 export type InfiniteScrollDirection = 'top' | 'bottom' | 'left' | 'right';
@@ -13,25 +14,25 @@ export type InfiniteScrollDirection = 'top' | 'bottom' | 'left' | 'right';
 /** Options for {@link useInfiniteScroll}. */
 export interface UseInfiniteScrollOptions extends UseScrollOptions {
 	/**
-	 * Minimum distance (px) from the edge that still triggers loading.
-	 * @default 0
+	 * Gate loading per element.
+	 * @default () => true
 	 */
-	distance?: number;
+	canLoadMore?: (element: HTMLElement | SVGElement) => boolean;
 	/**
 	 * Edge to observe.
 	 * @default 'bottom'
 	 */
 	direction?: InfiniteScrollDirection;
 	/**
+	 * Minimum distance (px) from the edge that still triggers loading.
+	 * @default 0
+	 */
+	distance?: number;
+	/**
 	 * Quiet period (ms) after each load before the next may start.
 	 * @default 100
 	 */
 	interval?: number;
-	/**
-	 * Gate loading per element.
-	 * @default () => true
-	 */
-	canLoadMore?: (element: HTMLElement | SVGElement) => boolean;
 }
 
 /** State returned by {@link useInfiniteScroll}. */

@@ -1,8 +1,9 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link useFavicon}. */
 export interface UseFaviconOptions {

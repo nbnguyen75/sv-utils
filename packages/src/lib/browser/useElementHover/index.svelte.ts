@@ -1,10 +1,16 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Options for {@link useElementHover}. */
 export interface UseElementHoverOptions {
+	/**
+	 * Clear hover when the element leaves the DOM.
+	 * @default false
+	 */
+	triggerOnRemoval?: boolean;
 	/**
 	 * Delay before reporting hover, in milliseconds.
 	 * @default 0
@@ -15,11 +21,6 @@ export interface UseElementHoverOptions {
 	 * @default 0
 	 */
 	delayLeave?: number;
-	/**
-	 * Clear hover when the element leaves the DOM.
-	 * @default false
-	 */
-	triggerOnRemoval?: boolean;
 }
 
 /** State returned by {@link useElementHover}. */

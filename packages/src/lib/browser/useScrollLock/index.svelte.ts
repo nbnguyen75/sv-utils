@@ -1,11 +1,12 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+import type { ScrollTarget } from '../useScroll/index.svelte.ts';
+
 import { untrack } from 'svelte';
 
+import { resolveGetter } from '../../shared/getter/index.ts';
 import { isBrowser } from '../../shared/is.ts';
 import { isIOS } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
-import type { ScrollTarget } from '../useScroll/index.svelte.ts';
 
 /** Lock state returned by {@link useScrollLock}. */
 export interface UseScrollLockReturn {

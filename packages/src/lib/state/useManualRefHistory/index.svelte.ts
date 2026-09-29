@@ -7,8 +7,8 @@ export interface HistoryCell<T> {
 
 /** One history point. */
 export interface UseRefHistoryRecord<T> {
-	snapshot: T;
 	timestamp: number;
+	snapshot: T;
 }
 
 /** Clone function. */
@@ -17,54 +17,54 @@ export type CloneFn<T> = (source: T) => T;
 /** Options for {@link useManualRefHistory}. */
 export interface UseManualRefHistoryOptions<Raw, Serialized = Raw> {
 	/**
-	 * Maximum undo records kept (unlimited when omitted).
+	 * Deserialize a record back into a value.
 	 */
-	capacity?: number;
+	parse?: (snapshot: Serialized) => Raw;
+	/**
+	 * Serialize a value into a record.
+	 */
+	dump?: (value: Raw) => Serialized;
+	/**
+	 * Write a restored value back (defaults to assigning the cell).
+	 */
+	setSource?: (value: Raw) => void;
 	/**
 	 * `true` clones via `structuredClone`; a function clones customly.
 	 * @default false (snapshots share references)
 	 */
 	clone?: boolean | CloneFn<Raw>;
 	/**
-	 * Serialize a value into a record.
+	 * Maximum undo records kept (unlimited when omitted).
 	 */
-	dump?: (value: Raw) => Serialized;
-	/**
-	 * Deserialize a record back into a value.
-	 */
-	parse?: (snapshot: Serialized) => Raw;
-	/**
-	 * Write a restored value back (defaults to assigning the cell).
-	 */
-	setSource?: (value: Raw) => void;
+	capacity?: number;
 }
 
 /** History state returned by {@link useManualRefHistory}. */
 export interface UseManualRefHistoryReturn<Raw, Serialized> {
-	/** Tracked cell. */
-	readonly source: HistoryCell<Raw>;
-	/** All records, newest first. Getter-backed. */
-	readonly history: UseRefHistoryRecord<Serialized>[];
-	/** Latest record (may differ from source while paused). Getter-backed. */
-	readonly last: UseRefHistoryRecord<Serialized>;
 	/** Undo records, newest first. Getter-backed. */
 	readonly undoStack: UseRefHistoryRecord<Serialized>[];
 	/** Redo records, newest first. Getter-backed. */
 	readonly redoStack: UseRefHistoryRecord<Serialized>[];
+	/** All records, newest first. Getter-backed. */
+	readonly history: UseRefHistoryRecord<Serialized>[];
+	/** Latest record (may differ from source while paused). Getter-backed. */
+	readonly last: UseRefHistoryRecord<Serialized>;
+	/** Tracked cell. */
+	readonly source: HistoryCell<Raw>;
 	/** Whether undo is possible. Getter-backed. */
 	readonly canUndo: boolean;
 	/** Whether redo is possible. Getter-backed. */
 	readonly canRedo: boolean;
 	/** Record the current value. */
 	commit(): void;
-	/** Restore the previous record. */
-	undo(): void;
-	/** Re-apply the next record. */
-	redo(): void;
 	/** Drop all records. */
 	clear(): void;
 	/** Restore the latest record into the source. */
 	reset(): void;
+	/** Restore the previous record. */
+	undo(): void;
+	/** Re-apply the next record. */
+	redo(): void;
 }
 
 function defaultDump<Raw, Serialized>(clone: boolean | CloneFn<Raw>): (value: Raw) => Serialized {

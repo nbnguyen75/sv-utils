@@ -1,5 +1,6 @@
-import { useMediaQuery } from '../useMediaQuery/index.svelte.ts';
 import type { UseMediaQueryReturn } from '../useMediaQuery/index.svelte.ts';
+
+import { useMediaQuery } from '../useMediaQuery/index.svelte.ts';
 
 /**
  * Track whether the OS prefers dark colors.

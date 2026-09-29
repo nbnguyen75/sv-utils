@@ -1,7 +1,8 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
+
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link useFullscreen}. */
 export interface UseFullscreenOptions {
@@ -14,16 +15,16 @@ export interface UseFullscreenOptions {
 
 /** State returned by {@link useFullscreen}. */
 export interface UseFullscreenReturn {
-	/** Whether the Fullscreen API is available here. Getter-backed. */
-	readonly isSupported: boolean;
 	/** Whether the target is currently fullscreen. Getter-backed. */
 	readonly isFullscreen: boolean;
+	/** Whether the Fullscreen API is available here. Getter-backed. */
+	readonly isSupported: boolean;
+	/** Toggle between `enter` and `exit`. */
+	toggle(): Promise<void>;
 	/** Enter fullscreen (no-op when unsupported or already fullscreen). */
 	enter(): Promise<void>;
 	/** Exit fullscreen (no-op when unsupported or not fullscreen). */
 	exit(): Promise<void>;
-	/** Toggle between `enter` and `exit`. */
-	toggle(): Promise<void>;
 }
 
 const FULLSCREEN_EVENTS = [

@@ -1,29 +1,30 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Per-frame arguments passed to a {@link useRafFn} callback. */
 export interface UseRafFnCallbackArguments {
-	/** Milliseconds elapsed since the previous executed frame. */
-	delta: number;
 	/** High-resolution timestamp of the current frame. */
 	timestamp: DOMHighResTimeStamp;
+	/** Milliseconds elapsed since the previous executed frame. */
+	delta: number;
 }
 
 /** Options for {@link useRafFn}. */
 export interface UseRafFnOptions {
-	/**
-	 * Start the loop on mount.
-	 * @default true
-	 */
-	immediate?: boolean;
 	/**
 	 * Maximum frames per second; frames above the budget are skipped.
 	 * Getters resolve per frame. `null` disables the cap.
 	 * @default null
 	 */
 	fpsLimit?: MaybeGetter<number | null>;
+	/**
+	 * Start the loop on mount.
+	 * @default true
+	 */
+	immediate?: boolean;
 	/**
 	 * Stop automatically after the first executed frame.
 	 * @default false
@@ -35,10 +36,10 @@ export interface UseRafFnOptions {
 export interface UseRafFnReturn {
 	/** Whether the loop is currently running. Getter-backed (destructure-safe). */
 	readonly isActive: boolean;
-	/** Stop the loop. Safe to call when idle. */
-	pause(): void;
 	/** Start (or restart) the loop. No-op without `requestAnimationFrame`. */
 	resume(): void;
+	/** Stop the loop. Safe to call when idle. */
+	pause(): void;
 }
 
 function hasRaf(): boolean {

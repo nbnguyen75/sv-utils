@@ -1,10 +1,29 @@
-import { isBrowser } from '../../shared/is.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
-import { useEventListener } from '../useEventListener/index.svelte.ts';
 import type { UseMouseSourceType } from '../useMouse/index.svelte.ts';
+
+import { isBrowser } from '../../shared/is.ts';
+import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Options for {@link useMousePressed}. */
 export interface UseMousePressedOptions {
+	/** Called when pressing ends. */
+	onReleased?: (event: MouseEvent | TouchEvent | DragEvent) => void;
+	/** Called when pressing starts. */
+	onPressed?: (event: MouseEvent | TouchEvent | DragEvent) => void;
+	/**
+	 * Starting pressed state.
+	 * @default false
+	 */
+	initialValue?: boolean;
+	/**
+	 * Element (or getter) receiving press starts; releases listen on window.
+	 */
+	target?: MaybeElement;
+	/**
+	 * Capture-phase listeners.
+	 * @default false
+	 */
+	capture?: boolean;
 	/**
 	 * Listen to touchstart/touchend/touchcancel.
 	 * @default true
@@ -15,32 +34,14 @@ export interface UseMousePressedOptions {
 	 * @default true
 	 */
 	drag?: boolean;
-	/**
-	 * Capture-phase listeners.
-	 * @default false
-	 */
-	capture?: boolean;
-	/**
-	 * Starting pressed state.
-	 * @default false
-	 */
-	initialValue?: boolean;
-	/**
-	 * Element (or getter) receiving press starts; releases listen on window.
-	 */
-	target?: MaybeElement;
-	/** Called when pressing starts. */
-	onPressed?: (event: MouseEvent | TouchEvent | DragEvent) => void;
-	/** Called when pressing ends. */
-	onReleased?: (event: MouseEvent | TouchEvent | DragEvent) => void;
 }
 
 /** State returned by {@link useMousePressed}. */
 export interface UseMousePressedReturn {
-	/** Whether anything is pressed. Getter-backed. */
-	readonly pressed: boolean;
 	/** Latest input kind. Getter-backed. */
 	readonly sourceType: UseMouseSourceType;
+	/** Whether anything is pressed. Getter-backed. */
+	readonly pressed: boolean;
 }
 
 /**

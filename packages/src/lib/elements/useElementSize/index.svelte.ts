@@ -1,8 +1,9 @@
+import type { MaybeElement } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeElement } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useResizeObserver } from '../useResizeObserver/index.svelte.ts';
 
 /** Size box model. */
@@ -10,8 +11,8 @@ export type ElementSizeBox = 'content-box' | 'border-box' | 'device-pixel-conten
 
 /** Initial dimensions. */
 export interface ElementSize {
-	width: number;
 	height: number;
+	width: number;
 }
 
 /** Options for {@link useElementSize}. */
@@ -25,10 +26,10 @@ export interface UseElementSizeOptions {
 
 /** Size state returned by {@link useElementSize}. */
 export interface UseElementSizeReturn {
-	/** Content width. Getter-backed (destructure-safe). */
-	readonly width: number;
 	/** Content height. Getter-backed (destructure-safe). */
 	readonly height: number;
+	/** Content width. Getter-backed (destructure-safe). */
+	readonly width: number;
 	/** Disconnect the observer permanently. */
 	stop(): void;
 }

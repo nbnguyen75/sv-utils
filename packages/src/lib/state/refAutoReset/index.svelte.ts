@@ -1,5 +1,6 @@
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
 
 /** Auto-reset state returned by {@link refAutoReset}. */
 export interface RefAutoResetReturn<T> {

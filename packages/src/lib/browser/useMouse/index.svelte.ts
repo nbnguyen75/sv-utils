@@ -1,5 +1,6 @@
-import { isBrowser } from '../../shared/is.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Coordinate source. */
@@ -22,44 +23,44 @@ export interface UseMousePosition {
 /** Options for {@link useMouse}. */
 export interface UseMouseOptions {
 	/**
-	 * Coordinate system, or a custom extractor.
-	 * @default 'page'
-	 */
-	type?: UseMouseCoordType | UseMouseEventExtractor;
-	/**
 	 * Element (or getter) listening for pointer events.
 	 * @default window
 	 */
 	target?: MaybeGetter<Window | EventTarget | null | undefined>;
 	/**
-	 * Listen to touch events.
-	 * @default true
+	 * Coordinate system, or a custom extractor.
+	 * @default 'page'
 	 */
-	touch?: boolean;
+	type?: UseMouseCoordType | UseMouseEventExtractor;
 	/**
-	 * Adjust page coordinates on scroll.
-	 * @default true
+	 * Initial values.
 	 */
-	scroll?: boolean;
+	initialValue?: UseMousePosition;
 	/**
 	 * Reset to the initial value on `touchend`.
 	 * @default false
 	 */
 	resetOnTouchEnds?: boolean;
 	/**
-	 * Initial values.
+	 * Adjust page coordinates on scroll.
+	 * @default true
 	 */
-	initialValue?: UseMousePosition;
+	scroll?: boolean;
+	/**
+	 * Listen to touch events.
+	 * @default true
+	 */
+	touch?: boolean;
 }
 
 /** State returned by {@link useMouse}. */
 export interface UseMouseReturn {
+	/** Latest input kind. Getter-backed. */
+	readonly sourceType: UseMouseSourceType;
 	/** Horizontal position. Getter-backed (destructure-safe). */
 	readonly x: number;
 	/** Vertical position. Getter-backed (destructure-safe). */
 	readonly y: number;
-	/** Latest input kind. Getter-backed. */
-	readonly sourceType: UseMouseSourceType;
 }
 
 function builtinExtractor(type: UseMouseCoordType): UseMouseEventExtractor {

@@ -1,6 +1,7 @@
-import { useRefHistory } from '../useRefHistory/index.svelte.ts';
-import type { UseRefHistoryOptions, UseRefHistoryReturn } from '../useRefHistory/index.svelte.ts';
 import type { HistoryCell } from '../useManualRefHistory/index.svelte.ts';
+import type { UseRefHistoryOptions, UseRefHistoryReturn } from '../useRefHistory/index.svelte.ts';
+
+import { useRefHistory } from '../useRefHistory/index.svelte.ts';
 
 /** Options for {@link useDebouncedRefHistory}. */
 export interface UseDebouncedRefHistoryOptions<Raw, Serialized = Raw> extends Omit<

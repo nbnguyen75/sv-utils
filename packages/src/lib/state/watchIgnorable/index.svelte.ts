@@ -1,7 +1,8 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Run `updater` without notifying this watcher. */
 export type IgnoredUpdater = (updater: () => void) => void;
@@ -17,10 +18,10 @@ export interface WatchIgnorableOptions {
 
 /** Controls returned by {@link watchIgnorable}. */
 export interface WatchIgnorableReturn {
-	/** Apply `updater` without firing the callback. */
-	ignoreUpdates: IgnoredUpdater;
 	/** Drop the currently pending change, if any. */
 	ignorePrevAsyncUpdates(): void;
+	/** Apply `updater` without firing the callback. */
+	ignoreUpdates: IgnoredUpdater;
 	/** Stop watching permanently (runs pending cleanup). */
 	stop(): void;
 }

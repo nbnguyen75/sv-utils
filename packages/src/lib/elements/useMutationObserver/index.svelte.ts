@@ -1,21 +1,22 @@
+import type { MaybeElement } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
+import { resolveGetter } from '../../shared/getter/index.ts';
 import { isBrowser } from '../../shared/is.ts';
 import { isElement } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeElement } from '../../shared/getter/index.ts';
 
 /** Options for {@link useMutationObserver} (observer init). */
 export type UseMutationObserverOptions = MutationObserverInit;
 
 /** State returned by {@link useMutationObserver}. */
 export interface UseMutationObserverReturn {
+	/** Drain pending records without disconnecting. */
+	takeRecords(): MutationRecord[] | undefined;
 	/** Whether `MutationObserver` exists in this environment. */
 	readonly isSupported: boolean;
 	/** Disconnect permanently. Safe to call twice. */
 	stop(): void;
-	/** Drain pending records without disconnecting. */
-	takeRecords(): MutationRecord[] | undefined;
 }
 
 /**

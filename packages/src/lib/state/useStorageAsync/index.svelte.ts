@@ -1,9 +1,10 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
-import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Promise-based key/value backend. */
 export interface AsyncStorageLike {
@@ -29,20 +30,20 @@ export interface UseStorageAsyncOptions<T> {
 	 * Custom codec (default: JSON with string passthrough).
 	 */
 	serializer?: UseStorageAsyncSerializer<T>;
-	/**
-	 * Write the default back when the key is absent.
-	 * @default true
-	 */
-	writeDefaults?: boolean;
+	/** Called with storage or codec failures. Defaults to `console.error`. */
+	onError?: (error: unknown) => void;
 	/**
 	 * Re-read on cross-tab `storage` events.
 	 * @default true
 	 */
 	listenToStorageChanges?: boolean;
-	/** Called with storage or codec failures. Defaults to `console.error`. */
-	onError?: (error: unknown) => void;
 	/** Called once with the value after the first read. */
 	onReady?: (value: T) => void;
+	/**
+	 * Write the default back when the key is absent.
+	 * @default true
+	 */
+	writeDefaults?: boolean;
 }
 
 /** Async storage cell returned by {@link useStorageAsync}. Awaitable for first-read readiness. */

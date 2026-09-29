@@ -9,10 +9,10 @@ export interface AsyncComputedOptions {
 
 /** Async derivation returned by {@link computedAsync}. */
 export interface AsyncComputedReturn<T> {
-	/** Latest settled value (or the initial state). Getter-backed. */
-	readonly value: T;
 	/** Whether an evaluation is in flight. Getter-backed. */
 	readonly evaluating: boolean;
+	/** Latest settled value (or the initial state). Getter-backed. */
+	readonly value: T;
 }
 
 function defaultOnError(error: unknown) {

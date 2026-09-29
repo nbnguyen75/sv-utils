@@ -1,12 +1,13 @@
-import { useIntervalFn } from '../useIntervalFn/index.svelte.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { resolveGetter } from '../../shared/getter/index.ts';
+import { useIntervalFn } from '../useIntervalFn/index.svelte.ts';
 
 /** Scheduler factory for {@link useCountdown}: pause/resume/isActive controls. */
 export interface UseCountdownScheduler {
-	pause(): void;
-	resume(): void;
 	readonly isActive: boolean;
+	resume(): void;
+	pause(): void;
 }
 
 /** Options for {@link useCountdown}. */
@@ -24,20 +25,20 @@ export interface UseCountdownOptions {
 
 /** State returned by {@link useCountdown}. */
 export interface UseCountdownReturn {
-	/** Seconds remaining. Getter/setter-backed (destructure-safe). */
-	remaining: number;
-	/** Whether the countdown is currently ticking. Getter-backed. */
-	readonly isActive: boolean;
 	/** Reset to `countdown` (or the initial value) without starting. */
 	reset(countdown?: MaybeGetter<number>): void;
-	/** Pause and reset to the initial value. */
-	stop(): void;
 	/** Reset to `countdown` (or the initial value) and start. */
 	start(countdown?: MaybeGetter<number>): void;
-	/** Pause the countdown, keeping the remaining value. */
-	pause(): void;
+	/** Whether the countdown is currently ticking. Getter-backed. */
+	readonly isActive: boolean;
+	/** Seconds remaining. Getter/setter-backed (destructure-safe). */
+	remaining: number;
 	/** Resume ticking (no-op when already active or finished). */
 	resume(): void;
+	/** Pause the countdown, keeping the remaining value. */
+	pause(): void;
+	/** Pause and reset to the initial value. */
+	stop(): void;
 }
 
 /**

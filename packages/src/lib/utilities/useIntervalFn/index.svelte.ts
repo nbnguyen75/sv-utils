@@ -1,31 +1,32 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useIntervalFn}. */
 export interface UseIntervalFnOptions {
-	/**
-	 * Start the interval on mount.
-	 * @default true
-	 */
-	immediate?: boolean;
 	/**
 	 * Invoke the callback synchronously when `resume` is called, in addition
 	 * to the scheduled invocations.
 	 * @default false
 	 */
 	immediateCallback?: boolean;
+	/**
+	 * Start the interval on mount.
+	 * @default true
+	 */
+	immediate?: boolean;
 }
 
 /** Controls returned by {@link useIntervalFn}. */
 export interface UseIntervalFnReturn {
 	/** Whether the interval is currently running. Getter-backed (destructure-safe). */
 	readonly isActive: boolean;
-	/** Stop the interval. Safe to call when idle. */
-	pause(): void;
 	/** (Re)start the interval. Non-positive intervals are ignored. */
 	resume(): void;
+	/** Stop the interval. Safe to call when idle. */
+	pause(): void;
 }
 
 /**

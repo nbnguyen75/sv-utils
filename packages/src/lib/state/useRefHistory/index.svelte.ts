@@ -1,14 +1,15 @@
+import type {
+	UseManualRefHistoryOptions,
+	UseManualRefHistoryReturn,
+	HistoryCell
+} from '../useManualRefHistory/index.svelte.ts';
+
 import { untrack } from 'svelte';
 
 import { useDebounceFn } from '../../utilities/useDebounceFn/index.ts';
 import { useThrottleFn } from '../../utilities/useThrottleFn/index.ts';
-import { watchIgnorable } from '../watchIgnorable/index.svelte.ts';
 import { useManualRefHistory } from '../useManualRefHistory/index.svelte.ts';
-import type {
-	HistoryCell,
-	UseManualRefHistoryOptions,
-	UseManualRefHistoryReturn
-} from '../useManualRefHistory/index.svelte.ts';
+import { watchIgnorable } from '../watchIgnorable/index.svelte.ts';
 
 /** Options for {@link useRefHistory} (and the debounced/throttled shorthands). */
 export interface UseRefHistoryOptions<Raw, Serialized = Raw> extends UseManualRefHistoryOptions<
@@ -16,10 +17,9 @@ export interface UseRefHistoryOptions<Raw, Serialized = Raw> extends UseManualRe
 	Serialized
 > {
 	/**
-	 * Track nested mutations (deep snapshot reads).
-	 * @default false
+	 * Veto a commit by comparing the pre-change and current values.
 	 */
-	deep?: boolean;
+	shouldCommit?: (oldValue: Raw | undefined, newValue: Raw) => boolean;
 	/**
 	 * Coalesce commits: only commit after this many quiet milliseconds.
 	 * Mutually exclusive with `throttle`.
@@ -31,9 +31,10 @@ export interface UseRefHistoryOptions<Raw, Serialized = Raw> extends UseManualRe
 	 */
 	throttle?: number;
 	/**
-	 * Veto a commit by comparing the pre-change and current values.
+	 * Track nested mutations (deep snapshot reads).
+	 * @default false
 	 */
-	shouldCommit?: (oldValue: Raw | undefined, newValue: Raw) => boolean;
+	deep?: boolean;
 }
 
 /** History state returned by {@link useRefHistory}. */
@@ -41,25 +42,25 @@ export interface UseRefHistoryReturn<Raw, Serialized> extends UseManualRefHistor
 	Raw,
 	Serialized
 > {
-	/** Whether change tracking is enabled. Getter-backed. */
-	readonly isTracking: boolean;
-	/** Suspend automatic commits. */
-	pause(): void;
-	/**
-	 * Resume automatic commits; commit immediately first when `commitNow`.
-	 */
-	resume(commitNow?: boolean): void;
 	/**
 	 * Run `fn` with tracking silenced, then commit once unless `cancel()`
 	 * was invoked.
 	 */
 	batch(fn: (cancel: () => void) => void): void;
-	/** Stop tracking and drop all records. */
-	dispose(): void;
 	/** Silence the next automatic commit(s) from programmatic writes. */
 	ignoreUpdates(updater: () => void): void;
+	/**
+	 * Resume automatic commits; commit immediately first when `commitNow`.
+	 */
+	resume(commitNow?: boolean): void;
 	/** Drop the currently pending automatic commit, if any. */
 	ignorePrevAsyncUpdates(): void;
+	/** Whether change tracking is enabled. Getter-backed. */
+	readonly isTracking: boolean;
+	/** Stop tracking and drop all records. */
+	dispose(): void;
+	/** Suspend automatic commits. */
+	pause(): void;
 }
 
 /**

@@ -11,6 +11,13 @@ export type SyncDirection = 'ltr' | 'rtl' | 'both';
 /** Options for {@link syncRef}. */
 export interface SyncRefOptions<L, R> {
 	/**
+	 * Value transforms per direction (identity by default).
+	 */
+	transform?: {
+		rtl?: (right: R) => L;
+		ltr?: (left: L) => R;
+	};
+	/**
 	 * Sync directions to install.
 	 * @default 'both'
 	 */
@@ -20,13 +27,6 @@ export interface SyncRefOptions<L, R> {
 	 * @default true
 	 */
 	immediate?: boolean;
-	/**
-	 * Value transforms per direction (identity by default).
-	 */
-	transform?: {
-		ltr?: (left: L) => R;
-		rtl?: (right: R) => L;
-	};
 }
 
 /**

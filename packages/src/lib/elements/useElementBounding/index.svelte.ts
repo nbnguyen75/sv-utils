@@ -1,19 +1,21 @@
+import type { MaybeElement } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeElement } from '../../shared/getter/index.ts';
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useMutationObserver } from '../useMutationObserver/index.svelte.ts';
 import { useResizeObserver } from '../useResizeObserver/index.svelte.ts';
 
 /** Options for {@link useElementBounding}. */
 export interface UseElementBoundingOptions {
 	/**
-	 * Reset all values to zero on unmount.
-	 * @default true
+	 * `'sync'` measures immediately; `'next-frame'` defers a tick (useful
+	 * when layout settles after the current frame).
+	 * @default 'sync'
 	 */
-	reset?: boolean;
+	updateTiming?: 'sync' | 'next-frame';
 	/**
 	 * Re-measure on window resize.
 	 * @default true
@@ -30,21 +32,20 @@ export interface UseElementBoundingOptions {
 	 */
 	immediate?: boolean;
 	/**
-	 * `'sync'` measures immediately; `'next-frame'` defers a tick (useful
-	 * when layout settles after the current frame).
-	 * @default 'sync'
+	 * Reset all values to zero on unmount.
+	 * @default true
 	 */
-	updateTiming?: 'sync' | 'next-frame';
+	reset?: boolean;
 }
 
 /** Bounding-box state returned by {@link useElementBounding}. */
 export interface UseElementBoundingReturn {
 	readonly height: number;
 	readonly bottom: number;
-	readonly left: number;
 	readonly right: number;
-	readonly top: number;
 	readonly width: number;
+	readonly left: number;
+	readonly top: number;
 	readonly x: number;
 	readonly y: number;
 	/** Re-measure now ( honors `updateTiming`). */

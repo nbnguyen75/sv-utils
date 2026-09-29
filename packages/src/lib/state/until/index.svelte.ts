@@ -1,55 +1,56 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options shared by every `until` matcher. */
 export interface UntilOptions {
+	/**
+	 * Reject (instead of resolving the current value) on timeout.
+	 * @default false
+	 */
+	throwOnTimeout?: boolean;
 	/**
 	 * Milliseconds after which the promise settles with the current value
 	 * (or rejects with `throwOnTimeout`). `0`/omitted never times out.
 	 * @default 0
 	 */
 	timeout?: number;
-	/**
-	 * Reject (instead of resolving the current value) on timeout.
-	 * @default false
-	 */
-	throwOnTimeout?: boolean;
 }
 
 /** Matchers available on every `until` instance. */
 export interface UntilBaseInstance<T> {
 	/** Resolve with the first value satisfying `condition`. */
 	toMatch(condition: (value: T) => boolean, options?: UntilOptions): Promise<T>;
-	/** Resolve with the value after the next change. */
-	changed(options?: UntilOptions): Promise<T>;
 	/** Resolve with the value after `n` changes. */
 	changedTimes(n?: number, options?: UntilOptions): Promise<T>;
+	/** Resolve with the value after the next change. */
+	changed(options?: UntilOptions): Promise<T>;
 }
 
 /** Matchers for non-array sources. */
 export interface UntilValueInstance<T> extends UntilBaseInstance<T> {
-	/** Inverted matchers (resolve when the condition does NOT hold). */
-	readonly not: UntilValueInstance<T>;
 	/** Resolve when the source strictly equals `value` (getters tracked too). */
 	toBe(value: MaybeGetter<T>, options?: UntilOptions): Promise<T>;
-	/** Resolve with the first truthy value. */
-	toBeTruthy(options?: UntilOptions): Promise<T>;
-	/** Resolve with `null`. */
-	toBeNull(options?: UntilOptions): Promise<null>;
 	/** Resolve with `undefined`. */
 	toBeUndefined(options?: UntilOptions): Promise<undefined>;
+	/** Resolve with `null`. */
+	toBeNull(options?: UntilOptions): Promise<null>;
+	/** Resolve with the first truthy value. */
+	toBeTruthy(options?: UntilOptions): Promise<T>;
 	/** Resolve with the first NaN value. */
 	toBeNaN(options?: UntilOptions): Promise<T>;
+	/** Inverted matchers (resolve when the condition does NOT hold). */
+	readonly not: UntilValueInstance<T>;
 }
 
 /** Matchers for array sources. */
 export interface UntilArrayInstance<T> extends UntilBaseInstance<T> {
-	/** Inverted matchers. */
-	readonly not: UntilArrayInstance<T>;
 	/** Resolve with the array once it contains `value`. */
 	toContains(value: MaybeGetter<unknown>, options?: UntilOptions): Promise<T>;
+	/** Inverted matchers. */
+	readonly not: UntilArrayInstance<T>;
 }
 
 function timeoutError(timeout: number): Error {

@@ -6,6 +6,11 @@ export type UseTextDirectionValue = 'ltr' | 'rtl' | 'auto';
 /** Options for {@link useTextDirection}. */
 export interface UseTextDirectionOptions {
 	/**
+	 * Server and pre-mount value.
+	 * @default 'ltr'
+	 */
+	initialValue?: UseTextDirectionValue;
+	/**
 	 * Element receiving the direction.
 	 * @default 'html'
 	 */
@@ -15,11 +20,6 @@ export interface UseTextDirectionOptions {
 	 * @default false
 	 */
 	observe?: boolean;
-	/**
-	 * Server and pre-mount value.
-	 * @default 'ltr'
-	 */
-	initialValue?: UseTextDirectionValue;
 }
 
 /** Direction state returned by {@link useTextDirection}. */

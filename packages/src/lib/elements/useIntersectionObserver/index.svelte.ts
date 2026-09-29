@@ -1,18 +1,14 @@
-import { untrack } from 'svelte';
-
-import { isBrowser } from '../../shared/is.ts';
-import { isElement } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
 
+import { untrack } from 'svelte';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
+import { isElement } from '../../shared/is.ts';
+
 /** Options for {@link useIntersectionObserver}. */
 export interface UseIntersectionObserverOptions {
-	/**
-	 * Start observing on mount.
-	 * @default true
-	 */
-	immediate?: boolean;
 	/**
 	 * Root element/document, or a getter for one.
 	 */
@@ -26,6 +22,11 @@ export interface UseIntersectionObserverOptions {
 	 * @default 0
 	 */
 	threshold?: number | number[];
+	/**
+	 * Start observing on mount.
+	 * @default true
+	 */
+	immediate?: boolean;
 }
 
 /** State returned by {@link useIntersectionObserver}. */
@@ -34,10 +35,10 @@ export interface UseIntersectionObserverReturn {
 	readonly isSupported: boolean;
 	/** Whether observation is currently active. Getter-backed. */
 	readonly isActive: boolean;
-	/** Suspend observation (disconnects). */
-	pause(): void;
 	/** Resume observation. */
 	resume(): void;
+	/** Suspend observation (disconnects). */
+	pause(): void;
 	/** Stop permanently. */
 	stop(): void;
 }

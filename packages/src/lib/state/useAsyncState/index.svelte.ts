@@ -1,18 +1,9 @@
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { resolveGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useAsyncState}. */
 export interface UseAsyncStateOptions<D> {
-	/**
-	 * Run on creation (after `delay` when set).
-	 * @default true
-	 */
-	immediate?: boolean;
-	/**
-	 * Delay before the immediate execution, in milliseconds.
-	 * @default 0
-	 */
-	delay?: number;
 	/** Called with the rejection reason on failure. Defaults to a safe reporter. */
 	onError?: (error: unknown) => void;
 	/** Called with the data on success (including stale executions). */
@@ -27,24 +18,34 @@ export interface UseAsyncStateOptions<D> {
 	 * @default false
 	 */
 	throwError?: boolean;
+	/**
+	 * Run on creation (after `delay` when set).
+	 * @default true
+	 */
+	immediate?: boolean;
+	/**
+	 * Delay before the immediate execution, in milliseconds.
+	 * @default 0
+	 */
+	delay?: number;
 }
 
 /** Async state returned by {@link useAsyncState}. Awaitable until loaded. */
 export interface UseAsyncStateReturn<D, Args extends unknown[]> extends PromiseLike<
 	UseAsyncStateSnapshot<D, Args>
 > {
-	/** Latest settled data (or the initial value). Getter-backed. */
-	readonly state: D;
-	/** Whether at least one execution has settled. Getter-backed. */
-	readonly isReady: boolean;
-	/** Whether an execution is in flight. Getter-backed. */
-	readonly isLoading: boolean;
-	/** Latest failure of the current execution generation. Getter-backed. */
-	readonly error: unknown;
 	/** Run (optionally delayed); only the latest execution settles state. */
 	execute(delay?: number, ...args: Args): Promise<D | undefined>;
 	/** Run immediately with arguments. */
 	executeImmediate(...args: Args): Promise<D | undefined>;
+	/** Whether an execution is in flight. Getter-backed. */
+	readonly isLoading: boolean;
+	/** Whether at least one execution has settled. Getter-backed. */
+	readonly isReady: boolean;
+	/** Latest failure of the current execution generation. Getter-backed. */
+	readonly error: unknown;
+	/** Latest settled data (or the initial value). Getter-backed. */
+	readonly state: D;
 }
 
 /**
@@ -53,18 +54,18 @@ export interface UseAsyncStateReturn<D, Args extends unknown[]> extends PromiseL
  * thenable resolving to itself can never settle.
  */
 export interface UseAsyncStateSnapshot<D, Args extends unknown[]> {
-	/** Latest settled data (or the initial value). Getter-backed. */
-	readonly state: D;
-	/** Whether at least one execution has settled. Getter-backed. */
-	readonly isReady: boolean;
-	/** Whether an execution is in flight. Getter-backed. */
-	readonly isLoading: boolean;
-	/** Latest failure of the current execution generation. Getter-backed. */
-	readonly error: unknown;
 	/** Run (optionally delayed); only the latest execution settles state. */
 	execute(delay?: number, ...args: Args): Promise<D | undefined>;
 	/** Run immediately with arguments. */
 	executeImmediate(...args: Args): Promise<D | undefined>;
+	/** Whether an execution is in flight. Getter-backed. */
+	readonly isLoading: boolean;
+	/** Whether at least one execution has settled. Getter-backed. */
+	readonly isReady: boolean;
+	/** Latest failure of the current execution generation. Getter-backed. */
+	readonly error: unknown;
+	/** Latest settled data (or the initial value). Getter-backed. */
+	readonly state: D;
 }
 
 function defaultOnError(error: unknown) {

@@ -1,8 +1,9 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
-import { useMediaQuery } from '../useMediaQuery/index.svelte.ts';
 import type { UseMediaQueryReturn } from '../useMediaQuery/index.svelte.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
+import { useMediaQuery } from '../useMediaQuery/index.svelte.ts';
 
 /** Breakpoint table: names to widths (`number` = px, or a CSS length). */
 export type Breakpoints<K extends string = string> = Record<K, MaybeGetter<number | string>>;
@@ -22,10 +23,10 @@ export interface UseBreakpointsOptions {
 
 /** Breakpoint state returned by {@link useBreakpoints}. */
 export interface UseBreakpointsReturn<K extends string> {
-	/** Sorted names of currently matching breakpoints. Getter-backed. */
-	readonly current: K[];
-	/** Highest (mobile-first) or lowest (desktop-first) match, `''` when none. Getter-backed. */
-	readonly active: K | '';
+	/** Between `a` (inclusive) and `b` (exclusive). */
+	between(a: MaybeGetter<K>, b: MaybeGetter<K>): UseMediaQueryReturn;
+	/** Synchronous check (no reactivity). */
+	isInBetween(a: MaybeGetter<K>, b: MaybeGetter<K>): boolean;
 	/** Match query for `k` under the configured strategy. */
 	greaterOrEqual(k: MaybeGetter<K>): UseMediaQueryReturn;
 	/** `(max-width: k)` query. */
@@ -34,18 +35,18 @@ export interface UseBreakpointsReturn<K extends string> {
 	greater(k: MaybeGetter<K>): UseMediaQueryReturn;
 	/** Strictly smaller (excludes the exact boundary). */
 	smaller(k: MaybeGetter<K>): UseMediaQueryReturn;
-	/** Between `a` (inclusive) and `b` (exclusive). */
-	between(a: MaybeGetter<K>, b: MaybeGetter<K>): UseMediaQueryReturn;
-	/** Synchronous check (no reactivity). */
-	isGreater(k: MaybeGetter<K>): boolean;
 	/** Synchronous check (no reactivity). */
 	isGreaterOrEqual(k: MaybeGetter<K>): boolean;
 	/** Synchronous check (no reactivity). */
-	isSmaller(k: MaybeGetter<K>): boolean;
-	/** Synchronous check (no reactivity). */
 	isSmallerOrEqual(k: MaybeGetter<K>): boolean;
 	/** Synchronous check (no reactivity). */
-	isInBetween(a: MaybeGetter<K>, b: MaybeGetter<K>): boolean;
+	isGreater(k: MaybeGetter<K>): boolean;
+	/** Synchronous check (no reactivity). */
+	isSmaller(k: MaybeGetter<K>): boolean;
+	/** Highest (mobile-first) or lowest (desktop-first) match, `''` when none. Getter-backed. */
+	readonly active: K | '';
+	/** Sorted names of currently matching breakpoints. Getter-backed. */
+	readonly current: K[];
 }
 
 function pxValue(size: string): number {

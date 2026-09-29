@@ -8,25 +8,25 @@ export interface UseAsyncQueueResult<T> {
 
 /** Queue state returned by {@link useAsyncQueue}. */
 export interface UseAsyncQueueReturn<T extends unknown[]> {
-	/** Index of the task currently (or last) running. Getter-backed. */
-	readonly activeIndex: number;
 	/** Per-task outcomes in order. Getter-backed. */
 	readonly result: { [P in keyof T]: UseAsyncQueueResult<T[P]> };
+	/** Index of the task currently (or last) running. Getter-backed. */
+	readonly activeIndex: number;
 }
 
 /** Options for {@link useAsyncQueue}. */
 export interface UseAsyncQueueOptions {
+	/** Called when the queue settles (all done, interrupted, or aborted). */
+	onFinished?: () => void;
+	/** Called when a task rejects. */
+	onError?: () => void;
+	/** AbortSignal that aborts the queue. */
+	signal?: AbortSignal;
 	/**
 	 * Stop the chain when a task rejects (remaining tasks stay pending).
 	 * @default true
 	 */
 	interrupt?: boolean;
-	/** Called when a task rejects. */
-	onError?: () => void;
-	/** Called when the queue settles (all done, interrupted, or aborted). */
-	onFinished?: () => void;
-	/** AbortSignal that aborts the queue. */
-	signal?: AbortSignal;
 }
 
 function whenAborted(signal: AbortSignal): Promise<never> {

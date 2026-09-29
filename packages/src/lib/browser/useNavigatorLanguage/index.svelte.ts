@@ -3,10 +3,10 @@ import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Language state returned by {@link useNavigatorLanguage}. */
 export interface UseNavigatorLanguageReturn {
-	/** Whether the language API is available in this environment. */
-	readonly isSupported: boolean;
 	/** BCP 47 language tag, refreshing on `languagechange`. Getter-backed. */
 	readonly language: string | undefined;
+	/** Whether the language API is available in this environment. */
+	readonly isSupported: boolean;
 }
 
 /**

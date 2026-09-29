@@ -1,7 +1,8 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
+
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Focus state returned by {@link useFocusWithin}. */
 export interface UseFocusWithinReturn {

@@ -1,12 +1,13 @@
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
 
 /** Manual-reset state returned by {@link refManualReset}. */
 export interface RefManualResetReturn<T> {
-	/** Current value. Getter/setter-backed (destructure-safe). */
-	value: T;
 	/** Restore the default value (getters re-resolve). */
 	reset(): void;
+	/** Current value. Getter/setter-backed (destructure-safe). */
+	value: T;
 }
 
 /**

@@ -1,21 +1,22 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Options for {@link useTimeoutFn}. */
 export interface UseTimeoutFnOptions {
-	/**
-	 * Start the timer on mount.
-	 * @default true
-	 */
-	immediate?: boolean;
 	/**
 	 * Invoke the callback synchronously when `start` is called, in addition
 	 * to the delayed invocation.
 	 * @default false
 	 */
 	immediateCallback?: boolean;
+	/**
+	 * Start the timer on mount.
+	 * @default true
+	 */
+	immediate?: boolean;
 }
 
 /** Controls returned by {@link useTimeoutFn}. */

@@ -1,19 +1,19 @@
-import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link useActiveElement}. */
 export interface UseActiveElementOptions {
-	/**
-	 * Pierce shadow roots when resolving the active element.
-	 * @default true
-	 */
-	deep?: boolean;
 	/**
 	 * Re-resolve when the focused node is removed from the DOM
 	 * (via `MutationObserver`).
 	 * @default false
 	 */
 	triggerOnRemoval?: boolean;
+	/**
+	 * Pierce shadow roots when resolving the active element.
+	 * @default true
+	 */
+	deep?: boolean;
 }
 
 /** Active-element state returned by {@link useActiveElement}. */

@@ -14,8 +14,6 @@ export interface ControlledRefOptions<T> {
 
 /** Controlled state returned by {@link refWithControl}. */
 export interface RefWithControlReturn<T> {
-	/** Current value; writes run the veto + change callbacks. Getter/setter-backed. */
-	value: T;
 	/** Read, tracking by default. */
 	get(tracking?: boolean): T;
 	/** Write through the veto + change callbacks. */
@@ -24,6 +22,8 @@ export interface RefWithControlReturn<T> {
 	untrackedGet(): T;
 	/** Read without subscribing (alias). */
 	peek(): T;
+	/** Current value; writes run the veto + change callbacks. Getter/setter-backed. */
+	value: T;
 }
 
 /**

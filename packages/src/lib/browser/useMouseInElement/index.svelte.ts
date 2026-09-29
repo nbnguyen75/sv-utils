@@ -1,11 +1,12 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
-import { useEventListener } from '../useEventListener/index.svelte.ts';
+import type { UseMouseOptions } from '../useMouse/index.svelte.ts';
+
 import { useMutationObserver } from '../../elements/useMutationObserver/index.svelte.ts';
 import { useResizeObserver } from '../../elements/useResizeObserver/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
+import { useEventListener } from '../useEventListener/index.svelte.ts';
 import { useMouse } from '../useMouse/index.svelte.ts';
-import type { UseMouseOptions } from '../useMouse/index.svelte.ts';
 
 /** Options for {@link useMouseInElement}. */
 export interface MouseInElementOptions extends UseMouseOptions {
@@ -28,16 +29,8 @@ export interface MouseInElementOptions extends UseMouseOptions {
 
 /** State returned by {@link useMouseInElement}. */
 export interface UseMouseInElementReturn {
-	/** Global pointer x. Getter-backed. */
-	readonly x: number;
-	/** Global pointer y. Getter-backed. */
-	readonly y: number;
 	/** Latest input kind. Getter-backed. */
 	readonly sourceType: 'mouse' | 'touch' | null;
-	/** X relative to the element. Getter-backed. */
-	readonly elementX: number;
-	/** Y relative to the element. Getter-backed. */
-	readonly elementY: number;
 	/** Element's page X. Getter-backed. */
 	readonly elementPositionX: number;
 	/** Element's page Y. Getter-backed. */
@@ -48,6 +41,14 @@ export interface UseMouseInElementReturn {
 	readonly elementWidth: number;
 	/** Whether the pointer sits outside the element. Getter-backed. */
 	readonly isOutside: boolean;
+	/** X relative to the element. Getter-backed. */
+	readonly elementX: number;
+	/** Y relative to the element. Getter-backed. */
+	readonly elementY: number;
+	/** Global pointer x. Getter-backed. */
+	readonly x: number;
+	/** Global pointer y. Getter-backed. */
+	readonly y: number;
 	/** Detach all observers and listeners permanently. */
 	stop(): void;
 }

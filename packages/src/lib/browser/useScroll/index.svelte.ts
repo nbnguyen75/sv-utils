@@ -1,34 +1,57 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
+import { useMutationObserver } from '../../elements/useMutationObserver/index.svelte.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
-import { useEventListener } from '../useEventListener/index.svelte.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useDebounceFn } from '../../utilities/useDebounceFn/index.ts';
 import { useThrottleFn } from '../../utilities/useThrottleFn/index.ts';
-import { useMutationObserver } from '../../elements/useMutationObserver/index.svelte.ts';
+import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Scrollable target: element, window, or document. */
 export type ScrollTarget = HTMLElement | SVGElement | Window | Document | null | undefined;
 
 /** Arrival flags per edge. */
 export interface ScrollArrivedState {
-	left: boolean;
-	right: boolean;
-	top: boolean;
 	bottom: boolean;
+	right: boolean;
+	left: boolean;
+	top: boolean;
 }
 
 /** Scroll direction flags (reset on scroll end). */
 export interface ScrollDirections {
-	left: boolean;
-	right: boolean;
-	top: boolean;
 	bottom: boolean;
+	right: boolean;
+	left: boolean;
+	top: boolean;
 }
 
 /** Options for {@link useScroll}. */
 export interface UseScrollOptions {
+	/**
+	 * Edge arrival slack in pixels.
+	 */
+	offset?: { bottom?: number; right?: number; left?: number; top?: number };
+	/** Listener options for the scroll event. */
+	eventListenerOptions?: boolean | AddEventListenerOptions;
+	/**
+	 * Observe DOM mutations and re-measure (`true` shorthand supported).
+	 * @default false
+	 */
+	observe?: boolean | { mutation?: boolean };
+	/**
+	 * Scroll behavior for programmatic `x`/`y` writes.
+	 * @default 'auto'
+	 */
+	behavior?: MaybeGetter<ScrollBehavior>;
+	/** Mount-measure failures report here. Defaults to `console.error`. */
+	onError?: (error: unknown) => void;
+	/** Called on every (possibly throttled) scroll event. */
+	onScroll?: (event: Event) => void;
+	/** Called when scrolling ends. */
+	onStop?: (event: Event) => void;
 	/**
 	 * Throttle scroll handling in milliseconds (`0` disables).
 	 * @default 0
@@ -40,44 +63,22 @@ export interface UseScrollOptions {
 	 * @default 200
 	 */
 	idle?: number;
-	/**
-	 * Edge arrival slack in pixels.
-	 */
-	offset?: { left?: number; right?: number; top?: number; bottom?: number };
-	/**
-	 * Observe DOM mutations and re-measure (`true` shorthand supported).
-	 * @default false
-	 */
-	observe?: boolean | { mutation?: boolean };
-	/** Called on every (possibly throttled) scroll event. */
-	onScroll?: (event: Event) => void;
-	/** Called when scrolling ends. */
-	onStop?: (event: Event) => void;
-	/** Listener options for the scroll event. */
-	eventListenerOptions?: boolean | AddEventListenerOptions;
-	/**
-	 * Scroll behavior for programmatic `x`/`y` writes.
-	 * @default 'auto'
-	 */
-	behavior?: MaybeGetter<ScrollBehavior>;
-	/** Mount-measure failures report here. Defaults to `console.error`. */
-	onError?: (error: unknown) => void;
 }
 
 /** State returned by {@link useScroll}. */
 export interface UseScrollReturn {
-	/** Horizontal position; assigning scrolls. Getter/setter-backed. */
-	x: number;
-	/** Vertical position; assigning scrolls. Getter/setter-backed. */
-	y: number;
-	/** Whether a scroll is in flight. Getter-backed. */
-	readonly isScrolling: boolean;
 	/** Edge arrival flags. Getter-backed. */
 	readonly arrivedState: ScrollArrivedState;
 	/** Current scroll directions. Getter-backed. */
 	readonly directions: ScrollDirections;
+	/** Whether a scroll is in flight. Getter-backed. */
+	readonly isScrolling: boolean;
 	/** Re-measure now. */
 	measure(): void;
+	/** Horizontal position; assigning scrolls. Getter/setter-backed. */
+	x: number;
+	/** Vertical position; assigning scrolls. Getter/setter-backed. */
+	y: number;
 }
 
 /**

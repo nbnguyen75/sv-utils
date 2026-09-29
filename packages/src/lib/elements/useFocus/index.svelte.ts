@@ -1,12 +1,18 @@
+import type { MaybeElement } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeElement } from '../../shared/getter/index.ts';
 import { useEventListener } from '../../browser/useEventListener/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link useFocus}. */
 export interface UseFocusOptions {
+	/**
+	 * Passed to `focus()` to suppress scrolling.
+	 * @default false
+	 */
+	preventScroll?: boolean;
 	/**
 	 * Starting (and target-swap) value; `true` focuses on mount.
 	 * @default false
@@ -17,11 +23,6 @@ export interface UseFocusOptions {
 	 * @default false
 	 */
 	focusVisible?: boolean;
-	/**
-	 * Passed to `focus()` to suppress scrolling.
-	 * @default false
-	 */
-	preventScroll?: boolean;
 }
 
 /** Focus state returned by {@link useFocus}. */
