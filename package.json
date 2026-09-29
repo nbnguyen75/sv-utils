@@ -1,0 +1,15 @@
+{
+  "name": "sv-utils",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Workflow utilities for sv-utils",
+  "license": "MIT",
+  "author": "Nguyên (Wynn)",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
