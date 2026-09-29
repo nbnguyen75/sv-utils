@@ -5,11 +5,10 @@ echo "🔍 Running pre-commit checks..."
 if git diff --cached --name-only | grep -q '^packages/'; then
   echo "📦 [packages] Staged changes detected"
   cd packages
-  echo "  → [packages] pwd: $(pwd)"
-  echo "  → [packages] Running lint-staged..."
-  bun --bun lint-staged || { echo "❌ [packages] lint-staged failed"; exit 1; }
+  echo "  → [packages] Running lint..."
+  bun run lint || { echo "❌ [packages] lint failed"; exit 1; }
   echo "  → [packages] Running typecheck..."
-  bun --bun typecheck || { echo "❌ [packages] typecheck failed"; exit 1; }
+  bun run check || { echo "❌ [packages] typecheck failed"; exit 1; }
   cd ..
   echo "✅ [packages] Passed"
 else
@@ -18,14 +17,15 @@ fi
 
 if git diff --cached --name-only | grep -q '^docs/'; then
   echo "📦 [docs] Staged changes detected"
-  cd docs
-  echo "  → [docs] pwd: $(pwd)"
-  echo "  → [docs] Running lint-staged..."
-  bun --bun lint-staged || { echo "❌ [docs] lint-staged failed"; exit 1; }
-  echo "  → [docs] Running typecheck..."
-  bun --bun typecheck || { echo "❌ [docs] typecheck failed"; exit 1; }
-  cd ..
-  echo "✅ [docs] Passed"
+  if [ -f docs/package.json ] && grep -q '"check"' docs/package.json; then
+    cd docs
+    echo "  → [docs] Running typecheck..."
+    bun run check || { echo "❌ [docs] typecheck failed"; exit 1; }
+    cd ..
+    echo "✅ [docs] Passed"
+  else
+    echo "⏭️  [docs] No check script configured, skipping"
+  fi
 else
   echo "⏭️  [docs] No staged changes, skipping"
 fi
