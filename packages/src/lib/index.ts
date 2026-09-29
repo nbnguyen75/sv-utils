@@ -27,6 +27,15 @@ export * from './state/createGlobalState/index.ts';
 export * from './state/createSharedComposable/index.ts';
 export * from './state/syncRef/index.ts';
 export * from './state/computedWithControl/index.ts';
+export * from './state/useAsyncState/index.ts';
+export * from './state/computedAsync/index.ts';
+export * from './state/useAsyncQueue/index.ts';
+export * from './state/useMemoize/index.ts';
+export * from './state/useStorageAsync/index.ts';
+export * from './state/useManualRefHistory/index.ts';
+export * from './state/useRefHistory/index.ts';
+export * from './state/useDebouncedRefHistory/index.ts';
+export * from './state/useThrottledRefHistory/index.ts';
 // * Utilities
 export * from './utilities/useDebounceFn/index.ts';
 export * from './utilities/useThrottleFn/index.ts';

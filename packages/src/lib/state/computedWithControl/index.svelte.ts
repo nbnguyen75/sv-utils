@@ -7,10 +7,12 @@
  * The source is sampled inside `$effect`, so this must be called in
  * component initialization. Disposal on unmount is automatic.
  */
+
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Read-only controlled derivation returned by {@link computedWithControl}. */
 export interface ComputedWithControlReturn<T> {
@@ -32,11 +34,11 @@ export function computedWithControl<T>(
 ): ComputedWithControlReturn<T>;
 export function computedWithControl<T>(
 	source: MaybeGetter<unknown>,
-	fn: { get(): T; set(value: T): void }
+	fn: { set(value: T): void; get(): T }
 ): WritableComputedWithControlReturn<T>;
 export function computedWithControl<T>(
 	source: MaybeGetter<unknown>,
-	fn: (() => T) | { get(): T; set(value: T): void }
+	fn: (() => T) | { set(value: T): void; get(): T }
 ): ComputedWithControlReturn<T> {
 	const read = typeof fn === 'function' ? fn : fn.get;
 	const write = typeof fn === 'function' ? undefined : fn.set;

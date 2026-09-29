@@ -211,6 +211,27 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 254/254
       (42 files), `prepack` publint clean.
 
+### feat-015: Async & history state — done
+
+- [x] 9 ports in `src/lib/state/` (impl + test + README each, barrel wired):
+      useAsyncState (8 tests), computedAsync (5), useAsyncQueue (5),
+      useMemoize (5), useStorageAsync (7), useManualRefHistory (8),
+      useRefHistory (7), useDebouncedRefHistory (1), useThrottledRefHistory (1).
+- [x] Race safety by generation counters (async state + computed);
+      `onCancel` hooks via effect cleanup; queue interruption/abort parity;
+      history cells replace Vue refs; `structuredClone` default (with
+      snapshot normalization — proxies read out of `$state` re-proxy on
+      access and reject cloning); sync-window loop-breaking for cell sync.
+- [x] Fixed via failing tests: `$state.raw` needs declaration position
+      (dropped `shallow` — deep proxies are lazy anyway); awaiting a
+      thenable that resolves to itself hangs by spec — `await` now resolves
+      a fresh `then`-free snapshot view (same latent fix in storageAsync);
+      object spread snapshots getter values (useRefHistory delegates);
+      manual commits never double-fire (no guard needed); DataCloneError
+      via nested proxies.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 329/329
+      (60 files), `prepack` publint clean.
+
 ### feat-014: Ref variants & shared state — done
 
 - [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):
