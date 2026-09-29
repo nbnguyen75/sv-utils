@@ -74,4 +74,16 @@ describe('useEventListener', () => {
 			await dispose();
 		}
 	});
+
+	it('listens on generic event targets', async () => {
+		const handler = vi.fn();
+		const target = new EventTarget();
+		const { dispose } = await mountSetup(() => useEventListener(() => target, 'ping', handler));
+		try {
+			target.dispatchEvent(new Event('ping'));
+			expect(handler).toHaveBeenCalledTimes(1);
+		} finally {
+			await dispose();
+		}
+	});
 });

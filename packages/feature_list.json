@@ -673,66 +673,66 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Most-used responsive primitives. (useSSRWidth cut as recipe.) matchMedia mocks in tests; SSR returns fallback values (no hydration mismatch).",
-			"evidence": "",
+			"evidence": "src/lib/browser/{useMediaQuery,usePreferredDark,usePreferredColorScheme,useBreakpoints,useWindowSize,usePreferredReducedMotion,usePreferredLanguages,usePreferredContrast,usePreferredReducedTransparency,useTextDirection}/ (impl+test+README each) — 360/360 green",
 			"functions": [
 				{
 					"name": "useMediaQuery",
 					"source": "vueuse/core/useMediaQuery",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useMediaQuery/"
 				},
 				{
 					"name": "usePreferredDark",
 					"source": "vueuse/core/usePreferredDark",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePreferredDark/"
 				},
 				{
 					"name": "usePreferredColorScheme",
 					"source": "vueuse/core/usePreferredColorScheme",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePreferredColorScheme/"
 				},
 				{
 					"name": "useBreakpoints",
 					"source": "vueuse/core/useBreakpoints",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useBreakpoints/"
 				},
 				{
 					"name": "useWindowSize",
 					"source": "vueuse/core/useWindowSize",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useWindowSize/"
 				},
 				{
 					"name": "usePreferredReducedMotion",
 					"source": "vueuse/core/usePreferredReducedMotion",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePreferredReducedMotion/"
 				},
 				{
 					"name": "usePreferredLanguages",
 					"source": "vueuse/core/usePreferredLanguages",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePreferredLanguages/"
 				},
 				{
 					"name": "usePreferredContrast",
 					"source": "vueuse/core/usePreferredContrast",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePreferredContrast/"
 				},
 				{
 					"name": "usePreferredReducedTransparency",
 					"source": "vueuse/core/usePreferredReducedTransparency",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePreferredReducedTransparency/"
 				},
 				{
 					"name": "useTextDirection",
 					"source": "vueuse/core/useTextDirection",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useTextDirection/"
 				},
 				{
@@ -744,7 +744,7 @@
 			],
 			"id": "feat-016",
 			"name": "Viewport & media preferences",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

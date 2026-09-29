@@ -232,6 +232,25 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 329/329
       (60 files), `prepack` publint clean.
 
+### feat-016: Viewport & media preferences — done
+
+- [x] 10 ports in `src/lib/browser/` (impl + test + README each, barrel
+      wired): useMediaQuery (6 tests), usePreferredDark (1),
+      usePreferredColorScheme (1), useBreakpoints (6), useWindowSize (5),
+      usePreferredReducedMotion (1), usePreferredLanguages (2),
+      usePreferredContrast (1), usePreferredReducedTransparency (1),
+      useTextDirection (5); +1 generic-target test for useEventListener.
+- [x] `useMediaQuery` foundation with re-subscribing reactive queries and
+      `ssrMatches` fallback (no `ssrWidth` machinery); eager breakpoint
+      shortcuts; duck-typed window handling throughout; framework presets
+      ported (deprecated alias dropped); no `window`/`document` options
+      anywhere per isomorphic rule.
+- [x] Fixed via failing tests: effect-scope `matchMedia` needs the same
+      try/catch as the initial read (async throw = unhandled error);
+      breakpoint query factories install effects (build in setup).
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 360/360
+      (71 files), `prepack` publint clean.
+
 ### feat-014: Ref variants & shared state — done
 
 - [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):

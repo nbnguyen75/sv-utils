@@ -57,6 +57,19 @@ export function useEventListener<K extends keyof MediaQueryListEventMap>(
 	options?: boolean | AddEventListenerOptions
 ): void;
 
+// Overload 5: generic EventTarget (VisualViewport, WebSocket, sources
+// without a dedicated event map)
+/**
+ * Listen for an event on any `EventTarget`. No-op during SSR or when the
+ * target is nullish.
+ */
+export function useEventListener(
+	target: MaybeGetter<EventTarget | null | undefined>,
+	event: string,
+	handler: (e: Event) => void,
+	options?: boolean | AddEventListenerOptions
+): void;
+
 // Implementation signature
 export function useEventListener(
 	target: MaybeGetter<EventTarget | null | undefined>,
