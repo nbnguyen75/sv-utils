@@ -749,66 +749,66 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Element measurement and focus tracking. New elements/ category (created by this batch). Observer mocks + disconnect-on-dispose tests.",
-			"evidence": "",
+			"evidence": "src/lib/elements/{useResizeObserver,useMutationObserver,useIntersectionObserver,useElementVisibility,useElementSize,useElementBounding,useActiveElement,useFocus,useFocusWithin}/ (impl+test+README each) — 406/406 green",
 			"functions": [
 				{
 					"name": "useElementSize",
 					"source": "vueuse/core/useElementSize",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useElementSize/"
 				},
 				{
 					"name": "useElementBounding",
 					"source": "vueuse/core/useElementBounding",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useElementBounding/"
 				},
 				{
 					"name": "useElementVisibility",
 					"source": "vueuse/core/useElementVisibility",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useElementVisibility/"
 				},
 				{
 					"name": "useIntersectionObserver",
 					"source": "vueuse/core/useIntersectionObserver",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useIntersectionObserver/"
 				},
 				{
 					"name": "useResizeObserver",
 					"source": "vueuse/core/useResizeObserver",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useResizeObserver/"
 				},
 				{
 					"name": "useMutationObserver",
 					"source": "vueuse/core/useMutationObserver",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useMutationObserver/"
 				},
 				{
 					"name": "useActiveElement",
 					"source": "vueuse/core/useActiveElement",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useActiveElement/"
 				},
 				{
 					"name": "useFocus",
 					"source": "vueuse/core/useFocus",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useFocus/"
 				},
 				{
 					"name": "useFocusWithin",
 					"source": "vueuse/core/useFocusWithin",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/elements/useFocusWithin/"
 				}
 			],
 			"id": "feat-017",
 			"name": "Elements: size, visibility, focus",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

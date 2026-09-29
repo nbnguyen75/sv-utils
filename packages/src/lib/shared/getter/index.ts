@@ -19,3 +19,10 @@ export type MaybeGetter<T> = T | (() => T);
 export function resolveGetter<T>(value: MaybeGetter<T>): T {
 	return typeof value === 'function' ? (value as () => T)() : value;
 }
+
+/**
+ * Element accepted by observer/element utils: the element itself (e.g.
+ * from `bind:this`), a getter for late-bound elements, or nullish while
+ * detached.
+ */
+export type MaybeElement = MaybeGetter<Element | null | undefined>;

@@ -15,6 +15,16 @@ export * from './browser/useNavigatorLanguage/index.ts';
 export * from './browser/useTextDirection/index.ts';
 export * from './browser/useWindowSize/index.ts';
 export * from './browser/useBreakpoints/index.ts';
+// * Elements
+export * from './elements/useResizeObserver/index.ts';
+export * from './elements/useMutationObserver/index.ts';
+export * from './elements/useIntersectionObserver/index.ts';
+export * from './elements/useElementVisibility/index.ts';
+export * from './elements/useElementSize/index.ts';
+export * from './elements/useElementBounding/index.ts';
+export * from './elements/useActiveElement/index.ts';
+export * from './elements/useFocus/index.ts';
+export * from './elements/useFocusWithin/index.ts';
 // * State
 export * from './state/useStorage/index.ts';
 export * from './state/useToggle/index.ts';
@@ -50,11 +60,6 @@ export * from './state/useThrottledRefHistory/index.ts';
 // * Utilities
 export * from './utilities/useDebounceFn/index.ts';
 export * from './utilities/useThrottleFn/index.ts';
-export * from './utilities/useTimeoutFn/index.ts';
-export * from './utilities/useIntervalFn/index.ts';
-export * from './utilities/useRafFn/index.ts';
-export * from './utilities/useCountdown/index.ts';
-export * from './utilities/useFps/index.ts';
 export * from './utilities/useTimeoutFn/index.ts';
 export * from './utilities/useIntervalFn/index.ts';
 export * from './utilities/useRafFn/index.ts';

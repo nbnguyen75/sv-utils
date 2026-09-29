@@ -251,6 +251,27 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 360/360
       (71 files), `prepack` publint clean.
 
+### feat-017: Elements — done (new `elements/` category)
+
+- [x] 9 ports in `src/lib/elements/` (impl + test + README each, barrel
+      wired with a `// * Elements` group): useResizeObserver (6 tests),
+      useMutationObserver (4), useIntersectionObserver (7),
+      useElementVisibility (4), useElementSize (6), useElementBounding (8),
+      useActiveElement (3), useFocus (5), useFocusWithin (2); +`isElement`
+      guard in `shared/is.ts` with jsdom tests.
+- [x] `test/fixtures/observers.ts`: controllable Resize/IntersectionObserver
+      mocks (instance registries, per-target triggers, init capture).
+- [x] Duck-typed element checks everywhere (`nodeType` + shape, never
+      `instanceof` — cross-realm failures proven earlier); eager breakpoint-
+      style shortcuts where keys are known; native jsdom MutationObserver
+      used directly.
+- [x] Fixed via failing tests: `exactOptionalPropertyTypes` needs
+      conditional init building; empty-interface rule → type aliases;
+      effect-flush `tick()` required after `resume()`; jsdom matches
+      `:focus-visible`; `stop()`-then-trigger and unmount paths.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 406/406
+      (81 files), `prepack` publint clean.
+
 ### feat-014: Ref variants & shared state — done
 
 - [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):

@@ -50,6 +50,21 @@ export function isObject(value: unknown): value is Record<string, unknown> {
 	return objectToString.call(value) === '[object Object]';
 }
 
+/**
+ * True for DOM elements. Duck-typed (`nodeType` + `getBoundingClientRect`)
+ * instead of `instanceof Element`, which fails across realms (iframes and
+ * test runners evaluating modules in separate VM contexts). No globals
+ * touched — safe during SSR.
+ */
+export function isElement(value: unknown): value is Element {
+	return (
+		typeof value === 'object' &&
+		value !== null &&
+		(value as Element).nodeType === 1 &&
+		typeof (value as Element).getBoundingClientRect === 'function'
+	);
+}
+
 /** Current epoch milliseconds. */
 export const now = (): number => Date.now();
 

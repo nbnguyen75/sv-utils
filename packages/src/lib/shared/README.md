@@ -15,6 +15,7 @@ Pure, SSR-safe predicates and helpers. Inspired by VueUse
 | `notNullish` | `<T>(value: T \| null \| undefined) => value is T`                 | Neither `null` nor `undefined`.                                         |
 | `assert`     | `(condition: boolean, ...infos: unknown[]) => void`                | `console.warn(...infos)` unless `condition` holds.                      |
 | `isObject`   | `(value: unknown) => value is Record<string, unknown>`             | Plain objects only (no arrays, dates, functions).                       |
+| `isElement`  | `(value: unknown) => value is Element`                             | DOM elements, duck-typed (cross-realm safe, SSR-safe).                  |
 | `now`        | `() => number`                                                     | `Date.now()`.                                                           |
 | `timestamp`  | `() => number`                                                     | `+Date.now()` (identical to `now()`; parity export).                    |
 | `clamp`      | `(n, min, max: number) => number`                                  | Clamp into the inclusive range.                                         |

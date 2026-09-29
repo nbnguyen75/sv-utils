@@ -1,0 +1,81 @@
+/**
+ * `MutationObserver` wrapper with multi-target support, disposal,
+ * and pending-record access.
+ *
+ * Inspired by [VueUse `useMutationObserver`](https://vueuse.org/core/useMutationObserver/).
+ * Re-observes when targets resolve differently. Must be called in component
+ * initialization. Reports `isSupported: false` (and never observes)
+ * without `MutationObserver` or during SSR. Disposal on unmount is
+ * automatic.
+ */
+import { untrack } from 'svelte';
+
+import { isBrowser } from '../../shared/is.ts';
+import { isElement } from '../../shared/is.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import type { MaybeElement } from '../../shared/getter/index.ts';
+
+/** Options for {@link useMutationObserver} (observer init). */
+export type UseMutationObserverOptions = MutationObserverInit;
+
+/** State returned by {@link useMutationObserver}. */
+export interface UseMutationObserverReturn {
+	/** Whether `MutationObserver` exists in this environment. */
+	readonly isSupported: boolean;
+	/** Disconnect permanently. Safe to call twice. */
+	stop(): void;
+	/** Drain pending records without disconnecting. */
+	takeRecords(): MutationRecord[] | undefined;
+}
+
+/**
+ * Observe DOM mutations.
+ *
+ * @param target Element(s) or getters; nullish entries are skipped.
+ * @param callback Observer callback.
+ * @param options `MutationObserverInit` (e.g. `{ attributes: true }`).
+ */
+export function useMutationObserver(
+	target: MaybeElement | MaybeElement[],
+	callback: MutationCallback,
+	options: UseMutationObserverOptions = {}
+): UseMutationObserverReturn {
+	const isSupported = isBrowser && typeof MutationObserver === 'function';
+
+	let observer: MutationObserver | undefined;
+	let stopped = false;
+
+	function disconnect() {
+		if (observer) {
+			observer.disconnect();
+			observer = undefined;
+		}
+	}
+
+	function stop() {
+		stopped = true;
+		disconnect();
+	}
+
+	function takeRecords(): MutationRecord[] | undefined {
+		return observer?.takeRecords();
+	}
+
+	if (isSupported) {
+		$effect(() => {
+			const raw = Array.isArray(target) ? target : [target];
+			const elements = raw.map((item) => resolveGetter(item));
+			untrack(() => {
+				if (stopped) return;
+				disconnect();
+				observer = new MutationObserver(callback);
+				for (const element of elements) {
+					if (isElement(element)) observer.observe(element, options);
+				}
+			});
+			return () => disconnect();
+		});
+	}
+
+	return { isSupported, stop, takeRecords };
+}
