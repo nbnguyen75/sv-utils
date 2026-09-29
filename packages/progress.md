@@ -193,6 +193,24 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 224/224
       (37 files), `prepack` publint clean.
 
+### feat-013: Reactive watchers — done
+
+- [x] 5 ports in `src/lib/state/` (impl + test + README each, barrel wired):
+      watchArray (6 tests), watchAtMost (5), watchIgnorable (5),
+      watchTriggerable (4), until (10).
+- [x] `$effect` + `untrack` replaces `watch`; stopping is flag-based
+      (effects cannot unsubscribe early); boolean-guard replaces VueUse's
+      sync counters for silence (documented edges); `watchTriggerable`
+      composes our `watchIgnorable`; `until` matchers install one-shot
+      effects at call time (sync chain required) with timeout race.
+- [x] Fixed via failing tests: non-immediate first run must not fire
+      (watchAtMost); `until` needs skip-first mount run so counting
+      conditions evaluate exactly once per change; `mountUtil` requires
+      factories to return the API (block-body setups return stop); createBox
+      generics for mixed-type boxes.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 254/254
+      (42 files), `prepack` publint clean.
+
 ### feat-012: Date/time display — done (recipes-only, no code)
 
 - [x] Verified `docs/recipes.md` dates section covers all four deferred

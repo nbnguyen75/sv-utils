@@ -14,6 +14,11 @@ export * from './state/useCloned/index.ts';
 export * from './state/useCycleList/index.ts';
 export * from './state/useStepper/index.ts';
 export * from './state/useOffsetPagination/index.ts';
+export * from './state/watchArray/index.ts';
+export * from './state/watchAtMost/index.ts';
+export * from './state/watchIgnorable/index.ts';
+export * from './state/watchTriggerable/index.ts';
+export * from './state/until/index.ts';
 // * Utilities
 export * from './utilities/useDebounceFn/index.ts';
 export * from './utilities/useThrottleFn/index.ts';

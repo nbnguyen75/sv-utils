@@ -427,7 +427,7 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Reactive watchers kept: until, watchIgnorable, watchTriggerable, watchArray, watchAtMost. (One-liner aliases cut as recipes.)",
-			"evidence": "",
+			"evidence": "src/lib/state/{watchArray,watchAtMost,watchIgnorable,watchTriggerable,until}/ (impl+test+README each) — 254/254 green",
 			"functions": [
 				{
 					"name": "watchOnce",
@@ -438,7 +438,7 @@
 				{
 					"name": "watchAtMost",
 					"source": "vueuse/shared/watchAtMost",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/watchAtMost/"
 				},
 				{
@@ -456,7 +456,7 @@
 				{
 					"name": "watchArray",
 					"source": "vueuse/shared/watchArray",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/watchArray/"
 				},
 				{
@@ -468,7 +468,7 @@
 				{
 					"name": "until",
 					"source": "vueuse/shared/until",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/until/"
 				},
 				{
@@ -492,13 +492,13 @@
 				{
 					"name": "watchIgnorable",
 					"source": "vueuse/shared/watchIgnorable",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/watchIgnorable/"
 				},
 				{
 					"name": "watchTriggerable",
 					"source": "vueuse/shared/watchTriggerable",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/state/watchTriggerable/"
 				},
 				{
@@ -510,7 +510,7 @@
 			],
 			"id": "feat-013",
 			"name": "Reactive watchers",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
