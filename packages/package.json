@@ -1,6 +1,6 @@
 {
-	"name": "sv-utils",
-	"version": "0.0.1",
+	"name": "@wynn-dev/sv-utils",
+	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -21,9 +21,7 @@
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
-	"sideEffects": [
-		"**/*.css"
-	],
+	"sideEffects": false,
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"exports": {
@@ -63,5 +61,18 @@
 		"utilities",
 		"composables",
 		"runes"
-	]
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"homepage": "https://github.com/nbnguyen75/sv-utils#readme",
+	"bugs": {
+		"url": "https://github.com/nbnguyen75/sv-utils/issues"
+	},
+	"license": "MIT",
+	"author": "Nguyên (Wynn)",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nbnguyen75/sv-utils.git"
+	}
 }
