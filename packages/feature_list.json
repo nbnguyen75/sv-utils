@@ -9,9 +9,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-001"
-			],
+			"dependencies": ["feat-001"],
 			"description": "Port of core browser utilities with runes and SSR safety. Retrofit (docs/tests/fixes) tracked in feat-008.",
 			"evidence": "src/lib/browser/useEventListener/, src/lib/browser/useDark/, src/lib/browser/useClipboard/, src/lib/browser/useScrollToTop/",
 			"functions": [
@@ -45,9 +43,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-001"
-			],
+			"dependencies": ["feat-001"],
 			"description": "Reactive storage utility supporting localStorage/sessionStorage with Svelte 5 runes. Retrofit (docs/tests) tracked in feat-008.",
 			"evidence": "src/lib/state/useStorage/",
 			"functions": [
@@ -75,9 +71,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-001"
-			],
+			"dependencies": ["feat-001"],
 			"description": "Debounce and throttle helpers with lodash-style leading/trailing/maxWait semantics (vendored, zero-dep) plus cancel/flush. Parity review tracked in feat-006; docs/tests in feat-008.",
 			"evidence": "src/lib/utilities/useDebounceFn/, src/lib/utilities/useThrottleFn/",
 			"functions": [
@@ -99,9 +93,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-001"
-			],
+			"dependencies": ["feat-001"],
 			"description": "Add vitest + jsdom, `bun run test` script, colocated *.test.ts packaging exclusions, per-module README convention, and wire `test` into init.ps1/init.sh. Blocks all implementation batches.",
 			"evidence": "vitest.config.ts, test/setup.ts, test/harness.test.ts, test/harness.jsdom.test.ts, test/fixtures/, docs/module-readme-template.md, package.json#test, init.ps1/init.sh (6/6 smoke tests green)",
 			"functions": [
@@ -123,9 +115,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005"
-			],
+			"dependencies": ["feat-005"],
 			"description": "Review hand-rolled dual-timer logic against VueUse debounceFilter (timestamp-based leading/trailing/maxWait); align semantics vendored/zero-dep; add useThrottleFn.flush(). Proven by parity tests ported from VueUse filter tests.",
 			"evidence": "src/lib/utilities/useDebounceFn/index.ts (JSDoc + delay<=0/maxWait<=0 immediate + pending()), src/lib/utilities/useThrottleFn/index.ts (JSDoc + flush()), useDebounceFn.test.ts (13), useThrottleFn.test.ts (8) — 27/27 green",
 			"functions": [
@@ -147,9 +137,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005"
-			],
+			"dependencies": ["feat-005"],
 			"description": "Expand is.ts to full VueUse shared/utils/is.ts parity (isClient/isWorker/isDef/notNullish/isObject/noop/clamp/now/timestamp/rand/hasOwn/assert/isIOS) keeping isBrowser alias. Pure fns, full branch coverage.",
 			"evidence": "src/lib/shared/is.ts (strict-TS, JSDoc, local WorkerGlobalScope decl), src/lib/shared/is.test.ts (10) — 37/37 green",
 			"functions": [
@@ -165,11 +153,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-006",
-				"feat-007"
-			],
+			"dependencies": ["feat-005", "feat-006", "feat-007"],
 			"description": "Backfill README.md + *.test.ts for feat-002/003/004/007 and apply known fixes: useClipboard reset-timer dispose on unmount; useScrollToTop cancel handle + no stale writes mid-flight.",
 			"evidence": "test/fixtures/run.svelte mount harness; 5 suites (useEventListener 5, useDark 8, useClipboard 5, useScrollToTop 7, useStorage 10) + 8 READMEs (7 modules + shared/) + JSDoc/Return interfaces + fixes — 72/72 green",
 			"functions": [
@@ -197,10 +181,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Most-imported state primitives. useToggle/useCounter cover the majority of toggle/counter needs; history/cloned/cycle/stepper/previous/lastChanged round out local state.",
 			"evidence": "src/lib/state/{useToggle,useCounter,usePrevious,useLastChanged,useCloned,useCycleList,useStepper,useOffsetPagination}/ (impl+test+README each), test/fixtures/box.svelte.ts — 126/126 green",
 			"functions": [
@@ -258,10 +239,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Pure reactive array transforms. All synchronous/pure — high test coverage without compiler; shared/ category.",
 			"evidence": "src/lib/shared/{useArrayMap,useArrayFilter,useArrayUnique,useArraySome,useArrayEvery,useArrayIncludes,useArrayJoin,useArrayReduce,useArrayFind,useArrayFindIndex,useArrayFindLast,useArrayDifference,useSorted}/ (impl+test+README each) — 191/191 green",
 			"functions": [
@@ -349,10 +327,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Core timers and clock primitives; fake-timer tests. Pausable controls per architecture rules. (useTimeout/useInterval/useNow/useTimestamp cut as recipes.)",
 			"evidence": "src/lib/utilities/{useTimeoutFn,useIntervalFn,useRafFn,useCountdown,useFps}/ (impl+test+README each), test/fixtures/raf.ts — 224/224 green",
 			"functions": [
@@ -416,10 +391,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Date/time display — DEFERRED to date-fns entirely. Recipes only (ticker, Intl.RelativeTimeFormat); no code in this batch.",
 			"evidence": "docs/recipes.md (dates section: date-fns ticker/format + Intl.RelativeTimeFormat + Temporal note); no code per scope review",
 			"functions": [
@@ -453,10 +425,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Reactive watchers kept: until, watchIgnorable, watchTriggerable, watchArray, watchAtMost. (One-liner aliases cut as recipes.)",
 			"evidence": "src/lib/state/{watchArray,watchAtMost,watchIgnorable,watchTriggerable,until}/ (impl+test+README each) — 254/254 green",
 			"functions": [
@@ -544,10 +513,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Ref variants kept: refAutoReset, refManualReset, refWithControl, createEventHook, createGlobalState, createSharedComposable, syncRef, computedWithControl. (Trivial wrappers cut as recipes.)",
 			"evidence": "src/lib/state/{refAutoReset,refManualReset,refWithControl,createEventHook,createGlobalState,createSharedComposable,syncRef,computedWithControl}/ (impl+test+README each) — 282/282 green",
 			"functions": [
@@ -635,10 +601,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Async data + memoized/derived state. (useCached cut as recipe.) Promise handling must be SSR-safe (pending state on server, no unhandled rejections).",
 			"evidence": "src/lib/state/{useAsyncState,computedAsync,useAsyncQueue,useMemoize,useStorageAsync,useManualRefHistory,useRefHistory,useDebouncedRefHistory,useThrottledRefHistory}/ (impl+test+README each) — 329/329 green",
 			"functions": [
@@ -708,10 +671,7 @@
 			"status": "done"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Most-used responsive primitives. (useSSRWidth cut as recipe.) matchMedia mocks in tests; SSR returns fallback values (no hydration mismatch).",
 			"evidence": "",
 			"functions": [
@@ -787,10 +747,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Element measurement and focus tracking. New elements/ category (created by this batch). Observer mocks + disconnect-on-dispose tests.",
 			"evidence": "",
 			"functions": [
@@ -854,10 +811,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Document/page-level visibility, icon, fullscreen. (useTitle skipped: <svelte:head> covers it.) All SSR-guarded with server fallbacks.",
 			"evidence": "",
 			"functions": [
@@ -903,10 +857,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Scroll position/lock/infinite lists plus pointer position primitives. Passive listeners; SSR fallbacks.",
 			"evidence": "",
 			"functions": [
@@ -964,10 +915,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Touch/drag interactions and outside/long-press handlers. (useDraggable deferred to @neodrag/svelte.) Touch + mouse event mocks in tests.",
 			"evidence": "",
 			"functions": [
@@ -1043,10 +991,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Keyboard shortcuts and typing detection plus auto-growing textareas. KeyboardEvent mocks in tests.",
 			"evidence": "",
 			"functions": [
@@ -1086,10 +1031,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Extended clipboard/files plus theming/style/script injection. Depends on feat-002 useDark for useColorMode.",
 			"evidence": "",
 			"functions": [
@@ -1159,10 +1101,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Connectivity, realtime, sharing, URL state. New network/ category (created by this batch). Reconnect/abort/unsupported-path tests required.",
 			"evidence": "",
 			"functions": [
@@ -1226,10 +1165,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Hardware/OS capability sensing. New sensors/ category (created by this batch). Permission-denied/unsupported fallbacks are the main test cases.",
 			"evidence": "",
 			"functions": [
@@ -1299,10 +1235,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Event bus + dialogs + support detection + element overflow. (useMounted/useTransition/useAnimate skipped as Svelte-native; useVirtualList deferred to @tanstack/svelte-virtual.)",
 			"evidence": "",
 			"functions": [
@@ -1360,10 +1293,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Niche device/media APIs. Smallest audiences; last among browser ports. Every fn must no-op safely when the API is absent (primary test case).",
 			"evidence": "",
 			"functions": [
@@ -1469,10 +1399,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Reactive math kept: useClamp, usePrecision, createProjection, createGenericProjection. (One-liner wrappers cut as recipes.) Pure/SSR-trivial; full branch coverage.",
 			"evidence": "",
 			"functions": [
@@ -1590,10 +1517,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Shared helpers kept: useToNumber, reactifyObject, reactiveOmit, reactivePick, toReactive, makeDestructurable. (Trivial accessors cut as recipes.) Pure and fully testable.",
 			"evidence": "",
 			"functions": [
@@ -1675,10 +1599,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-005",
-				"feat-008"
-			],
+			"dependencies": ["feat-005", "feat-008"],
 			"description": "Ports of 11 svbase utilities ( Tier A pure helpers + Tier B Svelte attachments): composeHandlers, mergeProps, id utilities (generateId/createId/getTabIds), stateAttrs, sliderMath, roving, tooltip grace-delay, clickOutside/escapeKey attachments (browser/dismiss/), trackOutsidePress, context helpers. Existing svbase *.test.ts files travel as specs.",
 			"evidence": "",
 			"functions": [
@@ -1748,9 +1669,7 @@
 			"status": "todo"
 		},
 		{
-			"dependencies": [
-				"feat-029"
-			],
+			"dependencies": ["feat-029"],
 			"description": "Integration adapters LAST: useAxios, useFuse, useIDBKeyval as thin ports with peerDependencies (user installs the lib). The other 9 integrations are recipes-only in docs/recipes.md. Packaging/peerDep complexity isolated here.",
 			"evidence": "",
 			"functions": [
@@ -1803,19 +1722,11 @@
 			"reason": "Electron runtime only"
 		},
 		{
-			"functions": [
-				"useAuth",
-				"useFirestore",
-				"useRTDB"
-			],
+			"functions": ["useAuth", "useFirestore", "useRTDB"],
 			"reason": "Firebase SDK runtime"
 		},
 		{
-			"functions": [
-				"useRouteHash",
-				"useRouteParams",
-				"useRouteQuery"
-			],
+			"functions": ["useRouteHash", "useRouteParams", "useRouteQuery"],
 			"reason": "vue-router-coupled; SvelteKit equivalent needs $app/*"
 		},
 		{
@@ -1848,13 +1759,7 @@
 			"reason": "Vue component/template model; no Svelte equivalent"
 		},
 		{
-			"functions": [
-				"createRef",
-				"toRef",
-				"toRefs",
-				"unrefElement",
-				"createUnrefFn"
-			],
+			"functions": ["createRef", "toRef", "toRefs", "unrefElement", "createUnrefFn"],
 			"reason": "Vue ref/unref model; Svelte uses $state/getters"
 		},
 		{
@@ -1870,12 +1775,7 @@
 	],
 	"cut": [
 		{
-			"functions": [
-				"useTimeout",
-				"useInterval",
-				"useNow",
-				"useTimestamp"
-			],
+			"functions": ["useTimeout", "useInterval", "useNow", "useTimestamp"],
 			"reason": "Thin wrappers over useTimeoutFn/useIntervalFn or sub-10-line tickers a user writes directly.",
 			"recipes": "docs/recipes.md#timing"
 		},
@@ -1894,27 +1794,17 @@
 			"recipes": "docs/recipes.md#watchers"
 		},
 		{
-			"functions": [
-				"refDefault",
-				"refDebounced",
-				"refThrottled",
-				"syncRefs",
-				"computedEager"
-			],
+			"functions": ["refDefault", "refDebounced", "refThrottled", "syncRefs", "computedEager"],
 			"reason": "Trivial $state/$derived wrappers (computedEager also deprecated upstream).",
 			"recipes": "docs/recipes.md#refs"
 		},
 		{
-			"functions": [
-				"useCached"
-			],
+			"functions": ["useCached"],
 			"reason": "Single watch + comparator gate.",
 			"recipes": "docs/recipes.md#async"
 		},
 		{
-			"functions": [
-				"useSSRWidth"
-			],
+			"functions": ["useSSRWidth"],
 			"reason": "One-line SSR fallback constant.",
 			"recipes": "docs/recipes.md#viewport"
 		},
@@ -1939,100 +1829,63 @@
 			"recipes": "docs/recipes.md#math"
 		},
 		{
-			"functions": [
-				"isDefined",
-				"get",
-				"set",
-				"useToString",
-				"reactify",
-				"reactiveComputed"
-			],
+			"functions": ["isDefined", "get", "set", "useToString", "reactify", "reactiveComputed"],
 			"reason": "Sub-10-line accessors; reactify is $derived(fn(...args)) spelled out.",
 			"recipes": "docs/recipes.md#shared"
 		}
 	],
 	"deferred": [
 		{
-			"functions": [
-				"useDateFormat",
-				"useTimeAgo",
-				"useTimeAgoIntl"
-			],
+			"functions": ["useDateFormat", "useTimeAgo", "useTimeAgoIntl"],
 			"library": "date-fns",
 			"reason": "Token engine, locales, and pluralization beat any hand-rolled tables; keep only a ticker recipe."
 		},
 		{
-			"functions": [
-				"useTemporalNow"
-			],
+			"functions": ["useTemporalNow"],
 			"library": "Temporal API",
 			"reason": "Bleeding-edge API; defer to platform docs until it stabilizes."
 		},
 		{
-			"functions": [
-				"useDraggable"
-			],
+			"functions": ["useDraggable"],
 			"library": "@neodrag/svelte",
 			"reason": "383 lines duplicating a 2KB SSR-friendly Svelte action poorly."
 		},
 		{
-			"functions": [
-				"useVirtualList"
-			],
+			"functions": ["useVirtualList"],
 			"library": "@tanstack/svelte-virtual",
 			"reason": "Dynamic-size windowing, overscan, and a11y belong to a dedicated lib."
 		},
 		{
-			"functions": [
-				"useSortable"
-			],
+			"functions": ["useSortable"],
 			"library": "sortablejs",
 			"reason": "Simple sortable lists via a Svelte action recipe; complex cases go to @dnd-kit/svelte."
 		},
 		{
-			"functions": [
-				"useQRCode",
-				"useChangeCase",
-				"useJwt"
-			],
+			"functions": ["useQRCode", "useChangeCase", "useJwt"],
 			"library": "qrcode / change-case / jwt-decode (used directly)",
 			"reason": "The libs are already functional APIs; the wrapper is a $derived one-liner."
 		},
 		{
-			"functions": [
-				"useNProgress",
-				"useCookies",
-				"useFocusTrap",
-				"useDrauu",
-				"useAsyncValidator"
-			],
+			"functions": ["useNProgress", "useCookies", "useFocusTrap", "useDrauu", "useAsyncValidator"],
 			"library": "nprogress / document.cookie + SvelteKit / focus-trap / svelte whiteboards / async-validator",
 			"reason": "Framework-agnostic libs or platform APIs used directly; Svelte-shape snippets in recipes."
 		}
 	],
 	"svelteNative": [
 		{
-			"functions": [
-				"useTransition"
-			],
+			"functions": ["useTransition"],
 			"guidance": "svelte/motion (tweened/spring) + svelte/easing owns tweening; recipe shows the mapping."
 		},
 		{
-			"functions": [
-				"useAnimate"
-			],
+			"functions": ["useAnimate"],
 			"guidance": "svelte/animate + svelte/transition, or raw WAAPI element.animate() in $effect."
 		},
 		{
-			"functions": [
-				"useMounted"
-			],
+			"functions": ["useMounted"],
 			"guidance": "An $effect body IS mount; a composable adds nothing."
 		},
 		{
-			"functions": [
-				"useTitle"
-			],
+			"functions": ["useTitle"],
 			"guidance": "<svelte:head><title> + $effect for dynamic titles."
 		}
 	],
