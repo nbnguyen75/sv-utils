@@ -15,6 +15,11 @@ export * from './browser/useNavigatorLanguage/index.ts';
 export * from './browser/useTextDirection/index.ts';
 export * from './browser/useWindowSize/index.ts';
 export * from './browser/useBreakpoints/index.ts';
+export * from './browser/useDocumentVisibility/index.ts';
+export * from './browser/useWindowFocus/index.ts';
+export * from './browser/usePageLeave/index.ts';
+export * from './browser/useFavicon/index.ts';
+export * from './browser/useFullscreen/index.ts';
 // * Elements
 export * from './elements/useResizeObserver/index.ts';
 export * from './elements/useMutationObserver/index.ts';

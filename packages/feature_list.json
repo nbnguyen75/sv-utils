@@ -813,24 +813,24 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Document/page-level visibility, icon, fullscreen. (useTitle skipped: <svelte:head> covers it.) All SSR-guarded with server fallbacks.",
-			"evidence": "",
+			"evidence": "src/lib/browser/{useDocumentVisibility,useWindowFocus,usePageLeave,useFavicon,useFullscreen}/ (impl+test+README each) — 416/416 green",
 			"functions": [
 				{
 					"name": "useDocumentVisibility",
 					"source": "vueuse/core/useDocumentVisibility",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useDocumentVisibility/"
 				},
 				{
 					"name": "useWindowFocus",
 					"source": "vueuse/core/useWindowFocus",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useWindowFocus/"
 				},
 				{
 					"name": "usePageLeave",
 					"source": "vueuse/core/usePageLeave",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePageLeave/"
 				},
 				{
@@ -842,19 +842,19 @@
 				{
 					"name": "useFavicon",
 					"source": "vueuse/core/useFavicon",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useFavicon/"
 				},
 				{
 					"name": "useFullscreen",
 					"source": "vueuse/core/useFullscreen",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useFullscreen/"
 				}
 			],
 			"id": "feat-018",
 			"name": "Document & page UI",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

@@ -272,6 +272,20 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 406/406
       (81 files), `prepack` publint clean.
 
+### feat-018: Document & page UI — done
+
+- [x] 5 ports in `src/lib/browser/` (impl + test + README each, barrel
+      wired): useDocumentVisibility (1 test), useWindowFocus (1),
+      usePageLeave (1), useFavicon (4), useFullscreen (3).
+- [x] Fullscreen vendor-prefix detection via capability probing (`in`
+      operator — zero `any` casts / `ts-expect-error`s); per-name listener
+      loop (our listener takes single events, not arrays); enter-exits-first
+      ordering parity; mocked-API tests cover the whole state machine.
+- [x] Fixed via failing tests: favicon needs first-run application
+      (equality guard skips mount); existing links keep `type` (parity).
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 416/416
+      (86 files), `prepack` publint clean.
+
 ### feat-014: Ref variants & shared state — done
 
 - [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):
