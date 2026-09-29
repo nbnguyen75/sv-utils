@@ -171,6 +171,28 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 191/191
       (31 files), `prepack` publint clean.
 
+### feat-011: Timing core — done
+
+- [x] 5 ports in `src/lib/utilities/` (impl + test + README each, barrel
+      wired): useTimeoutFn (7 tests), useIntervalFn (6), useRafFn (7),
+      useCountdown (7), useFps (4).
+- [x] `$effect` + `untrack` replaces `tryOnScopeDispose`/`watch`;
+      `MaybeGetter` interval/period/fpsLimit inputs; dropped the `window`
+      option (global rAF only); countdown scheduler injectable with the same
+      pause/resume/isActive shape; writable `remaining`.
+- [x] `test/fixtures/raf.ts`: deterministic manual-frame rAF mock (explicit
+      timestamps, no timers).
+- [x] Fixed via failing tests: generic rest-tuple arity needs one shared
+      `NO_ARGS` empty-tuple constant; `useIntervalFn` reactive restart
+      requires a separate watcher effect (cleanup-then-check in one effect
+      mistakes disposal for a stop and kills the timer — real bug caught);
+      rAF capped first frame skips (VueUse parity); countdown `start()`
+      resets (setter test uses `resume()`); `useFps` measures
+      `performance.now`, not frame args (mocked clock); invalid intervals
+      stop rather than leak the old cadence (documented divergence).
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 224/224
+      (37 files), `prepack` publint clean.
+
 ### Scope review: roadmap 150+ → ~110 ports (v2.1.0)
 
 - [x] Policy locked: core strictly zero-dep; integrations-last may use

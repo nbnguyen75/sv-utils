@@ -329,12 +329,12 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Core timers and clock primitives; fake-timer tests. Pausable controls per architecture rules. (useTimeout/useInterval/useNow/useTimestamp cut as recipes.)",
-			"evidence": "",
+			"evidence": "src/lib/utilities/{useTimeoutFn,useIntervalFn,useRafFn,useCountdown,useFps}/ (impl+test+README each), test/fixtures/raf.ts — 224/224 green",
 			"functions": [
 				{
 					"name": "useTimeoutFn",
 					"source": "vueuse/shared/useTimeoutFn",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/utilities/useTimeoutFn/"
 				},
 				{
@@ -346,7 +346,7 @@
 				{
 					"name": "useIntervalFn",
 					"source": "vueuse/shared/useIntervalFn",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/utilities/useIntervalFn/"
 				},
 				{
@@ -358,7 +358,7 @@
 				{
 					"name": "useRafFn",
 					"source": "vueuse/core/useRafFn",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/utilities/useRafFn/"
 				},
 				{
@@ -376,19 +376,19 @@
 				{
 					"name": "useCountdown",
 					"source": "vueuse/core/useCountdown",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/utilities/useCountdown/"
 				},
 				{
 					"name": "useFps",
 					"source": "vueuse/core/useFps",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/utilities/useFps/"
 				}
 			],
 			"id": "feat-011",
 			"name": "Timing core (timeouts, intervals, clock)",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

@@ -17,6 +17,16 @@ export * from './state/useOffsetPagination/index.ts';
 // * Utilities
 export * from './utilities/useDebounceFn/index.ts';
 export * from './utilities/useThrottleFn/index.ts';
+export * from './utilities/useTimeoutFn/index.ts';
+export * from './utilities/useIntervalFn/index.ts';
+export * from './utilities/useRafFn/index.ts';
+export * from './utilities/useCountdown/index.ts';
+export * from './utilities/useFps/index.ts';
+export * from './utilities/useTimeoutFn/index.ts';
+export * from './utilities/useIntervalFn/index.ts';
+export * from './utilities/useRafFn/index.ts';
+export * from './utilities/useCountdown/index.ts';
+export * from './utilities/useFps/index.ts';
 // * Shared
 export * from './shared/is.ts';
 export * from './shared/getter/index.ts';
