@@ -393,7 +393,7 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Date/time display — DEFERRED to date-fns entirely. Recipes only (ticker, Intl.RelativeTimeFormat); no code in this batch.",
-			"evidence": "",
+			"evidence": "docs/recipes.md (dates section: date-fns ticker/format + Intl.RelativeTimeFormat + Temporal note); no code per scope review",
 			"functions": [
 				{
 					"name": "useDateFormat",
@@ -422,7 +422,7 @@
 			],
 			"id": "feat-012",
 			"name": "Date/time display",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

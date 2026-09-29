@@ -193,6 +193,13 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 224/224
       (37 files), `prepack` publint clean.
 
+### feat-012: Date/time display — done (recipes-only, no code)
+
+- [x] Verified `docs/recipes.md` dates section covers all four deferred
+      functions (date-fns ticker/format recipe, `Intl.RelativeTimeFormat`
+      recipe, Temporal stabilization note). Evidence recorded; no
+      implementation per scope review.
+
 ### Scope review: roadmap 150+ → ~110 ports (v2.1.0)
 
 - [x] Policy locked: core strictly zero-dep; integrations-last may use
