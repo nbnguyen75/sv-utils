@@ -211,6 +211,23 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 254/254
       (42 files), `prepack` publint clean.
 
+### feat-014: Ref variants & shared state — done
+
+- [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):
+      refAutoReset (5 tests), refManualReset (3), refWithControl (4),
+      createEventHook (3), createGlobalState (2), createSharedComposable (2),
+      syncRef (5), computedWithControl (4).
+- [x] No Vue `customRef`/`effectScope` in Svelte: auto-timers use disposal
+      effects; `silentSet`/`lay` dropped as impossible (writes always notify,
+      documented); shared-composable disposal degrades to documented
+      app-lifetime singleton (fresh per SSR call); `syncRef` loop-breaking
+      via sync-window flag + equality convergence; `computedWithControl`
+      via epoch counter.
+- [x] Pure modules (eventHook/globalState/sharedComposable) live directly
+      in `index.ts` per the no-runes convention.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 282/282
+      (51 files), `prepack` publint clean.
+
 ### feat-012: Date/time display — done (recipes-only, no code)
 
 - [x] Verified `docs/recipes.md` dates section covers all four deferred

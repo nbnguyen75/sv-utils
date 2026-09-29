@@ -19,6 +19,14 @@ export * from './state/watchAtMost/index.ts';
 export * from './state/watchIgnorable/index.ts';
 export * from './state/watchTriggerable/index.ts';
 export * from './state/until/index.ts';
+export * from './state/refAutoReset/index.ts';
+export * from './state/refManualReset/index.ts';
+export * from './state/refWithControl/index.ts';
+export * from './state/createEventHook/index.ts';
+export * from './state/createGlobalState/index.ts';
+export * from './state/createSharedComposable/index.ts';
+export * from './state/syncRef/index.ts';
+export * from './state/computedWithControl/index.ts';
 // * Utilities
 export * from './utilities/useDebounceFn/index.ts';
 export * from './utilities/useThrottleFn/index.ts';
