@@ -1,11 +1,18 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser, noop } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
+import { isBrowser, noop } from '../../shared/is.ts';
 
 /** Options for {@link useScriptTag}. */
 export interface UseScriptTagOptions {
+	/** CORS mode. */
+	crossOrigin?: 'anonymous' | 'use-credentials';
+	/** Referrer policy. */
+	referrerPolicy?: ReferrerPolicy;
+	/** Extra attributes. */
+	attrs?: Record<string, string>;
 	/**
 	 * Document receiving the tag. `null` disables.
 	 * @default document
@@ -16,44 +23,38 @@ export interface UseScriptTagOptions {
 	 * @default true
 	 */
 	immediate?: boolean;
-	/**
-	 * `async` attribute.
-	 * @default true
-	 */
-	async?: boolean;
-	/**
-	 * Script type.
-	 * @default 'text/javascript'
-	 */
-	type?: string;
+	/** `nomodule` attribute. */
+	noModule?: boolean;
 	/**
 	 * Manual timing: skip auto load and auto unload.
 	 * @default false
 	 */
 	manual?: boolean;
-	/** CORS mode. */
-	crossOrigin?: 'anonymous' | 'use-credentials';
-	/** Referrer policy. */
-	referrerPolicy?: ReferrerPolicy;
-	/** `nomodule` attribute. */
-	noModule?: boolean;
+	/**
+	 * `async` attribute.
+	 * @default true
+	 */
+	async?: boolean;
 	/** `defer` attribute. */
 	defer?: boolean;
-	/** Extra attributes. */
-	attrs?: Record<string, string>;
 	/** Nonce for Content Security Policy. */
 	nonce?: string;
+	/**
+	 * Script type.
+	 * @default 'text/javascript'
+	 */
+	type?: string;
 }
 
 /** State returned by {@link useScriptTag}. */
 export interface UseScriptTagReturn {
-	/** The script element once known. Getter-backed. */
-	readonly scriptTag: HTMLScriptElement | null;
 	/**
 	 * Load (singleton per instance). Resolves with the element, or `false`
 	 * without a document.
 	 */
 	load(waitForScriptLoad?: boolean): Promise<HTMLScriptElement | boolean>;
+	/** The script element once known. Getter-backed. */
+	readonly scriptTag: HTMLScriptElement | null;
 	/** Remove the tag and forget it. */
 	unload(): void;
 }

@@ -1,41 +1,42 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
-import { useEventListener } from '../useEventListener/index.svelte.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useTimeoutFn } from '../../utilities/useTimeoutFn/index.svelte.ts';
+import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Options for {@link useClipboardItems}. */
 export interface UseClipboardItemsOptions<Source> {
 	/**
-	 * Refresh `content` on copy/cut events.
-	 * @default false
+	 * Navigator to use. `null` disables. Defaults to the global navigator.
 	 */
-	read?: boolean;
-	/** Default content for `copy()` when called without arguments. */
-	source?: Source;
+	navigator?: Navigator | null;
 	/**
 	 * Milliseconds until `copied` resets.
 	 * @default 1500
 	 */
 	copiedDuring?: number;
+	/** Default content for `copy()` when called without arguments. */
+	source?: Source;
 	/**
-	 * Navigator to use. `null` disables. Defaults to the global navigator.
+	 * Refresh `content` on copy/cut events.
+	 * @default false
 	 */
-	navigator?: Navigator | null;
+	read?: boolean;
 }
 
 /** State returned by {@link useClipboardItems}. */
 export interface UseClipboardItemsReturn<Optional> {
-	/** Whether the Clipboard API exists here. */
-	readonly isSupported: boolean;
-	/** Last written or read items. Getter-backed. */
-	readonly content: ClipboardItems;
-	/** Whether the last write is still fresh. Getter-backed. */
-	readonly copied: boolean;
 	/** Write items to the clipboard. */
 	copy: Optional extends true
 		? (content?: ClipboardItems) => Promise<void>
 		: (content: ClipboardItems) => Promise<void>;
+	/** Last written or read items. Getter-backed. */
+	readonly content: ClipboardItems;
+	/** Whether the Clipboard API exists here. */
+	readonly isSupported: boolean;
+	/** Whether the last write is still fresh. Getter-backed. */
+	readonly copied: boolean;
 	/** Read the clipboard into `content` now. */
 	read(): void;
 }

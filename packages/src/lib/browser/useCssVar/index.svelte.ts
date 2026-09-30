@@ -1,9 +1,10 @@
+import type { MaybeElement, MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeElement, MaybeGetter } from '../../shared/getter/index.ts';
 import { useMutationObserver } from '../../elements/useMutationObserver/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link useCssVar}. */
 export interface UseCssVarOptions {

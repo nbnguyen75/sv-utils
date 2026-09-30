@@ -1,30 +1,15 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { createEventHook } from '../../state/createEventHook/index.ts';
 
 /** Options for {@link useFileDialog}. */
 export interface UseFileDialogOptions {
 	/**
-	 * Allow multiple files.
-	 * @default true
+	 * Custom input element. Defaults to a detached created input.
 	 */
-	multiple?: MaybeGetter<boolean>;
-	/**
-	 * Accepted MIME types or extensions.
-	 * @default '*'
-	 */
-	accept?: MaybeGetter<string>;
-	/**
-	 * Capture source for mobile file inputs
-	 * (`camera`, `camcorder`, `microphone`, `filesystem`).
-	 */
-	capture?: MaybeGetter<string>;
-	/**
-	 * Clear the selection when opening.
-	 * @default false
-	 */
-	reset?: MaybeGetter<boolean>;
+	input?: MaybeGetter<HTMLInputElement | null | undefined>;
 	/**
 	 * Select directories instead of files.
 	 * @default false
@@ -36,27 +21,43 @@ export interface UseFileDialogOptions {
 	 */
 	initialFiles?: File[] | FileList;
 	/**
-	 * Custom input element. Defaults to a detached created input.
+	 * Allow multiple files.
+	 * @default true
 	 */
-	input?: MaybeGetter<HTMLInputElement | null | undefined>;
+	multiple?: MaybeGetter<boolean>;
+	/**
+	 * Capture source for mobile file inputs
+	 * (`camera`, `camcorder`, `microphone`, `filesystem`).
+	 */
+	capture?: MaybeGetter<string>;
+	/**
+	 * Accepted MIME types or extensions.
+	 * @default '*'
+	 */
+	accept?: MaybeGetter<string>;
+	/**
+	 * Clear the selection when opening.
+	 * @default false
+	 */
+	reset?: MaybeGetter<boolean>;
 }
 
 /** State returned by {@link useFileDialog}. */
 export interface UseFileDialogReturn {
-	/** Selected files. Getter-backed. */
-	readonly files: FileList | null;
-	/** Open the dialog, optionally overriding options for one shot. */
-	open(localOptions?: Partial<UseFileDialogOptions>): void;
-	/** Clear the selection. */
-	reset(): void;
 	/** Subscribe to selections. */
 	onChange(fn: (files: FileList | null) => unknown): {
 		off(): void;
 	};
+	/** Open the dialog, optionally overriding options for one shot. */
+	open(localOptions?: Partial<UseFileDialogOptions>): void;
 	/** Subscribe to cancellations. */
 	onCancel(fn: () => unknown): {
 		off(): void;
 	};
+	/** Selected files. Getter-backed. */
+	readonly files: FileList | null;
+	/** Clear the selection. */
+	reset(): void;
 }
 
 const DEFAULT_OPTIONS = {

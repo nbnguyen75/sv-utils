@@ -1,42 +1,43 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
-import { useAsyncState } from '../../state/useAsyncState/index.svelte.ts';
 import type {
 	UseAsyncStateOptions,
 	UseAsyncStateReturn
 } from '../../state/useAsyncState/index.svelte.ts';
 
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
+import { useAsyncState } from '../../state/useAsyncState/index.svelte.ts';
+
 /** Options for {@link useImage}. Mirrors `<img>` attributes. */
 export interface UseImageOptions {
-	/** Address of the resource. */
-	src: string;
+	/** Referrer policy for the fetch. */
+	referrerPolicy?: HTMLImageElement['referrerPolicy'];
+	/** Fetch priority hint. */
+	fetchPriority?: HTMLImageElement['fetchPriority'];
+	/** Decoding hint. */
+	decoding?: HTMLImageElement['decoding'];
+	/** Loading hint. */
+	loading?: HTMLImageElement['loading'];
+	/** Image height. */
+	height?: HTMLImageElement['height'];
+	/** Partial URL of an associated image map. */
+	usemap?: HTMLImageElement['useMap'];
+	/** Image width. */
+	width?: HTMLImageElement['width'];
+	/** Server-side image map flag. */
+	ismap?: HTMLImageElement['isMap'];
+	/** CORS settings. */
+	crossorigin?: string;
 	/** Images for different situations (e.g. high-resolution displays). */
 	srcset?: string;
 	/** Image sizes for different page layouts. */
 	sizes?: string;
-	/** Alternative information. */
-	alt?: string;
 	/** Image classes. */
 	class?: string;
-	/** Loading hint. */
-	loading?: HTMLImageElement['loading'];
-	/** CORS settings. */
-	crossorigin?: string;
-	/** Referrer policy for the fetch. */
-	referrerPolicy?: HTMLImageElement['referrerPolicy'];
-	/** Image width. */
-	width?: HTMLImageElement['width'];
-	/** Image height. */
-	height?: HTMLImageElement['height'];
-	/** Decoding hint. */
-	decoding?: HTMLImageElement['decoding'];
-	/** Fetch priority hint. */
-	fetchPriority?: HTMLImageElement['fetchPriority'];
-	/** Server-side image map flag. */
-	ismap?: HTMLImageElement['isMap'];
-	/** Partial URL of an associated image map. */
-	usemap?: HTMLImageElement['useMap'];
+	/** Alternative information. */
+	alt?: string;
+	/** Address of the resource. */
+	src: string;
 }
 
 /** State returned by {@link useImage}. */

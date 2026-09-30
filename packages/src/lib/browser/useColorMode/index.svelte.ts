@@ -1,10 +1,11 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
-import { usePreferredDark } from '../usePreferredDark/index.svelte.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useStorage } from '../../state/useStorage/index.svelte.ts';
+import { usePreferredDark } from '../usePreferredDark/index.svelte.ts';
 
 /** Built-in color modes. */
 export type BasicColorMode = 'light' | 'dark';
@@ -15,26 +16,6 @@ export type BasicColorSchema = BasicColorMode | 'auto';
 /** Options for {@link useColorMode}. */
 export interface UseColorModeOptions<T extends string = BasicColorMode> {
 	/**
-	 * Selector or element receiving the mode marker.
-	 * @default 'html'
-	 */
-	selector?: string | MaybeGetter<Element | null | undefined>;
-	/**
-	 * Attribute carrying the mode (`'class'` toggles classes).
-	 * @default 'class'
-	 */
-	attribute?: string;
-	/**
-	 * Starting mode. Resolved once at creation.
-	 * @default 'auto'
-	 */
-	initialValue?: MaybeGetter<T | BasicColorSchema>;
-	/**
-	 * Class (or attribute value) per mode.
-	 * @default { auto: '', light: 'light', dark: 'dark' }
-	 */
-	modes?: Partial<Record<T | BasicColorSchema, string>>;
-	/**
 	 * Custom change handler. When provided, the default DOM update is
 	 * skipped unless `defaultHandler` is called.
 	 */
@@ -43,11 +24,31 @@ export interface UseColorModeOptions<T extends string = BasicColorMode> {
 		defaultHandler: (mode: T | BasicColorMode) => void
 	) => void;
 	/**
+	 * Selector or element receiving the mode marker.
+	 * @default 'html'
+	 */
+	selector?: string | MaybeGetter<Element | null | undefined>;
+	/**
+	 * Class (or attribute value) per mode.
+	 * @default { auto: '', light: 'light', dark: 'dark' }
+	 */
+	modes?: Partial<Record<T | BasicColorSchema, string>>;
+	/**
+	 * Starting mode. Resolved once at creation.
+	 * @default 'auto'
+	 */
+	initialValue?: MaybeGetter<T | BasicColorSchema>;
+	/**
 	 * External store. Must expose a mutable `value`; reactivity across
 	 * instances requires it to be reactive (e.g. another util's return).
 	 * Skips persistence when provided.
 	 */
 	storageRef?: { value: T | BasicColorSchema };
+	/**
+	 * Suppress CSS transitions while switching.
+	 * @default true
+	 */
+	disableTransition?: boolean;
 	/**
 	 * Persistence key. `null` disables persistence.
 	 * @default 'sv-color-scheme'
@@ -59,22 +60,22 @@ export interface UseColorModeOptions<T extends string = BasicColorMode> {
 	 */
 	storage?: Storage | null;
 	/**
-	 * Suppress CSS transitions while switching.
-	 * @default true
+	 * Attribute carrying the mode (`'class'` toggles classes).
+	 * @default 'class'
 	 */
-	disableTransition?: boolean;
+	attribute?: string;
 }
 
 /** State returned by {@link useColorMode}. */
 export interface UseColorModeReturn<T extends string = BasicColorMode> {
-	/** Effective mode. Assign to change. Getter/setter-backed. */
-	value: T | BasicColorMode;
-	/** Stored mode (`'auto'` included). Assign to change. Getter/setter-backed. */
-	store: T | BasicColorSchema;
-	/** System mode from the OS preference. Getter-backed. */
-	readonly system: BasicColorMode;
 	/** Effective mode (same as `value`). Getter-backed. */
 	readonly state: T | BasicColorMode;
+	/** System mode from the OS preference. Getter-backed. */
+	readonly system: BasicColorMode;
+	/** Stored mode (`'auto'` included). Assign to change. Getter/setter-backed. */
+	store: T | BasicColorSchema;
+	/** Effective mode. Assign to change. Getter/setter-backed. */
+	value: T | BasicColorMode;
 }
 
 const CSS_DISABLE_TRANS =

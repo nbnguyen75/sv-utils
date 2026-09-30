@@ -1,8 +1,9 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { untrack } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
 import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link useStyleTag}. */
 export interface UseStyleTagOptions {
@@ -11,8 +12,6 @@ export interface UseStyleTagOptions {
 	 * @default document
 	 */
 	document?: Document | null;
-	/** Media query the styles apply under. */
-	media?: string;
 	/**
 	 * Load on mount.
 	 * @default true
@@ -23,27 +22,29 @@ export interface UseStyleTagOptions {
 	 * @default false
 	 */
 	manual?: boolean;
+	/** Media query the styles apply under. */
+	media?: string;
+	/** Nonce for Content Security Policy. */
+	nonce?: string;
 	/**
 	 * DOM id of the tag (shared ids ref-count).
 	 * @default auto-incremented
 	 */
 	id?: string;
-	/** Nonce for Content Security Policy. */
-	nonce?: string;
 }
 
 /** State returned by {@link useStyleTag}. */
 export interface UseStyleTagReturn {
-	/** DOM id of the tag. */
-	readonly id: string;
-	/** Current CSS text. Getter-backed. */
-	readonly css: string;
-	/** Append the tag (idempotent per instance) and apply the CSS. */
-	load(): void;
-	/** Release the tag (removes it once the last user unloads). */
-	unload(): void;
 	/** Whether this instance holds the tag. Getter-backed. */
 	readonly isLoaded: boolean;
+	/** Current CSS text. Getter-backed. */
+	readonly css: string;
+	/** DOM id of the tag. */
+	readonly id: string;
+	/** Release the tag (removes it once the last user unloads). */
+	unload(): void;
+	/** Append the tag (idempotent per instance) and apply the CSS. */
+	load(): void;
 }
 
 let styleIdCounter = 0;

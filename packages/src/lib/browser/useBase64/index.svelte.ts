@@ -1,6 +1,7 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link useBase64}. */
 export interface UseBase64Options {
@@ -14,10 +15,10 @@ export interface UseBase64Options {
 
 /** Extra options for canvas/image sources. */
 export interface ToDataURLOptions extends UseBase64Options {
-	/** MIME type for the output. */
-	type?: string;
 	/** Quality for lossy encodings (0–1). */
 	quality?: number;
+	/** MIME type for the output. */
+	type?: string;
 }
 
 /** Extra options for object sources. */
@@ -28,12 +29,12 @@ export interface UseBase64ObjectOptions<T> extends UseBase64Options {
 
 /** State returned by {@link useBase64}. */
 export interface UseBase64Return {
-	/** Latest base64 output. Getter-backed. */
-	readonly base64: string;
 	/** In-flight (or last) conversion promise. Getter-backed. */
 	readonly promise: Promise<string> | undefined;
 	/** Convert the current target now. */
 	execute(): Promise<string> | undefined;
+	/** Latest base64 output. Getter-backed. */
+	readonly base64: string;
 }
 
 /** Default object serializer: JSON with Map/Set/Array support. */
