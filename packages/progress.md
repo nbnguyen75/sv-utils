@@ -320,6 +320,34 @@ Window` is false across VM contexts → duck-typed window detection in
       reads in teardown) + new §5 (documentation rules incl. duck-typed
       DOM checks), `migration-plan.md` §4 (examples + no banners).
 
+### feat-020: Gestures & drag — done
+
+- [x] 9 ports in `src/lib/browser/` (impl + test + README each, barrel
+      wired): usePointer (5 tests), usePointerLock (5), useSwipe (6),
+      usePointerSwipe (5), useDropZone (7), useElementByPoint (5),
+      onClickOutside (6), onLongPress (8), onElementRemoval (5).
+- [x] `useDraggable` stays `deferred` (recipe: `@neodrag/svelte`);
+      `useParallax` moved to feat-026 (needs `useDeviceOrientation`
+      feat-024 + `useScreenOrientation` feat-026).
+- [x] Stoppable listeners use a `stopped` flag over `useEventListener`
+      (which returns `void`): silence is behaviorally identical to
+      detach, and disposal still cleans up.
+- [x] Fixed via failing tests: `until()` cannot run inside post-mount
+      methods (`$effect` orphan) — `usePointerLock` waits on a one-shot
+      `pointerlockchange` listener attached before the request instead.
+- [x] `useDropZone.dataTypes` function form is the predicate, never a
+      getter (indistinguishable; matches upstream `unref` semantics).
+- [x] `onLongPress.stop()` cancels a pending timer (stricter than
+      upstream, which can fire post-unmount); a disposal-only `$effect`
+      clears it too.
+- [x] `??` cannot mix with `||` unparenthesized (parse error in
+      `usePointerSwipe.eventIsAllowed`); `exactOptionalPropertyTypes`
+      rejects explicit `undefined` in listener options (`onLongPress`);
+      TS DOM lib types `requestPointerLock()` as returning
+      `Promise<void>`.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 506/506
+      (103 files), `prepack` publint clean.
+
 ### feat-014: Ref variants & shared state — done
 
 - [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):

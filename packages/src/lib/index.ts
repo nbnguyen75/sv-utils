@@ -27,6 +27,15 @@ export * from './browser/useMouse/index.ts';
 export * from './browser/useMouseInElement/index.ts';
 export * from './browser/useMousePressed/index.ts';
 export * from './browser/useElementHover/index.ts';
+export * from './browser/usePointer/index.ts';
+export * from './browser/usePointerLock/index.ts';
+export * from './browser/useSwipe/index.ts';
+export * from './browser/usePointerSwipe/index.ts';
+export * from './browser/useDropZone/index.ts';
+export * from './browser/useElementByPoint/index.ts';
+export * from './browser/onClickOutside/index.ts';
+export * from './browser/onLongPress/index.ts';
+export * from './browser/onElementRemoval/index.ts';
 // * Elements
 export * from './elements/useResizeObserver/index.ts';
 export * from './elements/useMutationObserver/index.ts';

@@ -916,19 +916,19 @@
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
-			"description": "Touch/drag interactions and outside/long-press handlers. (useDraggable deferred to @neodrag/svelte.) Touch + mouse event mocks in tests.",
-			"evidence": "",
+			"description": "Touch/drag interactions and outside/long-press handlers. (useDraggable deferred to @neodrag/svelte; useParallax moved to feat-026 — needs useDeviceOrientation + useScreenOrientation.) Touch + mouse event mocks in tests.",
+			"evidence": "src/lib/browser/{usePointer,usePointerLock,useSwipe,usePointerSwipe,useDropZone,useElementByPoint,onClickOutside,onLongPress,onElementRemoval}/ (impl+test+README each) — 506/506 green (103 files); format/lint/check(0/0)/prepack clean",
 			"functions": [
 				{
 					"name": "useSwipe",
 					"source": "vueuse/core/useSwipe",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useSwipe/"
 				},
 				{
 					"name": "usePointerSwipe",
 					"source": "vueuse/core/usePointerSwipe",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePointerSwipe/"
 				},
 				{
@@ -940,55 +940,49 @@
 				{
 					"name": "useDropZone",
 					"source": "vueuse/core/useDropZone",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useDropZone/"
-				},
-				{
-					"name": "useParallax",
-					"source": "vueuse/core/useParallax",
-					"status": "todo",
-					"target": "src/lib/browser/useParallax/"
 				},
 				{
 					"name": "usePointer",
 					"source": "vueuse/core/usePointer",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePointer/"
 				},
 				{
 					"name": "usePointerLock",
 					"source": "vueuse/core/usePointerLock",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/usePointerLock/"
 				},
 				{
 					"name": "useElementByPoint",
 					"source": "vueuse/core/useElementByPoint",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useElementByPoint/"
 				},
 				{
 					"name": "onClickOutside",
 					"source": "vueuse/core/onClickOutside",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/onClickOutside/"
 				},
 				{
 					"name": "onLongPress",
 					"source": "vueuse/core/onLongPress",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/onLongPress/"
 				},
 				{
 					"name": "onElementRemoval",
 					"source": "vueuse/core/onElementRemoval",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/onElementRemoval/"
 				}
 			],
 			"id": "feat-020",
 			"name": "Gestures & drag",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],
@@ -1362,6 +1356,12 @@
 					"source": "vueuse/core/useScreenOrientation",
 					"status": "todo",
 					"target": "src/lib/browser/useScreenOrientation/"
+				},
+				{
+					"name": "useParallax",
+					"source": "vueuse/core/useParallax",
+					"status": "todo",
+					"target": "src/lib/browser/useParallax/"
 				},
 				{
 					"name": "useScreenSafeArea",
