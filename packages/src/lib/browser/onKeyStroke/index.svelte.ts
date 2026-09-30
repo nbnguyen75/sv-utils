@@ -1,6 +1,7 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Key match: accept all, one key, several keys, or a predicate. */
@@ -15,26 +16,26 @@ export type KeyStrokeEventName = 'keydown' | 'keypress' | 'keyup';
 /** Options for {@link onKeyStroke} (and the key-specific shorthands). */
 export interface OnKeyStrokeOptions {
 	/**
-	 * Event to listen for.
-	 * @default 'keydown'
-	 */
-	eventName?: KeyStrokeEventName;
-	/**
 	 * Element (or getter) receiving keyboard events.
 	 * @default window
 	 */
 	target?: MaybeGetter<EventTarget | null | undefined>;
 	/**
-	 * Register the listener as passive.
-	 * @default false
+	 * Event to listen for.
+	 * @default 'keydown'
 	 */
-	passive?: boolean;
+	eventName?: KeyStrokeEventName;
 	/**
 	 * Ignore auto-repeated events while the key is held down.
 	 * Resolved per event, so it can be reactive.
 	 * @default false
 	 */
 	dedupe?: MaybeGetter<boolean>;
+	/**
+	 * Register the listener as passive.
+	 * @default false
+	 */
+	passive?: boolean;
 }
 
 function createKeyPredicate(keyFilter: KeyFilter): KeyPredicate {

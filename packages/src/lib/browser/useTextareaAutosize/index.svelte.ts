@@ -1,9 +1,10 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { tick } from 'svelte';
 
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 import { useResizeObserver } from '../../elements/useResizeObserver/index.svelte.ts';
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Style property manipulated by {@link useTextareaAutosize}. */
 export type TextareaAutosizeStyleProp = 'height' | 'minHeight';
@@ -12,12 +13,6 @@ export type TextareaAutosizeStyleProp = 'height' | 'minHeight';
 export interface UseTextareaAutosizeOptions {
 	/** Textarea element to autosize. */
 	element?: MaybeGetter<HTMLTextAreaElement | null | undefined>;
-	/** Textarea content; resizing re-runs when it changes. */
-	input?: MaybeGetter<string>;
-	/** Maximum autosized height in pixels. */
-	maxHeight?: number;
-	/** Called when the measured height changes. */
-	onResize?: () => void;
 	/**
 	 * Style target receiving the height. Defaults to the textarea itself.
 	 */
@@ -27,6 +22,12 @@ export interface UseTextareaAutosizeOptions {
 	 * @default 'height'
 	 */
 	styleProp?: TextareaAutosizeStyleProp;
+	/** Textarea content; resizing re-runs when it changes. */
+	input?: MaybeGetter<string>;
+	/** Called when the measured height changes. */
+	onResize?: () => void;
+	/** Maximum autosized height in pixels. */
+	maxHeight?: number;
 }
 
 /** State returned by {@link useTextareaAutosize}. */

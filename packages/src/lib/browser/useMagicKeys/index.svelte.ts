@@ -1,8 +1,9 @@
-import { isBrowser } from '../../shared/is.ts';
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 
+import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Default key aliases (all lowercase). */
 export const DefaultMagicKeysAliasMap: Readonly<Record<string, string>> = {
@@ -19,6 +20,10 @@ export const DefaultMagicKeysAliasMap: Readonly<Record<string, string>> = {
 /** Options for {@link useMagicKeys}. */
 export interface UseMagicKeysOptions {
 	/**
+	 * Custom handler for keydown/keyup events. Return value is ignored.
+	 */
+	onEventFired?: (event: KeyboardEvent) => void | boolean;
+	/**
 	 * Element (or getter) receiving keyboard events.
 	 * @default window
 	 */
@@ -34,10 +39,6 @@ export interface UseMagicKeysOptions {
 	 * @default true
 	 */
 	passive?: boolean;
-	/**
-	 * Custom handler for keydown/keyup events. Return value is ignored.
-	 */
-	onEventFired?: (event: KeyboardEvent) => void | boolean;
 }
 
 /** Internal bookkeeping exposed by {@link useMagicKeys}. */

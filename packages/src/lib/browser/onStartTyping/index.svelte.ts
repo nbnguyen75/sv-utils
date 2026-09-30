@@ -38,15 +38,15 @@ export function isTypedCharValid(event: KeyboardEvent): boolean {
 
 /** Options for {@link onStartTyping}. */
 export interface OnStartTypingOptions {
+	/** Custom typeable-character check. */
+	isTypedCharValid?: (event: KeyboardEvent) => boolean;
+	/** Custom editable-focus check. */
+	isFocusedElementEditable?: () => boolean;
 	/**
 	 * Document receiving key events. `null` disables listening.
 	 * @default document
 	 */
 	document?: Document | null;
-	/** Custom typeable-character check. */
-	isTypedCharValid?: (event: KeyboardEvent) => boolean;
-	/** Custom editable-focus check. */
-	isFocusedElementEditable?: () => boolean;
 }
 
 /**
