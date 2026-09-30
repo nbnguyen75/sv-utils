@@ -41,6 +41,16 @@ export * from './browser/useKeyModifier/index.ts';
 export * from './browser/onStartTyping/index.ts';
 export * from './browser/useMagicKeys/index.ts';
 export * from './browser/useTextareaAutosize/index.ts';
+export * from './browser/useClipboardItems/index.ts';
+export * from './browser/useBase64/index.ts';
+export * from './browser/useObjectUrl/index.ts';
+export * from './browser/useFileDialog/index.ts';
+export * from './browser/useImage/index.ts';
+export * from './browser/useColorMode/index.ts';
+export * from './browser/useCssVar/index.ts';
+export * from './browser/useStyleTag/index.ts';
+export * from './browser/useScriptTag/index.ts';
+export * from './browser/useCssSupports/index.ts';
 // * Elements
 export * from './elements/useResizeObserver/index.ts';
 export * from './elements/useMutationObserver/index.ts';

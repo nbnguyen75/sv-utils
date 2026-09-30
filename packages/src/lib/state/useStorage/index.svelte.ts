@@ -28,7 +28,22 @@ function createDefaultSerializer<T>(): UseStorageSerializer<T> {
 	};
 }
 
-function useStorage<T>(
+/**
+ * Reactive storage-backed cell over a caller-provided storage.
+ * `getStorage` is only invoked in the browser, so globals like
+ * `localStorage` are safe to reference inside it during SSR.
+ *
+ * @param key Storage key.
+ * @param defaultValue Value used when the key is absent, unreadable, or during SSR.
+ * @param getStorage Storage accessor (e.g. `() => localStorage`).
+ * @param serializer Custom codec (default: JSON with string passthrough).
+ * @example
+ * ```ts
+ * const token = useStorage('token', '', () => sessionStorage);
+ * token.value; // session-backed, '' on the server
+ * ```
+ */
+export function useStorage<T>(
 	key: string,
 	defaultValue: T,
 	getStorage: () => Storage,

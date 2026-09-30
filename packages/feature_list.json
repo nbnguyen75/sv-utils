@@ -1027,72 +1027,72 @@
 		{
 			"dependencies": ["feat-005", "feat-008"],
 			"description": "Extended clipboard/files plus theming/style/script injection. Depends on feat-002 useDark for useColorMode.",
-			"evidence": "",
+			"evidence": "src/lib/browser/{useClipboardItems,useBase64,useObjectUrl,useFileDialog,useImage,useColorMode,useCssVar,useStyleTag,useScriptTag,useCssSupports}/ (impl+test+README each) + exported base useStorage — 590/590 green (118 files); format/lint/check(0/0)/prepack clean",
 			"functions": [
 				{
 					"name": "useClipboardItems",
 					"source": "vueuse/core/useClipboardItems",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useClipboardItems/"
 				},
 				{
 					"name": "useBase64",
 					"source": "vueuse/core/useBase64",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useBase64/"
 				},
 				{
 					"name": "useObjectUrl",
 					"source": "vueuse/core/useObjectUrl",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useObjectUrl/"
 				},
 				{
 					"name": "useFileDialog",
 					"source": "vueuse/core/useFileDialog",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useFileDialog/"
 				},
 				{
 					"name": "useImage",
 					"source": "vueuse/core/useImage",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useImage/"
 				},
 				{
 					"name": "useColorMode",
 					"source": "vueuse/core/useColorMode",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useColorMode/"
 				},
 				{
 					"name": "useCssVar",
 					"source": "vueuse/core/useCssVar",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useCssVar/"
 				},
 				{
 					"name": "useStyleTag",
 					"source": "vueuse/core/useStyleTag",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useStyleTag/"
 				},
 				{
 					"name": "useScriptTag",
 					"source": "vueuse/core/useScriptTag",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useScriptTag/"
 				},
 				{
 					"name": "useCssSupports",
 					"source": "vueuse/core/useCssSupports",
-					"status": "todo",
+					"status": "done",
 					"target": "src/lib/browser/useCssSupports/"
 				}
 			],
 			"id": "feat-022",
 			"name": "Clipboard extras, files, theming",
-			"status": "todo"
+			"status": "done"
 		},
 		{
 			"dependencies": ["feat-005", "feat-008"],

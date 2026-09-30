@@ -372,6 +372,44 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 535/535
       (108 files), `prepack` publint clean.
 
+### feat-022: Clipboard extras, files, theming — done
+
+- [x] 10 ports in `src/lib/browser/` (impl + test + README each,
+      barrel wired): useClipboardItems (5 tests), useBase64 (8),
+      useObjectUrl (3), useFileDialog (6), useImage (4), useColorMode
+      (7), useCssVar (6), useStyleTag (5), useScriptTag (6),
+      useCssSupports (5).
+- [x] Exported the base `useStorage(key, default, getStorage)` primitive
+      (one keyword + JSDoc) so `useColorMode` can take custom backends.
+- [x] Full public surface verified through the root barrel with a
+      throwaway checker (deleted after): every function + options/return
+      type resolves, no `export *` ambiguity drops. Found one gap this
+      way — `useObjectUrl` had no named return type — and added
+      `UseObjectUrlReturn`.
+- [x] Fixed via failing tests: `$state` reads inside the revocation
+      path re-triggered `useObjectUrl` forever
+      (`effect_update_depth_exceeded` at ~1000 runs) — revocation now
+      tracks a plain mirror; load/unload-flag ping-pong in
+      `useStyleTag`/`useScriptTag` runs `untrack`ed; `tick()` does not
+      flush `setTimeout(0)` (image fake); jsdom `dispatchEvent` on
+      `window` never reaches `document` listeners; `$state` proxies
+      need `toEqual`, not `toBe`.
+- [x] Fixed via gates: `svelte/prefer-svelte-reactivity` (bare
+      `SvelteSet`/`SvelteMap`, transient locals as arrays),
+      `prefer-writable-derived` (rewrote `useCssSupports` to
+      `$derived.by`, dropping the mount flag — same stance as
+      `useMediaQuery`), `typescript(no-empty-object-type)` (options bag
+      is a `Record<string, never>`), `no-this-alias` in tests,
+      `Window.CSS` lib gap (documented cast).
+- [x] Deliberate divergences: `useDropZone`-style predicate/getter rule
+      reused nowhere new; `onLongPress`-style stricter disposal kept;
+      `useBase64.quality` typed `number` (upstream `any`); 3 broad
+      `useBase64` overloads instead of 8; `useColorMode` drops deprecated
+      `emitAuto`, defaults key to `'sv-color-scheme'`, absent
+      `CSS.supports` reports `false` instead of throwing.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 590/590
+      (118 files), `prepack` publint clean.
+
 ### feat-014: Ref variants & shared state — done
 
 - [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):
