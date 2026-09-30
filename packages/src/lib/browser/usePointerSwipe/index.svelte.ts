@@ -1,23 +1,19 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
-import { useEventListener } from '../useEventListener/index.svelte.ts';
 import type { PointerType } from '../usePointer/index.svelte.ts';
-import type { SwipePosition, UseSwipeDirection } from '../useSwipe/index.svelte.ts';
+import type { UseSwipeDirection, SwipePosition } from '../useSwipe/index.svelte.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
+import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Options for {@link usePointerSwipe}. */
 export interface UsePointerSwipeOptions {
-	/**
-	 * Minimum travel (px) before a gesture counts as a swipe.
-	 * @default 50
-	 */
-	threshold?: number;
+	/** Called on swipe end. */
+	onSwipeEnd?: (event: PointerEvent, direction: UseSwipeDirection) => void;
 	/** Called on swipe start. */
 	onSwipeStart?: (event: PointerEvent) => void;
 	/** Called on swipe moves. */
 	onSwipe?: (event: PointerEvent) => void;
-	/** Called on swipe end. */
-	onSwipeEnd?: (event: PointerEvent, direction: UseSwipeDirection) => void;
 	/**
 	 * Pointer types to listen to.
 	 * @default ['mouse', 'touch', 'pen']
@@ -28,18 +24,23 @@ export interface UsePointerSwipeOptions {
 	 * @default false
 	 */
 	disableTextSelect?: boolean;
+	/**
+	 * Minimum travel (px) before a gesture counts as a swipe.
+	 * @default 50
+	 */
+	threshold?: number;
 }
 
 /** State returned by {@link usePointerSwipe}. */
 export interface UsePointerSwipeReturn {
-	/** Whether a swipe is in progress. Getter-backed. */
-	readonly isSwiping: boolean;
 	/** Swipe direction (`'none'` below the threshold). Getter-backed. */
 	readonly direction: UseSwipeDirection;
 	/** Press-start coordinates. Getter-backed (read-only by contract). */
 	readonly posStart: SwipePosition;
 	/** Latest coordinates. Getter-backed (read-only by contract). */
 	readonly posEnd: SwipePosition;
+	/** Whether a swipe is in progress. Getter-backed. */
+	readonly isSwiping: boolean;
 	/** Horizontal travel (`start − end`). Getter-backed. */
 	readonly distanceX: number;
 	/** Vertical travel (`start − end`). Getter-backed. */

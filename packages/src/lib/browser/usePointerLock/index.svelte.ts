@@ -1,6 +1,7 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Options for {@link usePointerLock}. Reserved for future parity. */
@@ -8,17 +9,17 @@ export type UsePointerLockOptions = Record<string, never>;
 
 /** State returned by {@link usePointerLock}. */
 export interface UsePointerLockReturn {
-	/** Whether the Pointer Lock API exists here. */
-	readonly isSupported: boolean;
-	/** Currently locked element (`null` when unlocked). Getter-backed. */
-	readonly element: Element | null | undefined;
-	/** Element whose click started the lock. Getter-backed. */
-	readonly triggerElement: Element | null | undefined;
 	/**
 	 * Lock the given target (or the click event's element, or the creation
 	 * target when omitted); resolves when locked.
 	 */
 	lock(target?: MaybeElement | Event): Promise<Element | null | undefined>;
+	/** Element whose click started the lock. Getter-backed. */
+	readonly triggerElement: Element | null | undefined;
+	/** Currently locked element (`null` when unlocked). Getter-backed. */
+	readonly element: Element | null | undefined;
+	/** Whether the Pointer Lock API exists here. */
+	readonly isSupported: boolean;
 	/** Exit the lock; resolves `false` when nothing was locked. */
 	unlock(): Promise<boolean>;
 }

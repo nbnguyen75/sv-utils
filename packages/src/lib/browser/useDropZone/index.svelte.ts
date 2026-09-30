@@ -1,13 +1,14 @@
-import { isBrowser } from '../../shared/is.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** State returned by {@link useDropZone}. */
 export interface UseDropZoneReturn {
-	/** Dropped files (`null` before the first valid drop). Getter-backed. */
-	readonly files: File[] | null;
 	/** Whether a valid drag hovers the zone. Getter-backed. */
 	readonly isOverDropZone: boolean;
+	/** Dropped files (`null` before the first valid drop). Getter-backed. */
+	readonly files: File[] | null;
 }
 
 /** Options for {@link useDropZone}. */
@@ -20,29 +21,29 @@ export interface UseDropZoneOptions {
 	 * they are indistinguishable from predicates.
 	 */
 	dataTypes?: readonly string[] | ((types: readonly string[]) => boolean);
+	/** Called when a drag enters the zone. */
+	onEnter?: (files: File[] | null, event: DragEvent) => void;
+	/** Called when a drag leaves the zone. */
+	onLeave?: (files: File[] | null, event: DragEvent) => void;
+	/** Called with the dropped files. */
+	onDrop?: (files: File[] | null, event: DragEvent) => void;
+	/** Called while a drag hovers the zone. */
+	onOver?: (files: File[] | null, event: DragEvent) => void;
 	/**
 	 * Custom validity check over the transfer items. Takes precedence over
 	 * `dataTypes` and `multiple` when provided.
 	 */
 	checkValidity?: (items: DataTransferItemList) => boolean;
-	/** Called with the dropped files. */
-	onDrop?: (files: File[] | null, event: DragEvent) => void;
-	/** Called when a drag enters the zone. */
-	onEnter?: (files: File[] | null, event: DragEvent) => void;
-	/** Called when a drag leaves the zone. */
-	onLeave?: (files: File[] | null, event: DragEvent) => void;
-	/** Called while a drag hovers the zone. */
-	onOver?: (files: File[] | null, event: DragEvent) => void;
-	/**
-	 * Allow multiple files to be dropped.
-	 * @default true
-	 */
-	multiple?: boolean;
 	/**
 	 * Prevent default behavior even for invalid drags.
 	 * @default false
 	 */
 	preventDefaultForUnhandled?: boolean;
+	/**
+	 * Allow multiple files to be dropped.
+	 * @default true
+	 */
+	multiple?: boolean;
 }
 
 /**

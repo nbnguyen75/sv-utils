@@ -1,37 +1,24 @@
-import { isBrowser } from '../../shared/is.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
+
+import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Listener modifiers for {@link onLongPress}. */
 export interface OnLongPressModifiers {
-	/** Stop propagation. */
-	stop?: boolean;
-	/** Fire at most once. */
-	once?: boolean;
 	/** Prevent default. */
 	prevent?: boolean;
 	/** Use the capture phase. */
 	capture?: boolean;
+	/** Stop propagation. */
+	stop?: boolean;
+	/** Fire at most once. */
+	once?: boolean;
 	/** Only handle events targeting the element itself. */
 	self?: boolean;
 }
 
 /** Options for {@link onLongPress}. */
 export interface OnLongPressOptions {
-	/**
-	 * Milliseconds until the handler fires, or a function computing it
-	 * per press.
-	 * @default 500
-	 */
-	delay?: number | ((event: PointerEvent) => number);
-	/** Listener modifiers. */
-	modifiers?: OnLongPressModifiers;
-	/**
-	 * Cancel when the pointer drifts this far (px) from the press point.
-	 * `false` disables the check.
-	 * @default 10
-	 */
-	distanceThreshold?: number | false;
 	/**
 	 * Called on release.
 	 * @param duration Press length in ms.
@@ -45,6 +32,20 @@ export interface OnLongPressOptions {
 		isLongPress: boolean,
 		pointerEvent: PointerEvent
 	) => void;
+	/**
+	 * Milliseconds until the handler fires, or a function computing it
+	 * per press.
+	 * @default 500
+	 */
+	delay?: number | ((event: PointerEvent) => number);
+	/**
+	 * Cancel when the pointer drifts this far (px) from the press point.
+	 * `false` disables the check.
+	 * @default 10
+	 */
+	distanceThreshold?: number | false;
+	/** Listener modifiers. */
+	modifiers?: OnLongPressModifiers;
 }
 
 /** Stop function returned by {@link onLongPress}. */

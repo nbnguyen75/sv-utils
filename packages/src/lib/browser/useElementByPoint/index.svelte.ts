@@ -1,6 +1,7 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useRafFn } from '../../utilities/useRafFn/index.ts';
 
 /** Per-frame scheduler controls (subset of {@link UseRafFnReturn}). */
@@ -15,35 +16,35 @@ export interface UseElementByPointScheduler {
 
 /** Options for {@link useElementByPoint}. */
 export interface UseElementByPointOptions<M extends boolean = false> {
-	/** Viewport X to query. */
-	x: MaybeGetter<number>;
-	/** Viewport Y to query. */
-	y: MaybeGetter<number>;
+	/**
+	 * Drives re-queries. Defaults to a `requestAnimationFrame` loop.
+	 * @default useRafFn
+	 */
+	scheduler?: (fn: () => void) => UseElementByPointScheduler;
 	/**
 	 * Return the full hit stack (`elementsFromPoint`) instead of the
 	 * topmost element. Resolved once at creation.
 	 * @default false
 	 */
 	multiple?: MaybeGetter<M>;
-	/**
-	 * Drives re-queries. Defaults to a `requestAnimationFrame` loop.
-	 * @default useRafFn
-	 */
-	scheduler?: (fn: () => void) => UseElementByPointScheduler;
+	/** Viewport X to query. */
+	x: MaybeGetter<number>;
+	/** Viewport Y to query. */
+	y: MaybeGetter<number>;
 }
 
 /** State returned by {@link useElementByPoint}. */
 export interface UseElementByPointReturn<M extends boolean = false> {
-	/** Whether the hit-testing API exists here. */
-	readonly isSupported: boolean;
 	/** Hit element(s) at the point. Getter-backed. */
 	readonly element: M extends true ? HTMLElement[] : HTMLElement | null;
+	/** Whether the hit-testing API exists here. */
+	readonly isSupported: boolean;
 	/** Whether the query loop is running. Getter-backed. */
 	readonly isActive: boolean;
-	/** Suspend querying. */
-	pause(): void;
 	/** Resume querying. */
 	resume(): void;
+	/** Suspend querying. */
+	pause(): void;
 }
 
 /**

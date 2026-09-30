@@ -1,6 +1,7 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 
 /** Options for {@link onElementRemoval}. */
 export interface OnElementRemovalOptions {

@@ -1,6 +1,7 @@
-import { isBrowser } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Pointer input kind. */
@@ -8,34 +9,30 @@ export type PointerType = 'mouse' | 'pen' | 'touch';
 
 /** Full pointer state. */
 export interface UsePointerState {
-	/** Horizontal position. */
-	x: number;
-	/** Vertical position. */
-	y: number;
-	/** Pressure of the pointer input. */
-	pressure: number;
+	/** Latest input kind. */
+	pointerType: PointerType | null;
 	/** Unique pointer identifier. */
 	pointerId: number;
+	/** Pressure of the pointer input. */
+	pressure: number;
+	/** Height (magnitude on the Y axis) of the contact geometry. */
+	height: number;
 	/** Plane angle (degrees, -90 to 90) between pointer and screen. */
 	tiltX: number;
 	/** Plane angle (degrees, -90 to 90) between pointer and screen. */
 	tiltY: number;
 	/** Width (magnitude on the X axis) of the contact geometry. */
 	width: number;
-	/** Height (magnitude on the Y axis) of the contact geometry. */
-	height: number;
 	/** Clockwise rotation (degrees, 0 to 359) of the transducer. */
 	twist: number;
-	/** Latest input kind. */
-	pointerType: PointerType | null;
+	/** Horizontal position. */
+	x: number;
+	/** Vertical position. */
+	y: number;
 }
 
 /** Options for {@link usePointer}. */
 export interface UsePointerOptions {
-	/**
-	 * Pointer types to listen to. All types are tracked when omitted.
-	 */
-	pointerTypes?: PointerType[];
 	/**
 	 * Starting state. Resolved once at creation.
 	 */
@@ -45,32 +42,36 @@ export interface UsePointerOptions {
 	 * @default window
 	 */
 	target?: MaybeGetter<EventTarget | null | undefined>;
+	/**
+	 * Pointer types to listen to. All types are tracked when omitted.
+	 */
+	pointerTypes?: PointerType[];
 }
 
 /** State returned by {@link usePointer}. */
 export interface UsePointerReturn {
-	/** Horizontal position. Getter-backed (destructure-safe). */
-	readonly x: number;
-	/** Vertical position. Getter-backed. */
-	readonly y: number;
-	/** Pressure of the pointer input. Getter-backed. */
-	readonly pressure: number;
+	/** Latest input kind. Getter-backed. */
+	readonly pointerType: PointerType | null;
 	/** Unique pointer identifier. Getter-backed. */
 	readonly pointerId: number;
+	/** Whether the pointer is currently over the target. Getter-backed. */
+	readonly isInside: boolean;
+	/** Pressure of the pointer input. Getter-backed. */
+	readonly pressure: number;
+	/** Height of the contact geometry. Getter-backed. */
+	readonly height: number;
 	/** Plane angle between pointer and screen. Getter-backed. */
 	readonly tiltX: number;
 	/** Plane angle between pointer and screen. Getter-backed. */
 	readonly tiltY: number;
 	/** Width of the contact geometry. Getter-backed. */
 	readonly width: number;
-	/** Height of the contact geometry. Getter-backed. */
-	readonly height: number;
 	/** Clockwise rotation of the transducer. Getter-backed. */
 	readonly twist: number;
-	/** Latest input kind. Getter-backed. */
-	readonly pointerType: PointerType | null;
-	/** Whether the pointer is currently over the target. Getter-backed. */
-	readonly isInside: boolean;
+	/** Horizontal position. Getter-backed (destructure-safe). */
+	readonly x: number;
+	/** Vertical position. Getter-backed. */
+	readonly y: number;
 }
 
 const defaultState: UsePointerState = {

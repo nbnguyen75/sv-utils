@@ -1,6 +1,7 @@
+import type { MaybeGetter } from '../../shared/getter/index.ts';
+
 import { isBrowser } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
-import type { MaybeGetter } from '../../shared/getter/index.ts';
 
 /** Swipe direction. */
 export type UseSwipeDirection = 'up' | 'down' | 'left' | 'right' | 'none';
@@ -15,34 +16,34 @@ export interface SwipePosition {
 
 /** Options for {@link useSwipe}. */
 export interface UseSwipeOptions {
-	/**
-	 * Register events as passive.
-	 * @default true
-	 */
-	passive?: boolean;
+	/** Called on swipe end. */
+	onSwipeEnd?: (event: TouchEvent, direction: UseSwipeDirection) => void;
+	/** Called on swipe start. */
+	onSwipeStart?: (event: TouchEvent) => void;
+	/** Called on swipe moves. */
+	onSwipe?: (event: TouchEvent) => void;
 	/**
 	 * Minimum travel (px) before a gesture counts as a swipe.
 	 * @default 50
 	 */
 	threshold?: number;
-	/** Called on swipe start. */
-	onSwipeStart?: (event: TouchEvent) => void;
-	/** Called on swipe moves. */
-	onSwipe?: (event: TouchEvent) => void;
-	/** Called on swipe end. */
-	onSwipeEnd?: (event: TouchEvent, direction: UseSwipeDirection) => void;
+	/**
+	 * Register events as passive.
+	 * @default true
+	 */
+	passive?: boolean;
 }
 
 /** State returned by {@link useSwipe}. */
 export interface UseSwipeReturn {
-	/** Whether a swipe is in progress. Getter-backed. */
-	readonly isSwiping: boolean;
 	/** Swipe direction (`'none'` below the threshold). Getter-backed. */
 	readonly direction: UseSwipeDirection;
 	/** Touch-start coordinates. Getter-backed (read-only by contract). */
 	readonly coordsStart: SwipePosition;
 	/** Latest touch coordinates. Getter-backed (read-only by contract). */
 	readonly coordsEnd: SwipePosition;
+	/** Whether a swipe is in progress. Getter-backed. */
+	readonly isSwiping: boolean;
 	/** Horizontal travel (`start - end`). Getter-backed. */
 	readonly lengthX: number;
 	/** Vertical travel (`start - end`). Getter-backed. */

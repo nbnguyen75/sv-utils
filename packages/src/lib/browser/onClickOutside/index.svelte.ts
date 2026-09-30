@@ -1,6 +1,7 @@
-import { isBrowser, isIOS } from '../../shared/is.ts';
-import { resolveGetter } from '../../shared/getter/index.ts';
 import type { MaybeElement, MaybeGetter } from '../../shared/getter/index.ts';
+
+import { resolveGetter } from '../../shared/getter/index.ts';
+import { isBrowser, isIOS } from '../../shared/is.ts';
 import { useEventListener } from '../useEventListener/index.svelte.ts';
 
 /** Options for {@link onClickOutside}. */
@@ -11,11 +12,6 @@ export interface OnClickOutsideOptions<Controls extends boolean = false> {
 	 */
 	ignore?: MaybeGetter<Array<MaybeElement | string>>;
 	/**
-	 * Use the capture phase for the internal click listener.
-	 * @default true
-	 */
-	capture?: boolean;
-	/**
 	 * Fire the handler when focus moves into an iframe.
 	 * @default false
 	 */
@@ -25,6 +21,11 @@ export interface OnClickOutsideOptions<Controls extends boolean = false> {
 	 * @default false
 	 */
 	controls?: Controls;
+	/**
+	 * Use the capture phase for the internal click listener.
+	 * @default true
+	 */
+	capture?: boolean;
 }
 
 /** Handler for {@link onClickOutside}. */
@@ -41,9 +42,9 @@ export type OnClickOutsideHandler<
 export type OnClickOutsideReturn<Controls extends boolean = false> = Controls extends false
 	? () => void
 	: {
-			stop: () => void;
-			cancel: () => void;
 			trigger: (event: Event) => void;
+			cancel: () => void;
+			stop: () => void;
 		};
 
 let iOSWorkaroundInstalled = false;
@@ -83,9 +84,9 @@ export function onClickOutside<T extends OnClickOutsideOptions<true>>(
 	handler: OnClickOutsideHandler<T>,
 	options: T
 ): {
-	stop: () => void;
-	cancel: () => void;
 	trigger: (event: Event) => void;
+	cancel: () => void;
+	stop: () => void;
 };
 
 // Implementation
