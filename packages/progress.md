@@ -348,6 +348,30 @@ Window` is false across VM contexts → duck-typed window detection in
 - [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 506/506
       (103 files), `prepack` publint clean.
 
+### feat-021: Keyboard & typing — done
+
+- [x] 5 ports in `src/lib/browser/` (impl + test + README each, barrel
+      wired): onKeyStroke incl. onKeyDown/onKeyPressed/onKeyUp (6 tests),
+      useKeyModifier (4), onStartTyping (5), useMagicKeys (8),
+      useTextareaAutosize (6).
+- [x] `onKeyStroke` uses typed overloads instead of `...args: any[]`;
+      `dedupe` resolves per event so it can be reactive.
+- [x] `useMagicKeys` keeps the proxy + lazy key creation: keys arm on
+      first access (verified against upstream's own browser tests —
+      presses before the first read are not retroactively reported).
+      The `reactive` option is dropped (Svelte reads are reactive by
+      default); combos evaluate live from `$state` flags.
+- [x] `useKeyModifier` keeps the non-null refined return for boolean
+      initials via overloads; explicit `document: null` disables (no
+      global fallback).
+- [x] `useTextareaAutosize` drops Vue's `watch` option (reactive
+      `element`/`input` getters + manual `triggerResize()` cover it).
+- [x] Fixed via gates: `svelte/prefer-svelte-reactivity` requires
+      `SvelteSet`/`SvelteMap` (bare, never `$state`-wrapped) over
+      native collections.
+- [x] Gates: `format`/`lint`/`check` (0/0) clean, full suite 535/535
+      (108 files), `prepack` publint clean.
+
 ### feat-014: Ref variants & shared state — done
 
 - [x] 8 ports in `src/lib/state/` (impl + test + README each, barrel wired):

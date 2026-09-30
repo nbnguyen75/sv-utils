@@ -11,7 +11,8 @@
   timers/raf (feat-012), breakpoints/media/responsive (feat-013),
   device/visibility/text (feat-014), fullscreen/copy/paste (feat-015),
   lifecycle hooks (feat-016), storage/history (feat-017), async state
-  (feat-018), scroll & mouse (feat-019), gestures & drag (feat-020).
+  (feat-018), scroll & mouse (feat-019), gestures & drag (feat-020),
+  keyboard & typing (feat-021).
 - Repository-wide docs pass landed with feat-019: no file-top banner
   comments in `src/lib`, `@example` on every exported function overload,
   and matching rules in `AGENTS.md`, `.agents/rules/utilities-architecture.md`,
@@ -19,13 +20,12 @@
 
 ## Immediate Next Task
 
-- feat-021: keyboard & typing (5 functions). Check `feature_list.json`
-  for the exact set.
-- Reusable feat-020 lessons: `until()` is setup-only (never inside
-  post-mount methods — use one-shot listeners); stoppable listeners use
-  a `stopped` flag over `useEventListener`; `??` needs parens with
-  `||`; `exactOptionalPropertyTypes` rejects explicit `undefined`
-  option fields.
+- feat-022: clipboard extras, files, theming (10 functions). Check
+  `feature_list.json` for the exact set.
+- Reusable feat-021 lessons: proxy + lazy creation mirrors upstream
+  key arming (verify against upstream's browser tests when porting
+  stateful Vue APIs); `SvelteSet`/`SvelteMap` bare, never `$state`-
+  wrapped; `...args: any[]` overloads must become typed overloads.
 
 ## How to Resume
 

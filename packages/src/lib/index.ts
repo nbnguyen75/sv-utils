@@ -36,6 +36,11 @@ export * from './browser/useElementByPoint/index.ts';
 export * from './browser/onClickOutside/index.ts';
 export * from './browser/onLongPress/index.ts';
 export * from './browser/onElementRemoval/index.ts';
+export * from './browser/onKeyStroke/index.ts';
+export * from './browser/useKeyModifier/index.ts';
+export * from './browser/onStartTyping/index.ts';
+export * from './browser/useMagicKeys/index.ts';
+export * from './browser/useTextareaAutosize/index.ts';
 // * Elements
 export * from './elements/useResizeObserver/index.ts';
 export * from './elements/useMutationObserver/index.ts';
